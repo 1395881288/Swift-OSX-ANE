@@ -42,8 +42,6 @@ echo "Copying native libraries into place."
 cp -R -L "$pathtome/../../native_library/mac/$PROJECT_NAME/Build/Products/Debug/$PROJECT_NAME.framework" "$pathtome/platforms/mac/debug"
 
 
-
-
 mv "$pathtome/platforms/mac/debug/$PROJECT_NAME.framework/Versions/A/Frameworks" "$pathtome/platforms/mac/debug/$PROJECT_NAME.framework"
 #mv "$pathtome/platforms/mac/release/$PROJECT_NAME.framework/Versions/A/Frameworks" "$pathtome/platforms/mac/release/$PROJECT_NAME.framework"
 

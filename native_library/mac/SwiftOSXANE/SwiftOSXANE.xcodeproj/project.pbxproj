@@ -15,8 +15,6 @@
 		CE36AF501DF47E4E003C224B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4F1DF47E4E003C224B /* Cocoa.framework */; };
 		CEE7AB121DF4D45D0047E083 /* SwiftOSXANE.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7AB111DF4D45D0047E083 /* SwiftOSXANE.swift */; };
 		CEE7AB181DF4EE620047E083 /* SwiftOSXANE-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE7AB131DF4D63D0047E083 /* SwiftOSXANE-Bridging-Header.h */; };
-		CEE7AB221DF4F8A50047E083 /* ANEHelperOC.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE7AB201DF4F8A50047E083 /* ANEHelperOC.h */; };
-		CEE7AB231DF4F8A50047E083 /* ANEHelperOC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE7AB211DF4F8A50047E083 /* ANEHelperOC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +28,6 @@
 		CE36AF4F1DF47E4E003C224B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CEE7AB111DF4D45D0047E083 /* SwiftOSXANE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftOSXANE.swift; sourceTree = "<group>"; };
 		CEE7AB131DF4D63D0047E083 /* SwiftOSXANE-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SwiftOSXANE-Bridging-Header.h"; path = "SwiftOSXANE/SwiftOSXANE-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		CEE7AB201DF4F8A50047E083 /* ANEHelperOC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANEHelperOC.h; sourceTree = "<group>"; };
-		CEE7AB211DF4F8A50047E083 /* ANEHelperOC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANEHelperOC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,8 +68,6 @@
 				CEE7AB1D1DF4F8110047E083 /* Misc */,
 				285FEA208428C0509C440EE0 /* SwiftOSXANE.m */,
 				CEE7AB111DF4D45D0047E083 /* SwiftOSXANE.swift */,
-				CEE7AB201DF4F8A50047E083 /* ANEHelperOC.h */,
-				CEE7AB211DF4F8A50047E083 /* ANEHelperOC.m */,
 				285FEBC407C4E1C1370F71EA /* ANEHelper.swift */,
 			);
 			path = SwiftOSXANE;
@@ -114,7 +108,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				285FE53DB9D50C815BCD0DFF /* SwiftOSXANE_oc.h in Headers */,
-				CEE7AB221DF4F8A50047E083 /* ANEHelperOC.h in Headers */,
 				CEE7AB181DF4EE620047E083 /* SwiftOSXANE-Bridging-Header.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,7 +199,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				285FEAB0481294474F21BE5D /* SwiftOSXANE.m in Sources */,
-				CEE7AB231DF4F8A50047E083 /* ANEHelperOC.m in Sources */,
 				CEE7AB121DF4D45D0047E083 /* SwiftOSXANE.swift in Sources */,
 				285FEC4F520BEB04F3C5C9BE /* ANEHelper.swift in Sources */,
 			);

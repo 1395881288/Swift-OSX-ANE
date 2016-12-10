@@ -17,7 +17,7 @@ public class Main extends Sprite {
         person.age = 31;
         person.name = "Tom";
         textField.width = 800;
-        textField.text = ane.getHelloWorld("Swift and ANE");
+        textField.text = ane.getHelloWorld("Swift and ANE bypass");
         textField.text = textField.text + "\n" + ane.getAge(person);
         textField.text = textField.text + "\n" + ane.getPrice();
         addChild(textField);

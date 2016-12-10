@@ -127,11 +127,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 SWIFT_CLASS("_TtC11SwiftOSXANE11SwiftOSXANE")
 @interface SwiftOSXANE : NSObject
-- (FREObject _Nonnull)getIsSwiftCool;
+- (FREObject _Nonnull)getIsSwiftCoolWithArgv:(NSPointerArray * _Nonnull)argv;
 
-- (FREObject _Nonnull)getPrice;
-- (FREObject _Nonnull)getAgeWithArgv:(NSArray * _Nonnull)argv;
-- (FREObject _Nonnull)getHelloWorldWithArgv:(NSArray * _Nonnull)argv;
+- (FREObject _Nonnull)getPriceWithArgv:(NSPointerArray * _Nonnull)argv;
+- (FREObject _Nonnull)getAgeWithArgv:(NSPointerArray * _Nonnull)argv;
+- (FREObject _Nonnull)getHelloWorldWithArgv:(NSPointerArray * _Nonnull)argv;
+//- (FREObject _Nonnull)getHelloWorldTwoWithArgv:(NSPointerArray * _Nonnull)argv;
 
 - (void)setFREContextWithCtx:(FREContext _Nonnull)ctx;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;

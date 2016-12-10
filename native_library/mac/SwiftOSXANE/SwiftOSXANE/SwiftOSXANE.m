@@ -7,28 +7,39 @@
 
 #include "SwiftOSXANE_oc.h"
 #import "SwiftOSXANE-Swift.h"
-#include "ANEHelperOC.h"
 #include <Adobe AIR/Adobe AIR.h>
 
 SwiftOSXANE *swft;
-ANEHelperOC *aneHelper;
 
 #define FRE_FUNCTION(fn) FREObject (fn)(FREContext context, void* functionData, uint32_t argc, FREObject argv[])
 
+// convert argv into a pointer array which can be passed to Swift
+NSPointerArray * getFREargs(uint32_t argc, FREObject argv[]) {
+    NSPointerArray * pa = [[NSPointerArray alloc] initWithOptions:NSPointerFunctionsOpaqueMemory];
+    for (int i = 0; i < argc; ++i) {
+        FREObject freObject;
+        freObject = argv[i];
+        [pa addPointer:freObject];
+    }
+    return pa;
+}
+
+
 FRE_FUNCTION (getAge) {
-    return [swft getAgeWithArgv:[aneHelper getNSArrayFromArgc:argc Argv:argv]];
+    return [swft getAgeWithArgv:getFREargs(argc, argv)];
 }
 
 FRE_FUNCTION(getPrice) {
-    return swft.getPrice;
+    return [swft getPriceWithArgv:getFREargs(argc, argv)];
 }
 
 FRE_FUNCTION (getIsSwiftCool) {
-    return swft.getIsSwiftCool;
+    return [swft getIsSwiftCoolWithArgv:getFREargs(argc, argv)];
 }
 
+
 FRE_FUNCTION (getHelloWorld) {
-    return [swft getHelloWorldWithArgv:[aneHelper getNSArrayFromArgc:argc Argv:argv]];
+    return [swft getHelloWorldWithArgv:getFREargs(argc, argv)];
 }
 
 void contextInitializer(void *extData, const uint8_t *ctxType, FREContext ctx, uint32_t *numFunctionsToSet, const FRENamedFunction **functionsToSet) {
@@ -42,8 +53,6 @@ void contextInitializer(void *extData, const uint8_t *ctxType, FREContext ctx, u
     *numFunctionsToSet = sizeof(extensionFunctions) / sizeof(FRENamedFunction);
     *functionsToSet = extensionFunctions;
 
-    aneHelper = [[ANEHelperOC alloc] init];
-    [aneHelper setCtx:ctx];
     swft = [[SwiftOSXANE alloc] init];
     [swft setFREContextWithCtx:ctx];
 

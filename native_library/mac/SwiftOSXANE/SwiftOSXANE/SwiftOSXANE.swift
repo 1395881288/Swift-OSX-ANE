@@ -18,44 +18,45 @@ import Foundation
         FREDispatchStatusEventAsync(self.dllContext, value, "TRACE")
     }
 
-    func getIsSwiftCool() -> FREObject {
+    func getIsSwiftCool(argv:NSPointerArray) -> FREObject {
         return aneHelper.getFreObject(bool: true)
     }
 
-    func getPrice() -> FREObject {
+    func getPrice(argv:NSPointerArray) -> FREObject {
         return aneHelper.getFREObject(double: 59.99)
     }
 
-    func getAgeWith(argv:NSArray) -> FREObject {
+    func getAgeWith(argv:NSPointerArray) -> FREObject {
         var age = 31
-        if(argv.count > 0){
-            let person = argv.object(at: 0) as! Dictionary<String, AnyObject>
-            let value:Int = person["age"] as! Int
-            age = value + 1
-        }else{
-            Swift.debugPrint("getAge no person object passed")
+        let inFRE:FREObject! = argv.pointer(at: 0)
+        let person:Dictionary<String, AnyObject> = aneHelper.getIdObjectFromFREObject(freObject: inFRE)
+            as! Dictionary<String, AnyObject>
+        if let val = person["age"] as? NSNumber { // AnyObject is read back as NSNumber
+            age = Int(val) + 7
         }
         
         return aneHelper.getFreObject(int:age)
     }
     
-    func getHelloWorld(argv:NSArray) -> FREObject {
-        let txt = argv.object(at: 0)
-        //test creating an object and setting props
+
+    func getHelloWorld(argv:NSPointerArray) -> FREObject {
+        let inFRE:FREObject! = argv.pointer(at: 0)
+        let txt:String = aneHelper.getIdObjectFromFREObject(freObject: inFRE) as! String
         let fre:FREObject = aneHelper.createFREObject(className:"com.tuarua.Person")
         aneHelper.setFREObjectProperty(freObject: fre, name: "name", prop: aneHelper.getFreObject(string: "Kitty"))
         aneHelper.setFREObjectProperty(freObject: fre, name: "age", prop: aneHelper.getFreObject(int: 21))
-        
+
         let person = aneHelper.getIdObjectFromFREObject(freObject: fre) as! Dictionary<String, AnyObject>
         let personName:String = person["name"] as! String
+
         return aneHelper.getFreObject(string: "\(txt) talking to \(personName)")
+
     }
     
 
     func setFREContext(ctx: FREContext) {
         dllContext = ctx
-        let aneHelperOC = ANEHelperOC()
-        aneHelperOC.ctx = ctx;
+        aneHelper.setFREContext(ctx:ctx)
     }
 
 

@@ -10,6 +10,4 @@
 #define SwiftOSXANE_Bridging_Header_h
 
 #import <Adobe AIR/Adobe AIR.h>
-#import "SwiftOSXANE/ANEHelperOC.h"
-//#import "Person.h"
 #endif /* SwiftOSXANE_Bridging_Header_h */
