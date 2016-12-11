@@ -6,10 +6,12 @@ package com.tuarua {
 public class Person extends ANEObject {
     public var name:String;
     public var age:int;
+    public var opt:String;
     public function Person() {
         super();
         super.addPropName("name");
         super.addPropName("age");
+        super.addPropName("opt");
     }
 
 }

@@ -18,15 +18,15 @@ import Foundation
         FREDispatchStatusEventAsync(self.dllContext, value, "TRACE")
     }
 
-    func getIsSwiftCool(argv:NSPointerArray) -> FREObject {
+    func getIsSwiftCool(argv:NSPointerArray) -> FREObject? {
         return aneHelper.getFreObject(bool: true)
     }
 
-    func getPrice(argv:NSPointerArray) -> FREObject {
+    func getPrice(argv:NSPointerArray) -> FREObject? {
         return aneHelper.getFREObject(double: 59.99)
     }
 
-    func getAgeWith(argv:NSPointerArray) -> FREObject {
+    func getAgeWith(argv:NSPointerArray) -> FREObject? {
         var age = 31
         let inFRE:FREObject! = argv.pointer(at: 0)
         let person:Dictionary<String, AnyObject> = aneHelper.getIdObjectFromFREObject(freObject: inFRE)
@@ -39,16 +39,16 @@ import Foundation
     }
     
 
-    func getHelloWorld(argv:NSPointerArray) -> FREObject {
+    func getHelloWorld(argv:NSPointerArray) -> FREObject? {
         let inFRE:FREObject! = argv.pointer(at: 0)
         let txt:String = aneHelper.getIdObjectFromFREObject(freObject: inFRE) as! String
-        let fre:FREObject = aneHelper.createFREObject(className:"com.tuarua.Person")
-        aneHelper.setFREObjectProperty(freObject: fre, name: "name", prop: aneHelper.getFreObject(string: "Kitty"))
-        aneHelper.setFREObjectProperty(freObject: fre, name: "age", prop: aneHelper.getFreObject(int: 21))
-
-        let person = aneHelper.getIdObjectFromFREObject(freObject: fre) as! Dictionary<String, AnyObject>
-        let personName:String = person["name"] as! String
-
+        var personName:String?
+        if let frePerson = aneHelper.createFREObject(className:"com.tuarua.Person"){
+            aneHelper.setFREObjectProperty(freObject: frePerson, name: "name", prop: aneHelper.getFreObject(string: "Kitty")!)
+            aneHelper.setFREObjectProperty(freObject: frePerson, name: "age", prop: aneHelper.getFreObject(int: 21)!)
+            let person = aneHelper.getIdObjectFromFREObject(freObject: frePerson) as! Dictionary<String, AnyObject>
+            personName = person["name"] as? String
+        }
         return aneHelper.getFreObject(string: "\(txt) talking to \(personName)")
 
     }
