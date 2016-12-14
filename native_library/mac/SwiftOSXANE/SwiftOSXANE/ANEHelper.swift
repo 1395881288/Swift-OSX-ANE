@@ -103,10 +103,8 @@ class ANEHelper {
         }
 
     }
-
     
     func getNumberFromFREObject(freObject:FREObject?) -> Double {
-        assert(nil != freObject)
         var val:Double = 0.0
         
         let status: FREResult = FREGetObjectAsDouble(freObject, &val)
@@ -115,7 +113,7 @@ class ANEHelper {
         return val
     }
     
-    func getStringFromFREObject(freObject:FREObject) -> String {
+    func getStringFromFREObject(freObject:FREObject?) -> String {
         var strLength:CUnsignedInt? = 0
         var arg:UnsafePointer<UInt8>? = nil
         
@@ -131,8 +129,7 @@ class ANEHelper {
     }
 
 
-    private func getInt(freObject:FREObject) -> Int {
-        //assert(nil != freObject)
+    private func getInt(freObject:FREObject?) -> Int {
         var result:CUnsignedInt? = 0
         let status: FREResult = FREGetObjectAsUint32(freObject, &result!)
         _ = isFREResultOK(errorCode: status, errorMessage: "Could not convert FREObject to Int.")
@@ -146,18 +143,22 @@ class ANEHelper {
     }
 
 
-    func getArrayFromFREObject(freObject:FREObject) ->Array<Any?>? {
-        //assert(nil != freObject)
-        var objectType:FREObjectType = FRE_TYPE_NULL;
-        FREGetObjectType( freObject, &objectType );
-        let arrayLength:Int = getArrayLengthFromFREObject(freObject: freObject)
+    func getArrayFromFREObject(freObject:FREObject?) ->Array<Any?>? {
         var result : [Any?] = []
-        for i in 0..<arrayLength {
-            var objAs:FREObject? = nil
-            FREGetArrayElementAt( freObject, UInt32(i), &objAs );
-            let obj = self.getIdObjectFromFREObject(freObject: objAs!)
-            result.append(obj)
+        if let freObject = freObject {
+            let arrayLength:Int = getArrayLengthFromFREObject(freObject: freObject)
+            for i in 0..<arrayLength {
+                var objAs:FREObject? = nil
+                FREGetArrayElementAt( freObject, UInt32(i), &objAs );
+                if objAs != nil {
+                    let obj = self.getIdObjectFromFREObject(freObject: objAs)
+                    result.append(obj)
+                }
+               
+            }
+
         }
+        
         return result
     }
 
@@ -165,8 +166,11 @@ class ANEHelper {
         var objectType:FREObjectType = FRE_TYPE_NULL;
         FREGetObjectType( freObject, &objectType );
         switch objectType {
-        case FRE_TYPE_VECTOR, FRE_TYPE_ARRAY:
-            Swift.debugPrint("printObjectType: FRE_TYPE_VECTOR, FRE_TYPE_ARRAY")
+        case FRE_TYPE_ARRAY:
+            Swift.debugPrint("printObjectType: FRE_TYPE_ARRAY")
+            break
+        case FRE_TYPE_VECTOR:
+            Swift.debugPrint("printObjectType: FRE_TYPE_VECTOR")
             break
         case FRE_TYPE_STRING:
             Swift.debugPrint("printObjectType: FRE_TYPE_STRING")
@@ -206,10 +210,9 @@ class ANEHelper {
 
         switch objectType {
         case FRE_TYPE_VECTOR, FRE_TYPE_ARRAY:
-            //Swift.debugPrint("FRE_TYPE_VECTOR, FRE_TYPE_ARRAY")
-            return nil;
+            return getArrayFromFREObject(freObject: freObject)
         case FRE_TYPE_STRING:
-            return self.getStringFromFREObject(freObject: freObject!);
+            return self.getStringFromFREObject(freObject: freObject);
         case FRE_TYPE_BOOLEAN:
             var val:CUnsignedInt? = 0
             FREGetObjectAsBool( freObject, &val! );
