@@ -29,7 +29,7 @@ import Foundation
     func getAgeWith(argv:NSPointerArray) -> FREObject? {
         var age = 31
         let inFRE:FREObject! = argv.pointer(at: 0)
-        let person:Dictionary<String, AnyObject> = aneHelper.getIdObjectFromFREObject(freObject: inFRE)
+        let person:Dictionary<String, AnyObject> = aneHelper.getIdObject(freObject: inFRE)
             as! Dictionary<String, AnyObject>
         if let val = person["age"] as? NSNumber { // AnyObject is read back as NSNumber
             age = Int(val) + 7
@@ -41,12 +41,12 @@ import Foundation
 
     func getHelloWorld(argv:NSPointerArray) -> FREObject? {
         let inFRE:FREObject! = argv.pointer(at: 0)
-        let txt:String = aneHelper.getIdObjectFromFREObject(freObject: inFRE) as! String
+        let txt:String = aneHelper.getString(freObject: inFRE)
         var personName:String?
         if let frePerson = aneHelper.createFREObject(className:"com.tuarua.Person"){
             aneHelper.setFREObjectProperty(freObject: frePerson, name: "name", prop: aneHelper.getFreObject(string: "Kitty")!)
             aneHelper.setFREObjectProperty(freObject: frePerson, name: "age", prop: aneHelper.getFreObject(int: 21)!)
-            let person = aneHelper.getIdObjectFromFREObject(freObject: frePerson) as! Dictionary<String, AnyObject>
+            let person = aneHelper.getIdObject(freObject: frePerson) as! Dictionary<String, AnyObject>
             personName = person["name"] as? String
         }
         return aneHelper.getFreObject(string: "\(txt) talking to \(personName)")
