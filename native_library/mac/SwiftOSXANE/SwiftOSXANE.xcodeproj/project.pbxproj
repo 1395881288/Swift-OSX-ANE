@@ -8,25 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		285FE53DB9D50C815BCD0DFF /* SwiftOSXANE_oc.h in Headers */ = {isa = PBXBuildFile; fileRef = 285FEAB02EF710CE1ED2BC9A /* SwiftOSXANE_oc.h */; };
+		285FE5D4FE3BD57FC9C6A8EC /* SwiftOSXANE-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 285FE632F089B25BE590B688 /* SwiftOSXANE-Swift.h */; };
 		285FEAB0481294474F21BE5D /* SwiftOSXANE.m in Sources */ = {isa = PBXBuildFile; fileRef = 285FEA208428C0509C440EE0 /* SwiftOSXANE.m */; };
-		285FEC4F520BEB04F3C5C9BE /* ANEHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FEBC407C4E1C1370F71EA /* ANEHelper.swift */; };
 		CE36AF4D1DF47DBD003C224B /* Adobe AIR_64 in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4B1DF47DBD003C224B /* Adobe AIR_64 */; };
 		CE36AF4E1DF47DBD003C224B /* Adobe AIR in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4C1DF47DBD003C224B /* Adobe AIR */; };
 		CE36AF501DF47E4E003C224B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4F1DF47E4E003C224B /* Cocoa.framework */; };
-		CEE7AB121DF4D45D0047E083 /* SwiftOSXANE.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7AB111DF4D45D0047E083 /* SwiftOSXANE.swift */; };
+		CE490B171E74D6FA00F50640 /* FlashRuntimeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE490B161E74D6FA00F50640 /* FlashRuntimeExtensions.swift */; };
+		CEE7AB121DF4D45D0047E083 /* SwiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7AB111DF4D45D0047E083 /* SwiftController.swift */; };
 		CEE7AB181DF4EE620047E083 /* SwiftOSXANE-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE7AB131DF4D63D0047E083 /* SwiftOSXANE-Bridging-Header.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		285FE632F089B25BE590B688 /* SwiftOSXANE-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SwiftOSXANE-Swift.h"; sourceTree = "<group>"; };
 		285FEA208428C0509C440EE0 /* SwiftOSXANE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwiftOSXANE.m; sourceTree = "<group>"; };
 		285FEAB02EF710CE1ED2BC9A /* SwiftOSXANE_oc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftOSXANE_oc.h; sourceTree = "<group>"; };
-		285FEBC407C4E1C1370F71EA /* ANEHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ANEHelper.swift; sourceTree = "<group>"; };
 		CE36AF401DF47B7B003C224B /* SwiftOSXANE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftOSXANE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE36AF441DF47B7C003C224B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE36AF4B1DF47DBD003C224B /* Adobe AIR_64 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR_64"; path = "/Users/User/sdks/AIR/AIRSDK_23/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR_64"; sourceTree = "<absolute>"; };
 		CE36AF4C1DF47DBD003C224B /* Adobe AIR */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR"; path = "/Users/User/sdks/AIR/AIRSDK_23/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR"; sourceTree = "<absolute>"; };
 		CE36AF4F1DF47E4E003C224B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		CEE7AB111DF4D45D0047E083 /* SwiftOSXANE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftOSXANE.swift; sourceTree = "<group>"; };
+		CE490B161E74D6FA00F50640 /* FlashRuntimeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashRuntimeExtensions.swift; sourceTree = "<group>"; };
+		CEE7AB111DF4D45D0047E083 /* SwiftController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftController.swift; sourceTree = "<group>"; };
 		CEE7AB131DF4D63D0047E083 /* SwiftOSXANE-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SwiftOSXANE-Bridging-Header.h"; path = "SwiftOSXANE/SwiftOSXANE-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -67,8 +69,8 @@
 				CEE7AB1E1DF4F8240047E083 /* Headers */,
 				CEE7AB1D1DF4F8110047E083 /* Misc */,
 				285FEA208428C0509C440EE0 /* SwiftOSXANE.m */,
-				CEE7AB111DF4D45D0047E083 /* SwiftOSXANE.swift */,
-				285FEBC407C4E1C1370F71EA /* ANEHelper.swift */,
+				CEE7AB111DF4D45D0047E083 /* SwiftController.swift */,
+				CE490B161E74D6FA00F50640 /* FlashRuntimeExtensions.swift */,
 			);
 			path = SwiftOSXANE;
 			sourceTree = "<group>";
@@ -86,6 +88,7 @@
 			children = (
 				285FEAB02EF710CE1ED2BC9A /* SwiftOSXANE_oc.h */,
 				CEE7AB131DF4D63D0047E083 /* SwiftOSXANE-Bridging-Header.h */,
+				285FE632F089B25BE590B688 /* SwiftOSXANE-Swift.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -109,6 +112,7 @@
 			files = (
 				285FE53DB9D50C815BCD0DFF /* SwiftOSXANE_oc.h in Headers */,
 				CEE7AB181DF4EE620047E083 /* SwiftOSXANE-Bridging-Header.h in Headers */,
+				285FE5D4FE3BD57FC9C6A8EC /* SwiftOSXANE-Swift.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +184,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		CEE7AB171DF4E5760047E083 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -199,8 +203,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				285FEAB0481294474F21BE5D /* SwiftOSXANE.m in Sources */,
-				CEE7AB121DF4D45D0047E083 /* SwiftOSXANE.swift in Sources */,
-				285FEC4F520BEB04F3C5C9BE /* ANEHelper.swift in Sources */,
+				CEE7AB121DF4D45D0047E083 /* SwiftController.swift in Sources */,
+				CE490B171E74D6FA00F50640 /* FlashRuntimeExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

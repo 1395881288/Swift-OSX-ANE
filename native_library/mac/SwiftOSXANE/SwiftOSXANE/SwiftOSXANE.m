@@ -9,8 +9,8 @@
 #import "SwiftOSXANE-Swift.h"
 #include <Adobe AIR/Adobe AIR.h>
 
-SwiftOSXANE *swft;
-
+SwiftController *swft;
+FREContext dllContext;
 #define FRE_FUNCTION(fn) FREObject (fn)(FREContext context, void* functionData, uint32_t argc, FREObject argv[])
 
 // convert argv into a pointer array which can be passed to Swift
@@ -24,36 +24,70 @@ NSPointerArray * getFREargs(uint32_t argc, FREObject argv[]) {
     return pa;
 }
 
-
-FRE_FUNCTION (getAge) {
-    return [swft getAgeWithArgv:getFREargs(argc, argv)];
+FRE_FUNCTION (runStringTests) {
+    return [swft runStringTestsWithArgv:getFREargs(argc, argv)];
+}
+FRE_FUNCTION (runNumberTests) {
+    return [swft runNumberTestsWithArgv:getFREargs(argc, argv)];
+}
+FRE_FUNCTION (runIntTests) {
+    return [swft runIntTestsWithArgv:getFREargs(argc, argv)];
+}
+FRE_FUNCTION (runArrayTests) {
+    return [swft runArrayTestsWithArgv:getFREargs(argc, argv)];
+}
+FRE_FUNCTION (runObjectTests) {
+    return [swft runObjectTestsWithArgv:getFREargs(argc, argv)];
 }
 
-FRE_FUNCTION(getPrice) {
-    return [swft getPriceWithArgv:getFREargs(argc, argv)];
+FRE_FUNCTION (runBitmapTests) {
+    return [swft runBitmapTestsWithArgv:getFREargs(argc, argv)];
 }
 
-FRE_FUNCTION (getIsSwiftCool) {
-    return [swft getIsSwiftCoolWithArgv:getFREargs(argc, argv)];
+FRE_FUNCTION (runByteArrayTests) {
+    return [swft runByteArrayTestsWithArgv:getFREargs(argc, argv)];
+}
+
+FRE_FUNCTION(runDataTests) {
+    return [swft runDataTestsWithArgv:getFREargs(argc, argv)];
+}
+
+FRE_FUNCTION(runErrorTests) {
+    return [swft runErrorTestsWithArgv:getFREargs(argc, argv)];
 }
 
 
-FRE_FUNCTION (getHelloWorld) {
-    return [swft getHelloWorldWithArgv:getFREargs(argc, argv)];
-}
 
 void contextInitializer(void *extData, const uint8_t *ctxType, FREContext ctx, uint32_t *numFunctionsToSet, const FRENamedFunction **functionsToSet) {
     static FRENamedFunction extensionFunctions[] = {
-        {(const uint8_t *) "getHelloWorld", NULL, &getHelloWorld},
-        {(const uint8_t *) "getAge", NULL, &getAge},
-        {(const uint8_t *) "getPrice", NULL, &getPrice},
-        {(const uint8_t *) "getIsSwiftCool", NULL, &getIsSwiftCool}
+        {(const uint8_t *) "runStringTests", NULL, &runStringTests},
+        {(const uint8_t *) "runNumberTests", NULL, &runNumberTests},
+        {(const uint8_t *) "runIntTests", NULL, &runIntTests},
+        {(const uint8_t *) "runArrayTests", NULL, &runArrayTests},
+        {(const uint8_t *) "runObjectTests", NULL, &runObjectTests},
+        {(const uint8_t *) "runBitmapTests", NULL, &runBitmapTests},
+        {(const uint8_t *) "runByteArrayTests", NULL, &runByteArrayTests},
+        {(const uint8_t *) "runErrorTests", NULL, &runErrorTests},
+        {(const uint8_t *) "runDataTests", NULL, &runDataTests}
+        
+        
     };
+
+    /*
+     *
+     * typedef struct FRENamedFunction_ {
+    const uint8_t* name;
+	void*          functionData;
+    FREFunction    function;
+} FRENamedFunction;
+     */
 
     *numFunctionsToSet = sizeof(extensionFunctions) / sizeof(FRENamedFunction);
     *functionsToSet = extensionFunctions;
-
-    swft = [[SwiftOSXANE alloc] init];
+    dllContext = ctx;
+    
+    
+    swft = [[SwiftController alloc] init];
     [swft setFREContextWithCtx:ctx];
 
 }

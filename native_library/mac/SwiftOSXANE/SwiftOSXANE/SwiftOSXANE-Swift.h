@@ -124,18 +124,32 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
 
+SWIFT_CLASS("_TtC11SwiftOSXANE15SwiftController")
+@interface SwiftController : NSObject
 
-SWIFT_CLASS("_TtC11SwiftOSXANE11SwiftOSXANE")
-@interface SwiftOSXANE : NSObject
-- (FREObject _Nonnull)getIsSwiftCoolWithArgv:(NSPointerArray * _Nonnull)argv;
+- (FREObject _Nullable)runStringTestsWithArgv:(NSPointerArray *_Nullable)argv;
 
-- (FREObject _Nonnull)getPriceWithArgv:(NSPointerArray * _Nonnull)argv;
-- (FREObject _Nonnull)getAgeWithArgv:(NSPointerArray * _Nonnull)argv;
-- (FREObject _Nonnull)getHelloWorldWithArgv:(NSPointerArray * _Nonnull)argv;
-//- (FREObject _Nonnull)getHelloWorldTwoWithArgv:(NSPointerArray * _Nonnull)argv;
+- (FREObject _Nullable)runNumberTestsWithArgv:(NSPointerArray *_Nullable)argv;
+
+- (FREObject _Nullable)runIntTestsWithArgv:(NSPointerArray *_Nullable)argv;
+
+- (FREObject _Nullable)runArrayTestsWithArgv:(NSPointerArray *_Nullable)argv;
+
+- (FREObject _Nullable)runObjectTestsWithArgv:(NSPointerArray *_Nullable)argv;
+
+- (FREObject _Nullable)runBitmapTestsWithArgv:(NSPointerArray *_Nullable)argv;
+
+- (FREObject _Nullable)runByteArrayTestsWithArgv:(NSPointerArray *_Nullable)argv;
+
+- (FREObject _Nullable)runDataTestsWithArgv:(NSPointerArray *_Nullable)argv;
+
+- (FREObject _Nullable)runErrorTestsWithArgv:(NSPointerArray *_Nullable)argv;
 
 - (void)setFREContextWithCtx:(FREContext _Nonnull)ctx;
+
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+
+
 @end
 
 #pragma clang diagnostic pop
