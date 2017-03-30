@@ -23,9 +23,9 @@
 
 import Foundation
 
-var context: FREContext!
+public var context: FREContext!
 
-func trace(_ value: Any...) {
+public func trace(_ value: Any...) {
     var traceStr: String = ""
     for i in 0 ..< value.count {
         traceStr = traceStr + "\(value[i])" + " "
@@ -50,7 +50,7 @@ fileprivate enum FREObjectType2: UInt32 {
     case FRE_TYPE_CUSTOM = 10
 }
 
-struct FREError: Error {
+public struct FREError: Error {
     
     enum Code {
         case ok
@@ -65,7 +65,7 @@ struct FREError: Error {
         case insufficientMemory
     }
     
-    func printStackTrace(_ oFile: String, _ oLine: Int, _ oColumn: Int) {
+    public func printStackTrace(_ oFile: String, _ oLine: Int, _ oColumn: Int) {
         trace("_______________")
         trace("*****ERROR*****")
         trace("message:", message)
@@ -108,7 +108,7 @@ fileprivate func getActionscriptClassType(object: FREObject) -> FREObjectType2 {
     return FREObjectType2.FRE_TYPE_NULL
 }
 
-extension FREContext {
+public extension FREContext {
     
     func dispatchStatusEventAsync(code: String, level: String) throws {
         #if os(iOS)
@@ -152,7 +152,7 @@ extension FREContext {
 }
 
 
-extension FREObject {
+public extension FREObject {
     
     func release() {
         #if os(iOS)
@@ -680,7 +680,7 @@ extension FREObject {
             let status: FREResult = FREGetObjectAsUTF8(object, &len, &valuePtr)
         #endif
         if FRE_OK == status {
-            ret = (NSString(bytes: valuePtr!, length: Int(len), encoding: String.Encoding.utf8.rawValue) as? String)!
+            ret = (NSString(bytes: valuePtr!, length: Int(len), encoding: String.Encoding.utf8.rawValue) as String?)!
         } else {
             throw FREError(exception: "", message: "cannot get FREObject as String", code: FREObject.getErrorCode(status),
                            line: #line, column: #column, file: #file)
@@ -754,7 +754,7 @@ extension FREObject {
 
 public typealias FREArray = UnsafeMutableRawPointer
 
-extension FREArray {
+public extension FREArray {
     func getAsArray() throws -> Array<Any?> {
         return try _getAsArray(self)
     }
@@ -789,7 +789,7 @@ extension FREArray {
         return object
     }
     
-    func setObjectAt(index: UInt, object: FREObject) throws {
+    public func setObjectAt(index: UInt, object: FREObject) throws {
         #if os(iOS)
             let status: FREResult = FRESwiftBridge.bridge.FRESetArrayElementA(arrayOrVector: self, index: UInt32(index),
                                                                               value: object)
@@ -818,7 +818,7 @@ extension FREArray {
     
 }
 
-extension FREByteArray {
+public extension FREByteArray {
     static func newByteArray() -> FREByteArray {
         return self.init()
     }
@@ -839,7 +839,7 @@ extension FREByteArray {
 
 public typealias FREBitmapData = FREBitmapData2
 
-extension FREBitmapData {
+public extension FREBitmapData {
     func getWidth() -> UInt {
         return UInt(self.width)
     }
@@ -896,3 +896,17 @@ extension FREBitmapData {
     
 }
 
+public typealias FREArgv = UnsafeMutablePointer<FREObject?>!
+public typealias FREArgc = UInt32
+public typealias FREFunctionMap = [String: (_ :FREContext, _:FREArgc, _:FREArgv) -> FREObject? ]
+public var functionsToSet: FREFunctionMap = [:]
+
+public typealias FRESwiftController = NSObject
+public extension FRESwiftController {
+    func callSwiftFunction(name:String, ctx:FREContext, argc:FREArgc, argv: FREArgv) -> FREObject? {
+        if let fm = functionsToSet[name] {
+            return fm(ctx,argc,argv)
+        }
+        return nil
+    }
+}

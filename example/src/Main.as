@@ -43,17 +43,22 @@ public class Main extends Sprite {
         var myArray:Array = new Array();
         myArray.push(3, 1, 4, 2, 6, 5);
 
-        var resultString:String = ane.runStringTests("I am a string from AIR");
+
+        var resultString:String = ane.runStringTests("I am a string from AIR with new interface");
         textField.text += resultString + "\n";
 
 
         var resultNumber:Number = ane.runNumberTests(31.99);
         textField.text += "Number: " + resultNumber + "\n";
 
+
         var resultInt:int = ane.runIntTests(-54, 66);
         textField.text += "Int: " + resultInt + "\n";
+
+
         var resultArray:Array = ane.runArrayTests(myArray);
         textField.text += "Array: " + resultArray.toString() + "\n";
+
 
         var resultObject:Person = ane.runObjectTests(person) as Person;
         textField.text += "Person.age: " + resultObject.age.toString() + "\n";
@@ -82,6 +87,7 @@ public class Main extends Sprite {
         var inData:String = "Saved and returned";
         var outData:String = ane.runDataTests(inData) as String;
         textField.text += outData + "\n";
+
 
         addChild(textField);
     }

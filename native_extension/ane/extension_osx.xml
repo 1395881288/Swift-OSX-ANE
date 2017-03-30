@@ -3,7 +3,7 @@
 	<id>com.tuarua.SwiftOSXANE</id>
 	<name>Swift OSX ANE</name>
 	<copyright>This work is licensed under Mozilla Public License Version 1.1, Copyright 2015</copyright>
-	<versionNumber>0.0.1</versionNumber>
+	<versionNumber>0.0.2</versionNumber>
 	<platforms>
 	<platform name="MacOS-x86-64">
 		<applicationDeployment>
