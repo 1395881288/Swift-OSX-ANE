@@ -1,9 +1,11 @@
 package {
 
+import com.tuarua.ANEError;
 import com.tuarua.Person;
 import com.tuarua.SwiftOSXANE;
 
 import flash.display.Bitmap;
+import flash.display.BitmapData;
 
 import flash.display.Loader;
 
@@ -17,79 +19,109 @@ import flash.text.TextFormat;
 import flash.text.TextFormatAlign;
 import flash.utils.ByteArray;
 
+[SWF(width="640", height="360", frameRate="60", backgroundColor="#F1F1F1")]
 public class Main extends Sprite {
-    private var ane:SwiftOSXANE = new SwiftOSXANE();
+    private var ane:SwiftOSXANE;
+    private var hasActivated:Boolean;
 
     public function Main() {
         super();
         stage.align = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
-
-        var textField:TextField = new TextField();
-        var tf:TextFormat = new TextFormat();
-        tf.size = 24;
-        tf.color = 0x333333;
-        tf.align = TextFormatAlign.LEFT;
-        textField.defaultTextFormat = tf;
-        textField.width = 800;
-        textField.height = 800;
-        textField.multiline = true;
-        textField.wordWrap = true;
-
-        var person:Person = new Person();
-        person.age = 21;
-        person.name = "Tom";
-
-        var myArray:Array = new Array();
-        myArray.push(3, 1, 4, 2, 6, 5);
+        this.addEventListener(Event.ACTIVATE, onActivated);
 
 
-        var resultString:String = ane.runStringTests("I am a string from AIR with new interface");
-        textField.text += resultString + "\n";
+    }
+
+    private function onActivated(event:Event):void {
+        if (!hasActivated) {
+            ane = new SwiftOSXANE();
+            var textField:TextField = new TextField();
+            var tf:TextFormat = new TextFormat();
+            tf.size = 24;
+            tf.color = 0x333333;
+            tf.align = TextFormatAlign.LEFT;
+            textField.defaultTextFormat = tf;
+            textField.width = 800;
+            textField.height = 800;
+            textField.multiline = true;
+            textField.wordWrap = true;
+
+            var person:Person = new Person();
+            person.age = 21;
+            person.name = "Tom";
+
+            var myArray:Array = new Array();
+            myArray.push(3, 1, 4, 2, 6, 5);
 
 
-        var resultNumber:Number = ane.runNumberTests(31.99);
-        textField.text += "Number: " + resultNumber + "\n";
+            var resultString:String = ane.runStringTests("I am a string from AIR with new interface");
+            textField.text += resultString + "\n";
 
 
-        var resultInt:int = ane.runIntTests(-54, 66);
-        textField.text += "Int: " + resultInt + "\n";
+            var resultNumber:Number = ane.runNumberTests(31.99);
+            textField.text += "Number: " + resultNumber + "\n";
 
 
-        var resultArray:Array = ane.runArrayTests(myArray);
-        textField.text += "Array: " + resultArray.toString() + "\n";
+            var resultInt:int = ane.runIntTests(-54, 66);
+            textField.text += "Int: " + resultInt + "\n";
+
+            var resultArray:Array = ane.runArrayTests(myArray);
+            textField.text += "Array: " + resultArray.toString() + "\n";
 
 
-        var resultObject:Person = ane.runObjectTests(person) as Person;
-        textField.text += "Person.age: " + resultObject.age.toString() + "\n";
+            var resultObject:Person = ane.runObjectTests(person) as Person;
+            textField.text += "Person.age: " + resultObject.age.toString() + "\n";
 
-        const IMAGE_URL:String = "http://tinyurl.com/zaky3n4";
 
-        var ldr:Loader = new Loader();
-        ldr.contentLoaderInfo.addEventListener(Event.COMPLETE, ldr_complete);
-        ldr.load(new URLRequest(IMAGE_URL));
+            const IMAGE_URL:String = "http://tinyurl.com/zaky3n4";
 
-        var bitmap1:Bitmap;
+            var ldr:Loader = new Loader();
+            ldr.contentLoaderInfo.addEventListener(Event.COMPLETE, ldr_complete);
+            ldr.load(new URLRequest(IMAGE_URL));
 
-        function ldr_complete(evt:Event):void {
-            var bmp:Bitmap = ldr.content as Bitmap;
-            ane.runBitmapTests(bmp.bitmapData);
+            var bitmap1:Bitmap;
+
+            function ldr_complete(evt:Event):void {
+                var bmp:Bitmap = ldr.content as Bitmap;
+                var bmd:BitmapData = ane.runBitmapTests(bmp.bitmapData);
+                var bmp:Bitmap = new Bitmap(bmd);
+                bmp.y = 150;
+                addChild(bmp);
+
+                trace("bmd.width",bmd.width);
+                trace("bmd.height",bmd.height);
+
+            }
+
+
+            var myByteArray:ByteArray = new ByteArray();
+            myByteArray.writeUTFBytes("Swift in an ANE. Say whaaaat!");
+            ane.runByteArrayTests(myByteArray);
+
+
+            try {
+                ane.runErrorTests(person);
+            } catch (e:ANEError) {
+                trace("Error captured in AS")
+                trace("e.message:", e.message);
+                trace("e.errorID:", e.errorID);
+                trace("e.type:", e.type);
+                trace("e.source:", e.source);
+                trace("e.getStackTrace():", e.getStackTrace());
+            }
+
+            ane.runErrorTests2("Test String");
+
+            /*
+             var inData:String = "Saved and returned";
+             var outData:String = ane.runDataTests(inData) as String;
+             textField.text += outData + "\n";*/
+
+
+            addChild(textField);
         }
-
-
-        var myByteArray:ByteArray = new ByteArray();
-        myByteArray.writeUTFBytes("Swift in an ANE. Say whaaaat!");
-        ane.runByteArrayTests(myByteArray);
-
-
-        ane.runErrorTests(person, "test string", 78);
-
-        var inData:String = "Saved and returned";
-        var outData:String = ane.runDataTests(inData) as String;
-        textField.text += outData + "\n";
-
-
-        addChild(textField);
+        hasActivated = true;
     }
 }
 }
