@@ -54,8 +54,8 @@ public class SwiftOSXANE extends EventDispatcher {
         return extensionContext.call("runObjectTests", value) as Person;
     }
 
-    public function runBitmapTests(bmd:BitmapData):void {
-        extensionContext.call("runBitmapTests", bmd);
+    public function runBitmapTests(bmd:BitmapData):BitmapData {
+        return extensionContext.call("runBitmapTests", bmd) as BitmapData;
     }
 
     public function runByteArrayTests(byteArray:ByteArray):void {
@@ -66,8 +66,15 @@ public class SwiftOSXANE extends EventDispatcher {
         return extensionContext.call("runDataTests", value) as String;
     }
 
-    public function runErrorTests(value:Person, string:String, int:int):String {
-        return extensionContext.call("runErrorTests", value, string, int) as String;
+    public function runErrorTests(value:Person):void {
+        var theRet:* = extensionContext.call("runErrorTests", value);
+        if(theRet is ANEError){
+            throw theRet as ANEError;
+        }
+    }
+
+    public function runErrorTests2(string:String):void {
+        extensionContext.call("runErrorTests2", string);
     }
 
     public function dispose():void {
