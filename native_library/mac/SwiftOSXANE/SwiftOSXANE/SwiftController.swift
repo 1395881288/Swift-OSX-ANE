@@ -36,6 +36,7 @@ import CoreImage
         functionsToSet["runArrayTests"] = runArrayTests
         functionsToSet["runObjectTests"] = runObjectTests
         functionsToSet["runBitmapTests"] = runBitmapTests
+        functionsToSet["runBitmapTests2"] = runBitmapTests2
         functionsToSet["runByteArrayTests"] = runByteArrayTests
         functionsToSet["runErrorTests"] = runErrorTests
         functionsToSet["runErrorTests2"] = runErrorTests2
@@ -194,63 +195,89 @@ import CoreImage
         guard argc == 1, let inFRE0 = argv[0] else {
             return nil
         }
-
+        
         let asBitmapData = FREBitmapDataSwift.init(freObject: inFRE0)
-
         defer {
             asBitmapData.releaseData()
         }
         do {
             if let cgimg = try asBitmapData.getAsImage() {
-                trace("CGIMG Ok")
-                
                 let context = CIContext()
+                
+                
+                
                 let filter = CIFilter(name: "CISepiaTone")!
                 filter.setValue(0.8, forKey: kCIInputIntensityKey)
                 let image = CIImage.init(cgImage: cgimg)
-                filter.setValue(image, forKey: kCIInputImageKey)
+
+ 
                 let result = filter.outputImage!
-                let cgImage = context.createCGImage(result, from: result.extent)
-                
-                //TODO convert CGImage to FREBitmapData
                 
                 /*
-                if let view = NSApp.mainWindow?.contentView {
-                    trace("ADD SUBVIEW is not working") //TODO
-                    let img: NSImage = NSImage.init(cgImage: cgImage!, size: NSSize.init(width: 300, height: 300))
-                    let imageView: NSImageView = NSImageView(image: img)
-                    view.addSubview(imageView)
-                    view.needsDisplay = true
+                 case none /* For example, RGB. */
+                 
+                 case premultipliedLast /* For example, premultiplied RGBA */
+                 
+                 case premultipliedFirst /* For example, premultiplied ARGB */
+                 
+                 case last /* For example, non-premultiplied RGBA */
+                 
+                 case first /* For example, non-premultiplied ARGB */
+                 
+                 case noneSkipLast /* For example, RBGX. */
+                 
+                 case noneSkipFirst /* For example, XRGB. */
+                 
+                 case alphaOnly /* No color data, alpha data only */
+ */
+                
+                if let newImage = context.createCGImage(result, from: result.extent, format: kCIFormatBGRA8, colorSpace: cgimg.colorSpace) {
+                    trace("new Image",newImage.width,newImage.height)
+                    try asBitmapData.setPixels(cgImage: newImage)
                 }
                 
-                // https://developer.apple.com/library/content/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_context/dq_context.html
-                // no graphics context
-                */
             }
         } catch {
         }
-        
 
-        trace("bitmap test finish")
-        return asBitmapData.rawValue
+        return nil
+        
+    }
+    
+    func runBitmapTests2(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        return nil
     }
 
     func runByteArrayTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
         trace("***********Start ByteArray test***********")
 
         guard argc == 1, let inFRE0 = argv[0] else {
+            Swift.debugPrint("returning eraly BA")
             return nil
         }
 
         let asByteArray = FREByteArraySwift.init(freByteArray: inFRE0)
 
-        if let byteData = asByteArray.value {
-            let base64Encoded = byteData.base64EncodedString(options: .init(rawValue: 0))
-
-            trace("Encoded to Base64:", base64Encoded)
+        
+        guard let byteData = asByteArray.value else {
+            asByteArray.releaseBytes()
+            Swift.debugPrint("returning eraly BA 2")
+            return nil
         }
-        asByteArray.releaseBytes() //don't forget to release
+        
+        let base64Encoded = byteData.base64EncodedString(options: .init(rawValue: 0))
+        trace("Encoded to Base64 new BA:", base64Encoded)
+        asByteArray.releaseBytes() //don't forget to release!!
+        
+        let myString = "Here is a Swift string encoded to byte array"
+        if let stringData:NSData = myString.data(using: .utf8) as NSData? {
+            let newBA = FREByteArraySwift.init(data: stringData)
+            newBA.releaseBytes() //don't forget to release!!
+            return newBA.rawValue
+        }
+        
         return nil
+        
     }
 
     func runDataTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {

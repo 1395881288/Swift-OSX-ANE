@@ -13,6 +13,7 @@
         </dependencies>
         <compiler-options>
           <map>
+            <entry key="compiler.debug.swf" value="true" />
             <entry key="compiler.keep-generated-actionscript" value="false" />
           </map>
         </compiler-options>

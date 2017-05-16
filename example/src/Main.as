@@ -19,7 +19,7 @@ import flash.text.TextFormat;
 import flash.text.TextFormatAlign;
 import flash.utils.ByteArray;
 
-[SWF(width="640", height="360", frameRate="60", backgroundColor="#F1F1F1")]
+[SWF(width="640", height="640", frameRate="60", backgroundColor="#F1F1F1")]
 public class Main extends Sprite {
     private var ane:SwiftOSXANE;
     private var hasActivated:Boolean;
@@ -58,10 +58,8 @@ public class Main extends Sprite {
             var resultString:String = ane.runStringTests("I am a string from AIR with new interface");
             textField.text += resultString + "\n";
 
-
             var resultNumber:Number = ane.runNumberTests(31.99);
             textField.text += "Number: " + resultNumber + "\n";
-
 
             var resultInt:int = ane.runIntTests(-54, 66);
             textField.text += "Int: " + resultInt + "\n";
@@ -72,33 +70,27 @@ public class Main extends Sprite {
 
             var resultObject:Person = ane.runObjectTests(person) as Person;
             textField.text += "Person.age: " + resultObject.age.toString() + "\n";
-
-
-            const IMAGE_URL:String = "http://tinyurl.com/zaky3n4";
+            
+            const IMAGE_URL:String = "https://scontent.cdninstagram.com/t/s320x320/17126819_1827746530776184_5999931637335326720_n.jpg";
 
             var ldr:Loader = new Loader();
             ldr.contentLoaderInfo.addEventListener(Event.COMPLETE, ldr_complete);
             ldr.load(new URLRequest(IMAGE_URL));
 
-            var bitmap1:Bitmap;
-
             function ldr_complete(evt:Event):void {
                 var bmp:Bitmap = ldr.content as Bitmap;
-                var bmd:BitmapData = ane.runBitmapTests(bmp.bitmapData);
-                var bmp:Bitmap = new Bitmap(bmd);
                 bmp.y = 150;
                 addChild(bmp);
-
-                trace("bmd.width",bmd.width);
-                trace("bmd.height",bmd.height);
-
+                ane.runBitmapTests(bmp.bitmapData); //pass in bitmap data and apply filter
             }
 
+            ane.runBitmapTests2();
 
             var myByteArray:ByteArray = new ByteArray();
-            myByteArray.writeUTFBytes("Swift in an ANE. Say whaaaat!");
-            ane.runByteArrayTests(myByteArray);
 
+            myByteArray.writeUTFBytes("Swift in an ANE. Say whaaaat!");
+            var resultBA:ByteArray = ane.runByteArrayTests(myByteArray);
+            trace("resultBA.toString()", resultBA.toString());
 
             try {
                 ane.runErrorTests(person);
@@ -113,10 +105,10 @@ public class Main extends Sprite {
 
             ane.runErrorTests2("Test String");
 
-            /*
-             var inData:String = "Saved and returned";
-             var outData:String = ane.runDataTests(inData) as String;
-             textField.text += outData + "\n";*/
+
+            var inData:String = "Saved and returned";
+            var outData:String = ane.runDataTests(inData) as String;
+            textField.text += outData + "\n";
 
 
             addChild(textField);

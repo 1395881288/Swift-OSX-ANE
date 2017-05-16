@@ -54,12 +54,16 @@ public class SwiftOSXANE extends EventDispatcher {
         return extensionContext.call("runObjectTests", value) as Person;
     }
 
-    public function runBitmapTests(bmd:BitmapData):BitmapData {
-        return extensionContext.call("runBitmapTests", bmd) as BitmapData;
+    public function runBitmapTests(bmd:BitmapData):void {
+        extensionContext.call("runBitmapTests", bmd);
     }
 
-    public function runByteArrayTests(byteArray:ByteArray):void {
-        extensionContext.call("runByteArrayTests", byteArray);
+    public function runBitmapTests2():BitmapData {
+        return extensionContext.call("runBitmapTests2") as BitmapData;
+    }
+
+    public function runByteArrayTests(byteArray:ByteArray):ByteArray {
+        return extensionContext.call("runByteArrayTests", byteArray) as ByteArray;
     }
 
     public function runDataTests(value:String):String {
