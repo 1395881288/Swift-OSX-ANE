@@ -927,6 +927,7 @@ public class FREBitmapDataSwift: NSObject {
         rawValue = freObject
     }
     
+    /*
     public init(cgImage:CGImage) {
         
         /*
@@ -956,6 +957,7 @@ public class FREBitmapDataSwift: NSObject {
         //cgImage.alphaInfo.rawValue
         //_bitmapData = FREBitmapData.init(width: cgImage.width, height: cgImage.height, hasAlpha: <#T##UInt32#>, isPremultiplied: <#T##UInt32#>, lineStride32: <#T##UInt32#>, isInvertedY: <#T##UInt32#>, bits32: nil)
     }
+    */
     
     public func acquire() throws {
         guard let rv = rawValue else {

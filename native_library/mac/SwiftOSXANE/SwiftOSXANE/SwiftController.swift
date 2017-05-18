@@ -192,6 +192,8 @@ import CoreImage
 
     func runBitmapTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
         trace("***********Start Bitmap test***********")
+        
+        
         guard argc == 1, let inFRE0 = argv[0] else {
             return nil
         }
@@ -204,42 +206,20 @@ import CoreImage
             if let cgimg = try asBitmapData.getAsImage() {
                 let context = CIContext()
                 
-                
-                
                 let filter = CIFilter(name: "CISepiaTone")!
                 filter.setValue(0.8, forKey: kCIInputIntensityKey)
                 let image = CIImage.init(cgImage: cgimg)
-
- 
+                filter.setValue(image, forKey: kCIInputImageKey)
                 let result = filter.outputImage!
                 
-                /*
-                 case none /* For example, RGB. */
-                 
-                 case premultipliedLast /* For example, premultiplied RGBA */
-                 
-                 case premultipliedFirst /* For example, premultiplied ARGB */
-                 
-                 case last /* For example, non-premultiplied RGBA */
-                 
-                 case first /* For example, non-premultiplied ARGB */
-                 
-                 case noneSkipLast /* For example, RBGX. */
-                 
-                 case noneSkipFirst /* For example, XRGB. */
-                 
-                 case alphaOnly /* No color data, alpha data only */
- */
-                
                 if let newImage = context.createCGImage(result, from: result.extent, format: kCIFormatBGRA8, colorSpace: cgimg.colorSpace) {
-                    trace("new Image",newImage.width,newImage.height)
                     try asBitmapData.setPixels(cgImage: newImage)
                 }
                 
             }
         } catch {
         }
-
+        
         return nil
         
     }
