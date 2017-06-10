@@ -24,7 +24,7 @@
 import Cocoa
 import CoreImage
 
-@objc class SwiftController: FRESwiftController {
+@objc class SwiftController: FreSwiftController {
 
     // must have this function !!
     // Must set const numFunctions in SwiftOSXANE.m to the length of this Array
@@ -42,6 +42,14 @@ import CoreImage
         functionsToSet["runErrorTests2"] = runErrorTests2
         functionsToSet["runDataTests"] = runDataTests
 
+        functionsToSet["initNativeStage"] = FreStageSwift.initView
+        functionsToSet["addNativeStage"] = FreStageSwift.addRoot
+        functionsToSet["updateNativeStage"] = FreStageSwift.update
+        functionsToSet["addNativeChild"] = FreDisplayList.addChild
+        functionsToSet["updateNativeChild"] = FreDisplayList.updateChild
+
+
+
         var arr: Array<String> = []
         for key in functionsToSet.keys {
             arr.append(key)
@@ -49,11 +57,19 @@ import CoreImage
         return arr
     }
 
+
+
+    func FreDisplayListUpdateChild(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        return nil
+    }
+
+
+
     func runStringTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
         trace("***********Start String test***********")
         guard argc == 1,
               let inFRE0 = argv[0],
-              let airString: String = FREObjectSwift(freObject: inFRE0).value as? String else {
+              let airString: String = FreObjectSwift(freObject: inFRE0).value as? String else {
             return nil
         }
 
@@ -62,7 +78,7 @@ import CoreImage
         let swiftString: String = "I am a string from Swift"
 
         do {
-            return try FREObjectSwift(string: swiftString).rawValue
+            return try FreObjectSwift(string: swiftString).rawValue
         } catch {
         }
         return nil
@@ -71,7 +87,7 @@ import CoreImage
     func runNumberTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
         trace("***********Start Number test***********")
         guard argc == 1, let inFRE0 = argv[0],
-              let airNumber: Double = FREObjectSwift(freObject: inFRE0).value as? Double else {
+              let airNumber: Double = FreObjectSwift(freObject: inFRE0).value as? Double else {
             return nil
         }
 
@@ -79,7 +95,7 @@ import CoreImage
         let swiftDouble: Double = 34343.31
 
         do {
-            return try FREObjectSwift(double: swiftDouble).rawValue
+            return try FreObjectSwift(double: swiftDouble).rawValue
         } catch {
         }
 
@@ -90,8 +106,8 @@ import CoreImage
         trace("***********Start Int Uint test***********")
         guard argc == 2, let inFRE0 = argv[0],
               let inFRE1 = argv[1],
-              let airInt: Int = FREObjectSwift(freObject: inFRE0).value as? Int,
-              let airUInt: Int = FREObjectSwift(freObject: inFRE1).value as? Int else {
+              let airInt: Int = FreObjectSwift(freObject: inFRE0).value as? Int,
+              let airUInt: Int = FreObjectSwift(freObject: inFRE1).value as? Int else {
             return nil
         }
 
@@ -102,8 +118,8 @@ import CoreImage
         let swiftInt: Int = -666
         let swiftUInt: UInt = 888
         do {
-            try _ = FREObjectSwift(uint: swiftUInt).value
-            return try FREObjectSwift(int: swiftInt).rawValue
+            try _ = FreObjectSwift(uint: swiftUInt).value
+            return try FreObjectSwift(int: swiftInt).rawValue
         } catch {
         }
 
@@ -125,10 +141,10 @@ import CoreImage
             trace("AIR Array length:", airArrayLen)
 
 
-            if let itemZero: FREObjectSwift = try airArray.getObjectAt(index: 0) {
+            if let itemZero: FreObjectSwift = try airArray.getObjectAt(index: 0) {
                 if let itemZeroVal: Int = itemZero.value as? Int {
                     trace("AIR Array elem at 0 type:", "value:", itemZeroVal)
-                    let newVal = try FREObjectSwift.init(int: 56)
+                    let newVal = try FreObjectSwift.init(int: 56)
                     try airArray.setObjectAt(index: 0, object: newVal)
                     return airArray.rawValue
                 }
@@ -151,18 +167,18 @@ import CoreImage
         }
 
 
-        let person = FREObjectSwift.init(freObject: inFRE0)
+        let person = FreObjectSwift.init(freObject: inFRE0)
 
         do {
 
             if let freAge = try person.getProperty(name: "age") {
                 if let oldAge: Int = freAge.value as? Int {
-                    let newAge = try FREObjectSwift.init(int: oldAge + 10)
+                    let newAge = try FreObjectSwift.init(int: oldAge + 10)
                     try person.setProperty(name: "age", prop: newAge)
 
                     trace("current person age is", oldAge)
 
-                    if let addition: FREObjectSwift = try person.callMethod(
+                    if let addition: FreObjectSwift = try person.callMethod(
                             methodName: "add", args: 100, 31) {
 
                         if let sum: Int = addition.value as? Int {
@@ -198,7 +214,7 @@ import CoreImage
             return nil
         }
         
-        let asBitmapData = FREBitmapDataSwift.init(freObject: inFRE0)
+        let asBitmapData = FreBitmapDataSwift.init(freObject: inFRE0)
         defer {
             asBitmapData.releaseData()
         }
@@ -225,6 +241,31 @@ import CoreImage
     }
     
     func runBitmapTests2(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        /*
+        let nativeStage = FreStageSwift(frame: NSRect.init(x: 50, y: 50, width: 600, height: 600))
+        
+        
+        if let windowView = NSApp.mainWindow?.contentView {
+
+            let btn:FreNativeButton = FreNativeButton.init(frame: NSRect.init(x: 0, y: 0, width: 100, height: 100))
+            //let btn:NSButton = NSButton(title: "Well hello mis lady", target: self, action: nil)
+            
+            
+            let imgView = NSImageView(frame: NSRect.init(x: 0, y: 0, width: 640, height: 536))
+            let img = NSImage(byReferencing: URL.init(string: "https://raw.githubusercontent.com/tuarua/FreSharp/master/example/example/src/adobeair.png")!)
+            
+            imgView.alphaValue = 0.5
+            imgView.image = img
+            
+            nativeStage.addSubview(imgView)
+            nativeStage.addSubview(btn)
+            nativeStage.needsDisplay = true
+            windowView.addSubview(nativeStage)
+            windowView.needsDisplay = true
+            windowView.needsLayout = true
+            windowView.layoutSubtreeIfNeeded() //this is the magic line
+        }
+        */
         return nil
     }
 
@@ -282,7 +323,7 @@ import CoreImage
 
 
 
-        let person = FREObjectSwift.init(freObject: inFRE0)
+        let person = FreObjectSwift.init(freObject: inFRE0)
 
         do {
             _ = try person.callMethod(methodName: "add", args: 2) //not passing enough args
@@ -309,7 +350,7 @@ import CoreImage
             return nil
         }
 
-        let expectInt = FREObjectSwift.init(freObject: inFRE0)
+        let expectInt = FreObjectSwift.init(freObject: inFRE0)
         guard FREObjectTypeSwift.int == expectInt.getType() else {
             trace("Oops, we expected the FREObject to be passed as an int but it's not")
             return nil
@@ -323,7 +364,7 @@ import CoreImage
     }
 
     func setFREContext(ctx: FREContext) {
-        context = FREContextSwift.init(freContext: ctx)
+        context = FreContextSwift.init(freContext: ctx)
     }
 
 

@@ -5,19 +5,24 @@ package com.tuarua.fre {
 import com.tuarua.*;
 import com.tuarua.fre.display.NativeDisplayObject;
 
+import flash.display.Stage;
+import flash.events.FullScreenEvent;
+
 import flash.geom.Rectangle;
 
 [RemoteClass(alias="com.tuarua.fre.NativeStage")]
 public final class NativeStage {
     private static var _viewPort:Rectangle;
     private static var _visible:Boolean = true;
+    private static const _id:String = "root";
+
     public function NativeStage() {
     }
 
     public static function addChild(nativeDisplayObject:NativeDisplayObject):void {
         if (ANEContext.ctx) {
             try {
-                ANEContext.ctx.call("addChildToNativeStage", nativeDisplayObject);
+                ANEContext.ctx.call("addNativeChild", _id, nativeDisplayObject);
                 nativeDisplayObject.isAdded = true;
             } catch (e:Error) {
                 trace(e.message);
@@ -25,7 +30,9 @@ public final class NativeStage {
         }
     }
 
-    public static function init(viewPort:Rectangle, visible:Boolean, transparent:Boolean, backgroundColor:uint = 0):void {
+    //TODO add stage as param, add FullSevent
+    public static function init(stage:Stage, viewPort:Rectangle, visible:Boolean, transparent:Boolean, backgroundColor:uint = 0):void {
+        stage.addEventListener(FullScreenEvent.FULL_SCREEN, onFullScreenEvent);
         _viewPort = viewPort;
         _visible = visible;
         if (ANEContext.ctx) {
@@ -35,6 +42,10 @@ public final class NativeStage {
                 trace(e.message);
             }
         }
+    }
+
+    private static function onFullScreenEvent(event:FullScreenEvent):void {
+        trace("gone fullscreen", event.fullScreen);
     }
 
     public static function add():void {
