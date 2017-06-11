@@ -43,7 +43,7 @@ public struct FreStageSwift {
 		}
 
 		do {
-			_backgroundColor = try FreSwiftHelper.toCGColor(freObject: inFRE3)
+			_backgroundColor = try FreSwiftHelper.toCGColor(freObject: inFRE3, alpha: FreObjectSwift.init(int: 1).rawValue!)
 		} catch {
 		}
 		_viewPort = viewPort

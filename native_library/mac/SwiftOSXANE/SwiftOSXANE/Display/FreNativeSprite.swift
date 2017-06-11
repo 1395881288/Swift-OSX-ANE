@@ -9,7 +9,7 @@
 import Cocoa
 
 class FreNativeSprite: NSView {
-    private var _id:String = ""
+	private var _id: String = ""
 	private var _x: CGFloat = 0
 	public var x: CGFloat {
 		set {
@@ -39,7 +39,7 @@ class FreNativeSprite: NSView {
 			super.init(frame: NSRect.init(x: 0, y: 0, width: 0, height: 0))
 			return
 		}
-        _id = id
+		_id = id
 		let _x = CGFloat.init(xFre)
 		let _y = CGFloat.init(yFre)
 
@@ -73,7 +73,7 @@ class FreNativeSprite: NSView {
 		}
 		self.setFrameSize(NSSize.init(width: maxX, height: maxY))
 	}
-    
+
 
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
@@ -88,23 +88,23 @@ class FreNativeSprite: NSView {
 		  else {
 			return
 		}
-        var forceLayout = false
+		var forceLayout = false
 		if propName == "x" {
 			x = CGFloat.init(FreObjectSwift.init(freObject: value).value as! Int)
-            forceLayout = true
+			forceLayout = true
 		} else if propName == "y" {
 			y = CGFloat.init(FreObjectSwift.init(freObject: value).value as! Int)
-            forceLayout = true
+			forceLayout = true
 		} else if propName == "alpha" {
 			self.alphaValue = CGFloat.init(FreObjectSwift.init(freObject: value).value as! Double)
 		} else if propName == "visible" {
 			self.isHidden = FreObjectSwift.init(freObject: value).value as! Bool
 		}
 
-        if forceLayout {
-            self.setFrameOrigin(NSPoint.init(x: x, y: y))
-            FreDisplayList.sizeParentToFit(id: _id)
-        }
+		if forceLayout {
+			self.setFrameOrigin(NSPoint.init(x: x, y: y))
+			FreDisplayList.sizeParentToFit(id: _id)
+		}
 		self.needsDisplay = true
 
 	}
