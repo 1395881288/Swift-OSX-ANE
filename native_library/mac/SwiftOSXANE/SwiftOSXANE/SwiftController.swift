@@ -26,344 +26,343 @@ import CoreImage
 
 @objc class SwiftController: FreSwiftController {
 
-	// must have this function !!
-	// Must set const numFunctions in SwiftOSXANE.m to the length of this Array
-	func getFunctions() -> Array<String> {
-
-		functionsToSet["runStringTests"] = runStringTests
-		functionsToSet["runNumberTests"] = runNumberTests
-		functionsToSet["runIntTests"] = runIntTests
-		functionsToSet["runArrayTests"] = runArrayTests
-		functionsToSet["runObjectTests"] = runObjectTests
-		functionsToSet["runBitmapTests"] = runBitmapTests
-		functionsToSet["runBitmapTests2"] = runBitmapTests2
-		functionsToSet["runByteArrayTests"] = runByteArrayTests
-		functionsToSet["runErrorTests"] = runErrorTests
-		functionsToSet["runErrorTests2"] = runErrorTests2
-		functionsToSet["runDataTests"] = runDataTests
-
-		functionsToSet["initNativeStage"] = FreStageSwift.initView
-		functionsToSet["addNativeStage"] = FreStageSwift.addRoot
-		functionsToSet["updateNativeStage"] = FreStageSwift.update
-		functionsToSet["addNativeChild"] = FreDisplayList.addChild
-		functionsToSet["updateNativeChild"] = FreDisplayList.updateChild
-
-
-
-		var arr: Array<String> = []
-		for key in functionsToSet.keys {
-			arr.append(key)
-		}
-		return arr
-	}
-
-
-	func FreDisplayListUpdateChild(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-		return nil
-	}
-
-
-	func runStringTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-		trace("***********Start String test***********")
-		guard argc == 1,
-			  let inFRE0 = argv[0],
-			  let airString: String = FreObjectSwift(freObject: inFRE0).value as? String else {
-			return nil
-		}
+    // must have this function !!
+    // Must set const numFunctions in SwiftOSXANE.m to the length of this Array
+    func getFunctions() -> Array<String> {
+
+        functionsToSet["runStringTests"] = runStringTests
+        functionsToSet["runNumberTests"] = runNumberTests
+        functionsToSet["runIntTests"] = runIntTests
+        functionsToSet["runArrayTests"] = runArrayTests
+        functionsToSet["runObjectTests"] = runObjectTests
+        functionsToSet["runBitmapTests"] = runBitmapTests
+        functionsToSet["runBitmapTests2"] = runBitmapTests2
+        functionsToSet["runByteArrayTests"] = runByteArrayTests
+        functionsToSet["runErrorTests"] = runErrorTests
+        functionsToSet["runErrorTests2"] = runErrorTests2
+        functionsToSet["runDataTests"] = runDataTests
+
+        functionsToSet["initNativeStage"] = FreStageSwift.initView
+        functionsToSet["addNativeStage"] = FreStageSwift.addRoot
+        functionsToSet["updateNativeStage"] = FreStageSwift.update
+        functionsToSet["addNativeChild"] = FreDisplayList.addChild
+        functionsToSet["updateNativeChild"] = FreDisplayList.updateChild
+
+
+
+        var arr: Array<String> = []
+        for key in functionsToSet.keys {
+            arr.append(key)
+        }
+        return arr
+    }
+
+
+    func FreDisplayListUpdateChild(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        return nil
+    }
+
+
+    func runStringTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        trace("***********Start String test***********")
+        guard argc == 1,
+              let inFRE0 = argv[0],
+              let airString: String = FreObjectSwift(freObject: inFRE0).value as? String else {
+            return nil
+        }
+
+        trace("String passed from AIR:", airString)
+
+        let swiftString: String = "I am a string from Swift"
+
+        do {
+            return try FreObjectSwift(string: swiftString).rawValue
+        } catch {
+        }
+        return nil
+    }
+
+    func runNumberTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        trace("***********Start Number test***********")
+        guard argc == 1, let inFRE0 = argv[0],
+              let airNumber: Double = FreObjectSwift(freObject: inFRE0).value as? Double else {
+            return nil
+        }
 
-		trace("String passed from AIR:", airString)
-
-		let swiftString: String = "I am a string from Swift"
+        trace("Number passed from AIR:", airNumber)
+        let swiftDouble: Double = 34343.31
 
-		do {
-			return try FreObjectSwift(string: swiftString).rawValue
-		} catch {
-		}
-		return nil
-	}
+        do {
+            return try FreObjectSwift(double: swiftDouble).rawValue
+        } catch {
+        }
 
-	func runNumberTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-		trace("***********Start Number test***********")
-		guard argc == 1, let inFRE0 = argv[0],
-			  let airNumber: Double = FreObjectSwift(freObject: inFRE0).value as? Double else {
-			return nil
-		}
+        return nil
+    }
 
-		trace("Number passed from AIR:", airNumber)
-		let swiftDouble: Double = 34343.31
+    func runIntTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        trace("***********Start Int Uint test***********")
+        guard argc == 2, let inFRE0 = argv[0],
+              let inFRE1 = argv[1],
+              let airInt: Int = FreObjectSwift(freObject: inFRE0).value as? Int,
+              let airUInt: Int = FreObjectSwift(freObject: inFRE1).value as? Int else {
+            return nil
+        }
 
-		do {
-			return try FreObjectSwift(double: swiftDouble).rawValue
-		} catch {
-		}
 
-		return nil
-	}
+        trace("Int passed from AIR:", airInt)
+        trace("UInt passed from AIR:", airUInt)
 
-	func runIntTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-		trace("***********Start Int Uint test***********")
-		guard argc == 2, let inFRE0 = argv[0],
-			  let inFRE1 = argv[1],
-			  let airInt: Int = FreObjectSwift(freObject: inFRE0).value as? Int,
-			  let airUInt: Int = FreObjectSwift(freObject: inFRE1).value as? Int else {
-			return nil
-		}
+        let swiftInt: Int = -666
+        let swiftUInt: UInt = 888
+        do {
+            try _ = FreObjectSwift(uint: swiftUInt).value
+            return try FreObjectSwift(int: swiftInt).rawValue
+        } catch {
+        }
 
+        return nil
+    }
 
-		trace("Int passed from AIR:", airInt)
-		trace("UInt passed from AIR:", airUInt)
+    func runArrayTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        trace("***********Start Array test NEW ***********")
 
-		let swiftInt: Int = -666
-		let swiftUInt: UInt = 888
-		do {
-			try _ = FreObjectSwift(uint: swiftUInt).value
-			return try FreObjectSwift(int: swiftInt).rawValue
-		} catch {
-		}
+        guard argc == 1, let inFRE0 = argv[0] else {
+            return nil
+        }
 
-		return nil
-	}
+        let airArray: FREArraySwift = FREArraySwift.init(freObject: inFRE0)
+        do {
+            let airArrayLen = airArray.length
 
-	func runArrayTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-		trace("***********Start Array test NEW ***********")
+            trace("Array passed from AIR:", airArray.value)
+            trace("AIR Array length:", airArrayLen)
 
-		guard argc == 1, let inFRE0 = argv[0] else {
-			return nil
-		}
 
-		let airArray: FREArraySwift = FREArraySwift.init(freObject: inFRE0)
-		do {
-			let airArrayLen = airArray.length
+            if let itemZero: FreObjectSwift = try airArray.getObjectAt(index: 0) {
+                if let itemZeroVal: Int = itemZero.value as? Int {
+                    trace("AIR Array elem at 0 type:", "value:", itemZeroVal)
+                    let newVal = try FreObjectSwift.init(int: 56)
+                    try airArray.setObjectAt(index: 0, object: newVal)
+                    return airArray.rawValue
+                }
+            }
 
-			trace("Array passed from AIR:", airArray.value)
-			trace("AIR Array length:", airArrayLen)
+        } catch let e as FREError {
+            _ = e.getError(#file, #line, #column)
+        } catch {
+        }
 
+        return nil
 
-			if let itemZero: FreObjectSwift = try airArray.getObjectAt(index: 0) {
-				if let itemZeroVal: Int = itemZero.value as? Int {
-					trace("AIR Array elem at 0 type:", "value:", itemZeroVal)
-					let newVal = try FreObjectSwift.init(int: 56)
-					try airArray.setObjectAt(index: 0, object: newVal)
-					return airArray.rawValue
-				}
-			}
+    }
 
-		} catch let e as FREError {
-			_ = e.getError(#file, #line, #column)
-		} catch {
-		}
+    func runObjectTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        trace("***********Start Object test***********")
 
-		return nil
+        guard argc == 1, let inFRE0 = argv[0] else {
+            return nil
+        }
 
-	}
+        let person = FreObjectSwift.init(freObject: inFRE0)
 
-	func runObjectTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-		trace("***********Start Object test***********")
+        do {
 
-		guard argc == 1, let inFRE0 = argv[0] else {
-			return nil
-		}
+            if let freAge = try person.getProperty(name: "age") {
+                if let oldAge: Int = freAge.value as? Int {
+                    let newAge = try FreObjectSwift.init(int: oldAge + 10)
+                    try person.setProperty(name: "age", prop: newAge)
 
+                    trace("current person age is", oldAge)
 
-		let person = FreObjectSwift.init(freObject: inFRE0)
+                    if let addition: FreObjectSwift = try person.callMethod(
+                      methodName: "add", args: 100, 31) {
 
-		do {
+                        if let sum: Int = addition.value as? Int {
+                            trace("addition result:", sum)
+                        }
 
-			if let freAge = try person.getProperty(name: "age") {
-				if let oldAge: Int = freAge.value as? Int {
-					let newAge = try FreObjectSwift.init(int: oldAge + 10)
-					try person.setProperty(name: "age", prop: newAge)
+                    }
 
-					trace("current person age is", oldAge)
+                    if let dictionary: Dictionary<String, AnyObject> = person.value as? Dictionary<String, AnyObject> {
+                        trace("AIR Object converted to Dictionary using getAsDictionary:", dictionary.description) //this is what's failing
+                    }
 
-					if let addition: FreObjectSwift = try person.callMethod(
-					  methodName: "add", args: 100, 31) {
+                    return person.rawValue
 
-						if let sum: Int = addition.value as? Int {
-							trace("addition result:", sum)
-						}
+                }
 
-					}
+            }
+        } catch let e as FREError {
+            _ = e.getError(#file, #line, #column)
+        } catch {
+        }
 
-					if let dictionary: Dictionary<String, AnyObject> = person.value as? Dictionary<String, AnyObject> {
-						trace("AIR Object converted to Dictionary using getAsDictionary:", dictionary.description) //this is what's failing
-					}
 
-					return person.rawValue
+        return nil
 
-				}
+    }
 
-			}
-		} catch let e as FREError {
-			_ = e.getError(#file, #line, #column)
-		} catch {
-		}
+    func runBitmapTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        trace("***********Start Bitmap test***********")
 
 
-		return nil
+        guard argc == 1, let inFRE0 = argv[0] else {
+            return nil
+        }
 
-	}
+        let asBitmapData = FreBitmapDataSwift.init(freObject: inFRE0)
+        defer {
+            asBitmapData.releaseData()
+        }
+        do {
+            if let cgimg = try asBitmapData.getAsImage() {
+                let context = CIContext()
 
-	func runBitmapTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-		trace("***********Start Bitmap test***********")
+                let filter = CIFilter(name: "CISepiaTone")!
+                filter.setValue(0.8, forKey: kCIInputIntensityKey)
+                let image = CIImage.init(cgImage: cgimg)
+                filter.setValue(image, forKey: kCIInputImageKey)
+                let result = filter.outputImage!
 
+                if let newImage = context.createCGImage(result, from: result.extent, format: kCIFormatBGRA8, colorSpace: cgimg.colorSpace) {
+                    try asBitmapData.setPixels(cgImage: newImage)
+                }
 
-		guard argc == 1, let inFRE0 = argv[0] else {
-			return nil
-		}
+            }
+        } catch {
+        }
 
-		let asBitmapData = FreBitmapDataSwift.init(freObject: inFRE0)
-		defer {
-			asBitmapData.releaseData()
-		}
-		do {
-			if let cgimg = try asBitmapData.getAsImage() {
-				let context = CIContext()
+        return nil
 
-				let filter = CIFilter(name: "CISepiaTone")!
-				filter.setValue(0.8, forKey: kCIInputIntensityKey)
-				let image = CIImage.init(cgImage: cgimg)
-				filter.setValue(image, forKey: kCIInputImageKey)
-				let result = filter.outputImage!
+    }
 
-				if let newImage = context.createCGImage(result, from: result.extent, format: kCIFormatBGRA8, colorSpace: cgimg.colorSpace) {
-					try asBitmapData.setPixels(cgImage: newImage)
-				}
+    func runBitmapTests2(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        /*
+        let nativeStage = FreStageSwift(frame: NSRect.init(x: 50, y: 50, width: 600, height: 600))
 
-			}
-		} catch {
-		}
 
-		return nil
+        if let windowView = NSApp.mainWindow?.contentView {
 
-	}
+            let btn:FreNativeButton = FreNativeButton.init(frame: NSRect.init(x: 0, y: 0, width: 100, height: 100))
+            //let btn:NSButton = NSButton(title: "Well hello mis lady", target: self, action: nil)
 
-	func runBitmapTests2(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-		/*
-		let nativeStage = FreStageSwift(frame: NSRect.init(x: 50, y: 50, width: 600, height: 600))
 
+            let imgView = NSImageView(frame: NSRect.init(x: 0, y: 0, width: 640, height: 536))
+            let img = NSImage(byReferencing: URL.init(string: "https://raw.githubusercontent.com/tuarua/FreSharp/master/example/example/src/adobeair.png")!)
 
-		if let windowView = NSApp.mainWindow?.contentView {
+            imgView.alphaValue = 0.5
+            imgView.image = img
 
-			let btn:FreNativeButton = FreNativeButton.init(frame: NSRect.init(x: 0, y: 0, width: 100, height: 100))
-			//let btn:NSButton = NSButton(title: "Well hello mis lady", target: self, action: nil)
+            nativeStage.addSubview(imgView)
+            nativeStage.addSubview(btn)
+            nativeStage.needsDisplay = true
+            windowView.addSubview(nativeStage)
+            windowView.needsDisplay = true
+            windowView.needsLayout = true
+            windowView.layoutSubtreeIfNeeded() //this is the magic line
+        }
+        */
+        return nil
+    }
 
+    func runByteArrayTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        trace("***********Start ByteArray test***********")
 
-			let imgView = NSImageView(frame: NSRect.init(x: 0, y: 0, width: 640, height: 536))
-			let img = NSImage(byReferencing: URL.init(string: "https://raw.githubusercontent.com/tuarua/FreSharp/master/example/example/src/adobeair.png")!)
+        guard argc == 1, let inFRE0 = argv[0] else {
+            Swift.debugPrint("returning eraly BA")
+            return nil
+        }
 
-			imgView.alphaValue = 0.5
-			imgView.image = img
+        let asByteArray = FREByteArraySwift.init(freByteArray: inFRE0)
 
-			nativeStage.addSubview(imgView)
-			nativeStage.addSubview(btn)
-			nativeStage.needsDisplay = true
-			windowView.addSubview(nativeStage)
-			windowView.needsDisplay = true
-			windowView.needsLayout = true
-			windowView.layoutSubtreeIfNeeded() //this is the magic line
-		}
-		*/
-		return nil
-	}
 
-	func runByteArrayTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-		trace("***********Start ByteArray test***********")
+        guard let byteData = asByteArray.value else {
+            asByteArray.releaseBytes()
+            Swift.debugPrint("returning eraly BA 2")
+            return nil
+        }
 
-		guard argc == 1, let inFRE0 = argv[0] else {
-			Swift.debugPrint("returning eraly BA")
-			return nil
-		}
+        let base64Encoded = byteData.base64EncodedString(options: .init(rawValue: 0))
+        trace("Encoded to Base64 new BA:", base64Encoded)
+        asByteArray.releaseBytes() //don't forget to release!!
 
-		let asByteArray = FREByteArraySwift.init(freByteArray: inFRE0)
+        let myString = "Here is a Swift string encoded to byte array"
+        if let stringData: NSData = myString.data(using: .utf8) as NSData? {
+            let newBA = FREByteArraySwift.init(data: stringData)
+            newBA.releaseBytes() //don't forget to release!!
+            return newBA.rawValue
+        }
 
+        return nil
 
-		guard let byteData = asByteArray.value else {
-			asByteArray.releaseBytes()
-			Swift.debugPrint("returning eraly BA 2")
-			return nil
-		}
+    }
 
-		let base64Encoded = byteData.base64EncodedString(options: .init(rawValue: 0))
-		trace("Encoded to Base64 new BA:", base64Encoded)
-		asByteArray.releaseBytes() //don't forget to release!!
+    func runDataTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        trace("***********Start ActionScriptData test***********")
+        if let objectAs = argv[0] {
+            do {
+                try context.setActionScriptData(object: objectAs)
+                return try context.getActionScriptData()
+            } catch {
+            }
+        }
+        return nil
+    }
 
-		let myString = "Here is a Swift string encoded to byte array"
-		if let stringData: NSData = myString.data(using: .utf8) as NSData? {
-			let newBA = FREByteArraySwift.init(data: stringData)
-			newBA.releaseBytes() //don't forget to release!!
-			return newBA.rawValue
-		}
+    func runErrorTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        trace("***********Start Error Handling test***********")
 
-		return nil
+        guard argc == 1,
+              let inFRE0 = argv[0] else {
+            return nil
+        }
 
-	}
 
-	func runDataTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-		trace("***********Start ActionScriptData test***********")
-		if let objectAs = argv[0] {
-			do {
-				try context.setActionScriptData(object: objectAs)
-				return try context.getActionScriptData()
-			} catch {
-			}
-		}
-		return nil
-	}
 
-	func runErrorTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-		trace("***********Start Error Handling test***********")
+        let person = FreObjectSwift.init(freObject: inFRE0)
 
-		guard argc == 1,
-			  let inFRE0 = argv[0] else {
-			return nil
-		}
+        do {
+            _ = try person.callMethod(methodName: "add", args: 2) //not passing enough args
+        } catch let e as FREError {
+            trace(e.message) //just catch in Swift, do not bubble to actionscript
+        } catch {
+        }
 
+        do {
+            _ = try person.getProperty(name: "doNotExist") //calling a property that doesn't exist
+        } catch let e as FREError {
+            if let aneError = e.getError(#file, #line, #column) {
+                return aneError //return the error as an actionscript error
+            }
+        } catch {
+        }
 
+        return nil
+    }
 
-		let person = FreObjectSwift.init(freObject: inFRE0)
+    func runErrorTests2(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        guard argc == 1,
+              let inFRE0 = argv[0] else {
+            return nil
+        }
 
-		do {
-			_ = try person.callMethod(methodName: "add", args: 2) //not passing enough args
-		} catch let e as FREError {
-			trace(e.message) //just catch in Swift, do not bubble to actionscript
-		} catch {
-		}
+        let expectInt = FreObjectSwift.init(freObject: inFRE0)
+        guard FREObjectTypeSwift.int == expectInt.getType() else {
+            trace("Oops, we expected the FREObject to be passed as an int but it's not")
+            return nil
+        }
 
-		do {
-			_ = try person.getProperty(name: "doNotExist") //calling a property that doesn't exist
-		} catch let e as FREError {
-			if let aneError = e.getError(#file, #line, #column) {
-				return aneError //return the error as an actionscript error
-			}
-		} catch {
-		}
+        let _: Int = expectInt.value as! Int;
 
-		return nil
-	}
 
-	func runErrorTests2(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-		guard argc == 1,
-			  let inFRE0 = argv[0] else {
-			return nil
-		}
+        return nil
 
-		let expectInt = FreObjectSwift.init(freObject: inFRE0)
-		guard FREObjectTypeSwift.int == expectInt.getType() else {
-			trace("Oops, we expected the FREObject to be passed as an int but it's not")
-			return nil
-		}
+    }
 
-		let _: Int = expectInt.value as! Int;
-
-
-		return nil
-
-	}
-
-	func setFREContext(ctx: FREContext) {
-		context = FreContextSwift.init(freContext: ctx)
-	}
+    func setFREContext(ctx: FREContext) {
+        context = FreContextSwift.init(freContext: ctx)
+    }
 
 
 }
