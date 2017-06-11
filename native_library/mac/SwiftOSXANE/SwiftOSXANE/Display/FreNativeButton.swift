@@ -9,9 +9,10 @@
 import Cocoa
 
 class FreNativeButton: NSButton {
-	var upState: NSImage!
-	var overState: NSImage!
-	var downState: NSImage!
+    private var _id:String = ""
+	private var upState: NSImage!
+	private var overState: NSImage!
+	private var downState: NSImage!
 	private let AsCallbackEvent: String = "TRFRESHARP.as.CALLBACK";
 	private var _x: CGFloat = 0
 	public var x: CGFloat {
@@ -32,8 +33,6 @@ class FreNativeButton: NSButton {
 			return _y
 		}
 	}
-
-	private var _id: String = ""
 
 	override func draw(_ dirtyRect: NSRect) {
 		super.draw(dirtyRect)
@@ -89,7 +88,7 @@ class FreNativeButton: NSButton {
 			self.init(frame: NSRect.init(x: 0, y: 0, width: 0, height: 0))
 			return
 		}
-
+        
 		let _x = CGFloat.init(xFre)
 		let _y = CGFloat.init(yFre)
 		var width = 0
@@ -166,10 +165,13 @@ class FreNativeButton: NSButton {
 		  else {
 			return
 		}
+        var forceLayout = false
 		if propName == "x" {
 			x = CGFloat.init(FreObjectSwift.init(freObject: value).value as! Int)
+            forceLayout = true
 		} else if propName == "y" {
 			y = CGFloat.init(FreObjectSwift.init(freObject: value).value as! Int)
+            forceLayout = true
 		} else if propName == "alpha" {
 			let aFre = FreObjectSwift.init(freObject: value)
 			self.alphaValue = FREObjectTypeSwift.int == aFre.getType()
@@ -179,7 +181,10 @@ class FreNativeButton: NSButton {
 			self.isHidden = !(FreObjectSwift.init(freObject: value).value as! Bool)
 		}
 
-        self.setFrameOrigin(NSPoint.init(x: x, y: y))
+        if forceLayout {
+            self.setFrameOrigin(NSPoint.init(x: x, y: y))
+            FreDisplayList.sizeParentToFit(id: _id)
+        }
         self.needsDisplay = true
 	}
 

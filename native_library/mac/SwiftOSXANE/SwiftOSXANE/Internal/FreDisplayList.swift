@@ -80,7 +80,7 @@ public struct FreDisplayList {
 
 			switch type {
 			case FreStageSwift.FreNativeType.image:
-				let nativeImage = try FreNativeImage.init(freObjectSwift: child)
+				let nativeImage = try FreNativeImage.init(freObjectSwift: child, id: id)
 				addToParent(parentId: parentId, child: nativeImage)
 				children[id] = (parentId, nativeImage)
 				break
@@ -141,5 +141,17 @@ public struct FreDisplayList {
 		return nil
 	}
 
+    
+    public static func sizeParentToFit(id:String) {
+        if let dl = children[id] {
+            if dl.0 != "root" {
+                if let parentdl = children[dl.0] {
+                    if let parent = parentdl.1 as? FreNativeSprite {
+                        parent.fitToChildren()
+                    }
+                }
+            }
+        }
+    }
 
 }

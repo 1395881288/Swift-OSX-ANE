@@ -9,7 +9,7 @@
 import Cocoa
 
 class FreNativeImage: NSImageView {
-
+    private var _id:String = ""
 	private var _x: CGFloat = 0
 	public var x: CGFloat {
 		set {
@@ -43,10 +43,13 @@ class FreNativeImage: NSImageView {
 		  else {
 			return
 		}
+        var forceLayout = false
 		if propName == "x" {
 			x = CGFloat.init(FreObjectSwift.init(freObject: value).value as! Int)
+            forceLayout = true
 		} else if propName == "y" {
 			y = CGFloat.init(FreObjectSwift.init(freObject: value).value as! Int)
+            forceLayout = true
 		} else if propName == "alpha" {
 			let aFre = FreObjectSwift.init(freObject: value)
 			self.alphaValue = FREObjectTypeSwift.int == aFre.getType()
@@ -56,20 +59,27 @@ class FreNativeImage: NSImageView {
 			self.isHidden = !(FreObjectSwift.init(freObject: value).value as! Bool)
 		}
         
-        self.setFrameOrigin(NSPoint.init(x: x, y: y))
+        if forceLayout {
+            self.setFrameOrigin(NSPoint.init(x: x, y: y))
+            FreDisplayList.sizeParentToFit(id: _id)
+        }
         self.needsDisplay = true
         
 	}
+    
 
-	init(freObjectSwift: FreObjectSwift) throws {
+	init(freObjectSwift: FreObjectSwift, id: String) throws {
 		guard let bmd = try freObjectSwift.getProperty(name: "bitmapData")?.rawValue,
 			  let xFre = try freObjectSwift.getProperty(name: "x")?.value as? Int,
 			  let yFre = try freObjectSwift.getProperty(name: "y")?.value as? Int,
 			  let vFre = try freObjectSwift.getProperty(name: "visible")?.value as? Bool
 		  else {
+            self._id = id
 			super.init(frame: NSRect.init(x: 0, y: 0, width: 0, height: 0))
 			return
 		}
+        
+        self._id = id
 		let _x = CGFloat.init(xFre)
 		let _y = CGFloat.init(yFre)
 		var width = 0
@@ -98,6 +108,8 @@ class FreNativeImage: NSImageView {
 		}
 
 		super.init(frame: NSRect.init(x: _x, y: _y, width: CGFloat.init(width), height: CGFloat.init(height)))
+        self.postsFrameChangedNotifications = true
+        
 		x = _x
 		y = _y
 		alphaValue = _alpha
@@ -109,10 +121,8 @@ class FreNativeImage: NSImageView {
 
 	}
     
-    // https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CocoaDrawingGuide/Transforms/Transforms.html#//apple_ref/doc/uid/TP40003290-CH204-BCIHDAIJ
-    
     override var isFlipped: Bool {
-        return true //BOOM
+        return true
     }
 
 	required init?(coder: NSCoder) {
