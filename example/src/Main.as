@@ -1,18 +1,27 @@
 package {
 
+import com.greensock.TweenLite;
 import com.tuarua.Person;
 import com.tuarua.SwiftOSXANE;
 import com.tuarua.fre.ANEError;
+import com.tuarua.fre.NativeStage;
+import com.tuarua.fre.display.NativeButton;
+import com.tuarua.fre.display.NativeImage;
+import com.tuarua.fre.display.NativeSprite;
 
 import flash.display.Bitmap;
-import flash.display.BitmapData;
 
 import flash.display.Loader;
 
 import flash.display.Sprite;
 import flash.display.StageAlign;
+import flash.display.StageDisplayState;
 import flash.display.StageScaleMode;
 import flash.events.Event;
+
+
+import flash.events.MouseEvent;
+import flash.geom.Rectangle;
 import flash.net.URLRequest;
 import flash.text.TextField;
 import flash.text.TextFormat;
@@ -24,14 +33,28 @@ public class Main extends Sprite {
     private var ane:SwiftOSXANE;
     private var hasActivated:Boolean;
 
+    [Embed(source="adobeair.png")]
+    public static const TestImage:Class;
+
+    [Embed(source="play.png")]
+    public static const TestButton:Class;
+
+    [Embed(source="play-hover.png")]
+    public static const TestButtonHover:Class;
+
+    private var nativeButton:NativeButton;
+    private var nativeImage:NativeImage;
+    private var nativeSprite:NativeSprite;
+
     public function Main() {
         super();
         stage.align = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
         this.addEventListener(Event.ACTIVATE, onActivated);
-
-
     }
+
+
+
 
     private function onActivated(event:Event):void {
         if (!hasActivated) {
@@ -46,12 +69,14 @@ public class Main extends Sprite {
             textField.height = 800;
             textField.multiline = true;
             textField.wordWrap = true;
+            textField.width = 500;
+            textField.height = 300;
 
             var person:Person = new Person();
             person.age = 21;
             person.name = "Tom";
 
-            var myArray:Array = new Array();
+            var myArray:Array = [];
             myArray.push(3, 1, 4, 2, 6, 5);
 
 
@@ -70,7 +95,7 @@ public class Main extends Sprite {
 
             var resultObject:Person = ane.runObjectTests(person) as Person;
             textField.text += "Person.age: " + resultObject.age.toString() + "\n";
-            
+
             const IMAGE_URL:String = "https://scontent.cdninstagram.com/t/s320x320/17126819_1827746530776184_5999931637335326720_n.jpg";
 
             var ldr:Loader = new Loader();
@@ -84,7 +109,29 @@ public class Main extends Sprite {
                 ane.runBitmapTests(bmp.bitmapData); //pass in bitmap data and apply filter
             }
 
-            ane.runBitmapTests2();
+
+            NativeStage.init(stage, new Rectangle(0, 0, 400, 400), true, true/*, 0x505050*/);
+            NativeStage.add();
+
+            nativeSprite = new NativeSprite();
+            nativeSprite.x = 10;
+
+            nativeImage = new NativeImage(new TestImage());
+            nativeImage.x = 10;
+            nativeImage.y = 99;
+            nativeImage.visible = true;
+
+            nativeButton = new NativeButton(new TestButton(), new TestButtonHover());
+            NativeStage.addChild(nativeButton);
+
+
+            NativeStage.addChild(nativeSprite);
+            nativeSprite.addChild(nativeImage);
+
+            //NativeStage.viewPort = new Rectangle(0,0,400,600);
+
+            nativeButton.addEventListener(MouseEvent.MOUSE_OVER, onNativeOver);
+            nativeButton.addEventListener(MouseEvent.CLICK, onNativeClick);
 
             var myByteArray:ByteArray = new ByteArray();
 
@@ -95,7 +142,7 @@ public class Main extends Sprite {
             try {
                 ane.runErrorTests(person);
             } catch (e:ANEError) {
-                trace("Error captured in AS")
+                trace("Error captured in AS");
                 trace("e.message:", e.message);
                 trace("e.errorID:", e.errorID);
                 trace("e.type:", e.type);
@@ -115,5 +162,24 @@ public class Main extends Sprite {
         }
         hasActivated = true;
     }
+
+    private function onNativeOver(event:MouseEvent):void {
+        //nativeButton.alpha = 0.5;
+    }
+
+    private function onNativeClick(event:MouseEvent):void {
+        //goFullscreen();
+
+        //nativeImage.x = 100;
+        TweenLite.to(nativeImage, 0.35, {x: 100});
+        // NativeStage.viewPort = new Rectangle(0, 0, 500, 600);
+
+    }
+
+    private function goFullscreen() {
+        stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+    }
+
+
 }
 }

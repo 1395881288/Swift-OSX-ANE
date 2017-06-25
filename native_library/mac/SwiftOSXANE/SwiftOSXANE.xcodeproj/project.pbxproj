@@ -9,25 +9,39 @@
 /* Begin PBXBuildFile section */
 		285FE53DB9D50C815BCD0DFF /* SwiftOSXANE_oc.h in Headers */ = {isa = PBXBuildFile; fileRef = 285FEAB02EF710CE1ED2BC9A /* SwiftOSXANE_oc.h */; };
 		285FE5D4FE3BD57FC9C6A8EC /* SwiftOSXANE-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 285FE632F089B25BE590B688 /* SwiftOSXANE-Swift.h */; };
+		285FE627EA531E0AE7A0F821 /* FreDisplayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FE32056A8B1038565FB45 /* FreDisplayList.swift */; };
+		285FE6458D8BB6CE04C5AE38 /* FreNativeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FE089E6177AA9C46D4084 /* FreNativeButton.swift */; };
+		285FE8A5E784F90DD39B78F4 /* FreNativeSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FECC5D0E993F5196A2D8C /* FreNativeSprite.swift */; };
+		285FE9FCDAAAE88A58B87AFB /* FreRectangleSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FE737822277977DD0E7F8 /* FreRectangleSwift.swift */; };
 		285FEAB0481294474F21BE5D /* SwiftOSXANE.m in Sources */ = {isa = PBXBuildFile; fileRef = 285FEA208428C0509C440EE0 /* SwiftOSXANE.m */; };
+		285FECF853C17DEAD21B6084 /* FreNativeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FE905CC0AFA27A486810F /* FreNativeImage.swift */; };
 		CE36AF4D1DF47DBD003C224B /* Adobe AIR_64 in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4B1DF47DBD003C224B /* Adobe AIR_64 */; };
 		CE36AF4E1DF47DBD003C224B /* Adobe AIR in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4C1DF47DBD003C224B /* Adobe AIR */; };
 		CE36AF501DF47E4E003C224B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4F1DF47E4E003C224B /* Cocoa.framework */; };
 		CE490B171E74D6FA00F50640 /* FlashRuntimeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE490B161E74D6FA00F50640 /* FlashRuntimeExtensions.swift */; };
+		CE65AC591EDF82D800DEE389 /* FreStageSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65AC581EDF82D800DEE389 /* FreStageSwift.swift */; };
+		CE6782D61EFFD8A500C0F78B /* FrePointSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6782D51EFFD8A500C0F78B /* FrePointSwift.swift */; };
 		CEE7AB121DF4D45D0047E083 /* SwiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7AB111DF4D45D0047E083 /* SwiftController.swift */; };
 		CEE7AB181DF4EE620047E083 /* SwiftOSXANE-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE7AB131DF4D63D0047E083 /* SwiftOSXANE-Bridging-Header.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		285FE089E6177AA9C46D4084 /* FreNativeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreNativeButton.swift; sourceTree = "<group>"; };
+		285FE32056A8B1038565FB45 /* FreDisplayList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreDisplayList.swift; sourceTree = "<group>"; };
 		285FE632F089B25BE590B688 /* SwiftOSXANE-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SwiftOSXANE-Swift.h"; sourceTree = "<group>"; };
+		285FE737822277977DD0E7F8 /* FreRectangleSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreRectangleSwift.swift; sourceTree = "<group>"; };
+		285FE905CC0AFA27A486810F /* FreNativeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreNativeImage.swift; sourceTree = "<group>"; };
 		285FEA208428C0509C440EE0 /* SwiftOSXANE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwiftOSXANE.m; sourceTree = "<group>"; };
 		285FEAB02EF710CE1ED2BC9A /* SwiftOSXANE_oc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftOSXANE_oc.h; sourceTree = "<group>"; };
+		285FECC5D0E993F5196A2D8C /* FreNativeSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreNativeSprite.swift; sourceTree = "<group>"; };
 		CE36AF401DF47B7B003C224B /* SwiftOSXANE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftOSXANE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE36AF441DF47B7C003C224B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE36AF4B1DF47DBD003C224B /* Adobe AIR_64 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR_64"; path = "/Users/User/sdks/AIR/AIRSDK_23/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR_64"; sourceTree = "<absolute>"; };
 		CE36AF4C1DF47DBD003C224B /* Adobe AIR */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR"; path = "/Users/User/sdks/AIR/AIRSDK_23/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR"; sourceTree = "<absolute>"; };
 		CE36AF4F1DF47E4E003C224B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CE490B161E74D6FA00F50640 /* FlashRuntimeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashRuntimeExtensions.swift; sourceTree = "<group>"; };
+		CE65AC581EDF82D800DEE389 /* FreStageSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreStageSwift.swift; sourceTree = "<group>"; };
+		CE6782D51EFFD8A500C0F78B /* FrePointSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrePointSwift.swift; sourceTree = "<group>"; };
 		CEE7AB111DF4D45D0047E083 /* SwiftController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftController.swift; sourceTree = "<group>"; };
 		CEE7AB131DF4D63D0047E083 /* SwiftOSXANE-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SwiftOSXANE-Bridging-Header.h"; path = "SwiftOSXANE/SwiftOSXANE-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -46,6 +60,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		285FE00CDD2AC72DFED7858F /* Geom */ = {
+			isa = PBXGroup;
+			children = (
+				CE6782D51EFFD8A500C0F78B /* FrePointSwift.swift */,
+				285FE737822277977DD0E7F8 /* FreRectangleSwift.swift */,
+			);
+			path = Geom;
+			sourceTree = "<group>";
+		};
+		285FEC9F06FFFCF6D27ABDFF /* Display */ = {
+			isa = PBXGroup;
+			children = (
+				285FECC5D0E993F5196A2D8C /* FreNativeSprite.swift */,
+				285FE089E6177AA9C46D4084 /* FreNativeButton.swift */,
+				285FE905CC0AFA27A486810F /* FreNativeImage.swift */,
+			);
+			path = Display;
+			sourceTree = "<group>";
+		};
+		285FECEC32D9C8F35C346F98 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				285FE32056A8B1038565FB45 /* FreDisplayList.swift */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
 		CE36AF361DF47B7B003C224B = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +112,10 @@
 				285FEA208428C0509C440EE0 /* SwiftOSXANE.m */,
 				CEE7AB111DF4D45D0047E083 /* SwiftController.swift */,
 				CE490B161E74D6FA00F50640 /* FlashRuntimeExtensions.swift */,
+				CE65AC581EDF82D800DEE389 /* FreStageSwift.swift */,
+				285FECEC32D9C8F35C346F98 /* Internal */,
+				285FEC9F06FFFCF6D27ABDFF /* Display */,
+				285FE00CDD2AC72DFED7858F /* Geom */,
 			);
 			path = SwiftOSXANE;
 			sourceTree = "<group>";
@@ -204,7 +249,14 @@
 			files = (
 				285FEAB0481294474F21BE5D /* SwiftOSXANE.m in Sources */,
 				CEE7AB121DF4D45D0047E083 /* SwiftController.swift in Sources */,
+				CE65AC591EDF82D800DEE389 /* FreStageSwift.swift in Sources */,
 				CE490B171E74D6FA00F50640 /* FlashRuntimeExtensions.swift in Sources */,
+				285FE627EA531E0AE7A0F821 /* FreDisplayList.swift in Sources */,
+				285FE8A5E784F90DD39B78F4 /* FreNativeSprite.swift in Sources */,
+				285FE6458D8BB6CE04C5AE38 /* FreNativeButton.swift in Sources */,
+				285FECF853C17DEAD21B6084 /* FreNativeImage.swift in Sources */,
+				CE6782D61EFFD8A500C0F78B /* FrePointSwift.swift in Sources */,
+				285FE9FCDAAAE88A58B87AFB /* FreRectangleSwift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

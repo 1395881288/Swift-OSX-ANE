@@ -10,39 +10,40 @@
 #include <Adobe AIR/Adobe AIR.h>
 
 SwiftController *swft;
-NSArray * funcArray;
+NSArray *funcArray;
 #define FRE_FUNCTION(fn) FREObject (fn)(FREContext context, void* functionData, uint32_t argc, FREObject argv[])
 
 FRE_FUNCTION(callSwiftFunction) {
-    NSString* fName = (__bridge NSString *)(functionData);
+    NSString *fName = (__bridge NSString *) (functionData);
     return [swft callSwiftFunctionWithName:fName ctx:context argc:argc argv:argv];
 }
 
-void contextInitializer(void *extData, const uint8_t *ctxType, FREContext ctx, uint32_t *numFunctionsToSet, const FRENamedFunction **functionsToSet) {
-    
+void contextInitializer(void *extData, const uint8_t *ctxType, FREContext ctx, uint32_t *numFunctionsToSet,
+        const FRENamedFunction **functionsToSet) {
+
     /******* MAKE SURE TO SET NUM OF FUNCTIONS MANUALLY *****/
     /********************************************************/
-    
-    const int numFunctions = 11;
-    
+
+    const int numFunctions = 17;
+
     /********************************************************/
     /********************************************************/
-    
+
     swft = [[SwiftController alloc] init];
     [swft setFREContextWithCtx:ctx];
-    
-    
+
+
     funcArray = [swft getFunctions];
     static FRENamedFunction extensionFunctions[numFunctions] = {};
     for (int i = 0; i < [funcArray count]; ++i) {
-        NSString * nme = [funcArray objectAtIndex:i];
-        FRENamedFunction nf = {(const uint8_t *) [nme UTF8String], (__bridge void *)(nme), &callSwiftFunction};
+        NSString *nme = [funcArray objectAtIndex:i];
+        FRENamedFunction nf = {(const uint8_t *) [nme UTF8String], (__bridge void *) (nme), &callSwiftFunction};
         extensionFunctions[i] = nf;
     }
 
     *numFunctionsToSet = sizeof(extensionFunctions) / sizeof(FRENamedFunction);
     *functionsToSet = extensionFunctions;
-    
+
 
 }
 

@@ -12,6 +12,7 @@ public class NativeDisplayObject {
     protected var _id:String;
     protected static const IMAGE_TYPE:int = 0;
     protected static const BUTTON_TYPE:int = 1;
+    protected static const SPRITE_TYPE:int = 2;
     public var type:int;
     private var _isAdded:Boolean = false;
     public function NativeDisplayObject() {
