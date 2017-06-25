@@ -99,7 +99,7 @@ class FreNativeButton: NSButton {
 
         var _alpha: CGFloat = 0.0
         if let aFre = try freObjectSwift.getProperty(name: "alpha") {
-            _alpha = FREObjectTypeSwift.int == aFre.getType()
+            _alpha = FreObjectTypeSwift.int == aFre.getType()
               ? CGFloat.init(aFre.value as! Int)
               : CGFloat.init(aFre.value as! Double)
         }
@@ -174,7 +174,7 @@ class FreNativeButton: NSButton {
             forceLayout = true
         } else if propName == "alpha" {
             let aFre = FreObjectSwift.init(freObject: value)
-            self.alphaValue = FREObjectTypeSwift.int == aFre.getType()
+            self.alphaValue = FreObjectTypeSwift.int == aFre.getType()
               ? CGFloat.init(aFre.value as! Int)
               : CGFloat.init(aFre.value as! Double)
         } else if propName == "visible" {

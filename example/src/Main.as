@@ -15,8 +15,11 @@ import flash.display.Loader;
 
 import flash.display.Sprite;
 import flash.display.StageAlign;
+import flash.display.StageDisplayState;
 import flash.display.StageScaleMode;
 import flash.events.Event;
+
+
 import flash.events.MouseEvent;
 import flash.geom.Rectangle;
 import flash.net.URLRequest;
@@ -48,9 +51,10 @@ public class Main extends Sprite {
         stage.align = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
         this.addEventListener(Event.ACTIVATE, onActivated);
-
-
     }
+
+
+
 
     private function onActivated(event:Event):void {
         if (!hasActivated) {
@@ -164,11 +168,18 @@ public class Main extends Sprite {
     }
 
     private function onNativeClick(event:MouseEvent):void {
+        //goFullscreen();
+
         //nativeImage.x = 100;
         TweenLite.to(nativeImage, 0.35, {x: 100});
         // NativeStage.viewPort = new Rectangle(0, 0, 500, 600);
 
     }
+
+    private function goFullscreen() {
+        stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+    }
+
 
 }
 }

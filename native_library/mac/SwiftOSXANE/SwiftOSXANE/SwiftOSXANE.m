@@ -24,7 +24,7 @@ void contextInitializer(void *extData, const uint8_t *ctxType, FREContext ctx, u
     /******* MAKE SURE TO SET NUM OF FUNCTIONS MANUALLY *****/
     /********************************************************/
 
-    const int numFunctions = 16;
+    const int numFunctions = 17;
 
     /********************************************************/
     /********************************************************/

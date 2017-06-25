@@ -53,6 +53,38 @@ public struct FreStageSwift {
 
     }
 
+    public static func onFullScreen(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        guard argc > 0, let inFRE0 = argv[0] else {
+            traceError(message: "onFullScreen - incorrect arguments", line: #line, column: #column, file: #file, freError: nil)
+            return nil
+        }
+
+        let fullScreen: Bool = FreObjectSwift.init(freObject: inFRE0).value as! Bool
+        for win in NSApp.windows {
+            if (fullScreen && win.canBecomeMain && win.className.contains("AIR_FullScreen")) {
+                win.makeMain()
+                break
+            } else if (!fullScreen && win.canBecomeMain && win.className.contains("AIR_PlayerContent")) {
+                win.makeMain()
+                win.orderFront(nil)
+                break
+            }
+        }
+        _ = restore(ctx: ctx, argc: argc, argv: argv)
+
+        return nil
+    }
+
+    public static func restore(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        if let windowView = NSApp.mainWindow?.contentView, let v = _view {
+            v.removeFromSuperview()
+            v.setFrameOrigin(NSPoint.init(x: 0.0, y: windowView.frame.height - v.frame.height))
+            windowView.addSubview(v)
+            refreshView()
+        }
+        return nil
+    }
+
     public static func addRoot(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
         _view = FreStageSwiftView.init(frame: _viewPort, visible: _visible, transparent: _transparent, backgroundColor: _backgroundColor)
 

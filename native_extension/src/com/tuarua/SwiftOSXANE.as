@@ -62,10 +62,6 @@ public class SwiftOSXANE extends EventDispatcher {
         ANEContext.ctx.call("runBitmapTests", bmd);
     }
 
-    public function runBitmapTests2():BitmapData {
-        return ANEContext.ctx.call("runBitmapTests2") as BitmapData;
-    }
-
     public function runByteArrayTests(byteArray:ByteArray):ByteArray {
         return ANEContext.ctx.call("runByteArrayTests", byteArray) as ByteArray;
     }

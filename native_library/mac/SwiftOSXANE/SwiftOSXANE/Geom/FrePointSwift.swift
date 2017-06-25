@@ -21,24 +21,20 @@ import Cocoa
 
 #endif
 
-public class FreRectangleSwift: FreObjectSwift {
+public class FrePointSwift: FreObjectSwift {
     override public init(freObject: FREObject?) {
         super.init(freObject: freObject)
     }
 
-    public init(value: CGRect) {
+    public init(value: CGPoint) {
         var freObject: FREObject? = nil
         do {
             let argsArray: NSPointerArray = NSPointerArray(options: .opaqueMemory)
-            let arg0: FREObject? = try FreObjectSwift.init(cgFloat: value.origin.x).rawValue
+            let arg0: FREObject? = try FreObjectSwift.init(cgFloat: value.x).rawValue
             argsArray.addPointer(arg0)
-            let arg1: FREObject? = try FreObjectSwift.init(cgFloat: value.origin.y).rawValue
+            let arg1: FREObject? = try FreObjectSwift.init(cgFloat: value.y).rawValue
             argsArray.addPointer(arg1)
-            let arg2: FREObject? = try FreObjectSwift.init(cgFloat: value.width).rawValue
-            argsArray.addPointer(arg2)
-            let arg3: FREObject? = try FreObjectSwift.init(cgFloat: value.height).rawValue
-            argsArray.addPointer(arg3)
-            freObject = try FreSwiftHelper.newObject("flash.geom.Rectangle", argsArray)
+            freObject = try FreSwiftHelper.newObject("flash.geom.Point", argsArray)
         } catch {
         }
 
@@ -49,7 +45,7 @@ public class FreRectangleSwift: FreObjectSwift {
         get {
             do {
                 if let raw = rawValue {
-                    let idRes = try getAsCGRect(raw) as Any?
+                    let idRes = try getAsCGPoint(raw) as Any?
                     return idRes
                 }
             } catch {
@@ -58,19 +54,15 @@ public class FreRectangleSwift: FreObjectSwift {
         }
     }
 
-    private func getAsCGRect(_ rawValue: FREObject) throws -> CGRect {
-        var ret: CGRect = CGRect.init(x: 0, y: 0, width: 0, height: 0)
+    private func getAsCGPoint(_ rawValue: FREObject) throws -> CGPoint {
+        var ret: CGPoint = CGPoint.init(x: 0, y: 0)
         guard let x: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "x")).value as? Int,
-              let y: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "y")).value as? Int,
-              let width: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "width")).value as? Int,
-              let height: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "height")).value as? Int
+              let y: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "y")).value as? Int
           else {
             return ret
         }
-        ret.origin.x = CGFloat.init(x)
-        ret.origin.y = CGFloat.init(y)
-        ret.size.width = CGFloat.init(width)
-        ret.size.height = CGFloat.init(height)
+        ret.x = CGFloat.init(x)
+        ret.y = CGFloat.init(y)
 
         return ret
     }

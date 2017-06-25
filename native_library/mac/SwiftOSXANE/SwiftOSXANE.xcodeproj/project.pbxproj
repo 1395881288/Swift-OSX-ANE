@@ -20,6 +20,7 @@
 		CE36AF501DF47E4E003C224B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4F1DF47E4E003C224B /* Cocoa.framework */; };
 		CE490B171E74D6FA00F50640 /* FlashRuntimeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE490B161E74D6FA00F50640 /* FlashRuntimeExtensions.swift */; };
 		CE65AC591EDF82D800DEE389 /* FreStageSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65AC581EDF82D800DEE389 /* FreStageSwift.swift */; };
+		CE6782D61EFFD8A500C0F78B /* FrePointSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6782D51EFFD8A500C0F78B /* FrePointSwift.swift */; };
 		CEE7AB121DF4D45D0047E083 /* SwiftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7AB111DF4D45D0047E083 /* SwiftController.swift */; };
 		CEE7AB181DF4EE620047E083 /* SwiftOSXANE-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE7AB131DF4D63D0047E083 /* SwiftOSXANE-Bridging-Header.h */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		CE36AF4F1DF47E4E003C224B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CE490B161E74D6FA00F50640 /* FlashRuntimeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashRuntimeExtensions.swift; sourceTree = "<group>"; };
 		CE65AC581EDF82D800DEE389 /* FreStageSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreStageSwift.swift; sourceTree = "<group>"; };
+		CE6782D51EFFD8A500C0F78B /* FrePointSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrePointSwift.swift; sourceTree = "<group>"; };
 		CEE7AB111DF4D45D0047E083 /* SwiftController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftController.swift; sourceTree = "<group>"; };
 		CEE7AB131DF4D63D0047E083 /* SwiftOSXANE-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SwiftOSXANE-Bridging-Header.h"; path = "SwiftOSXANE/SwiftOSXANE-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -61,6 +63,7 @@
 		285FE00CDD2AC72DFED7858F /* Geom */ = {
 			isa = PBXGroup;
 			children = (
+				CE6782D51EFFD8A500C0F78B /* FrePointSwift.swift */,
 				285FE737822277977DD0E7F8 /* FreRectangleSwift.swift */,
 			);
 			path = Geom;
@@ -252,6 +255,7 @@
 				285FE8A5E784F90DD39B78F4 /* FreNativeSprite.swift in Sources */,
 				285FE6458D8BB6CE04C5AE38 /* FreNativeButton.swift in Sources */,
 				285FECF853C17DEAD21B6084 /* FreNativeImage.swift in Sources */,
+				CE6782D61EFFD8A500C0F78B /* FrePointSwift.swift in Sources */,
 				285FE9FCDAAAE88A58B87AFB /* FreRectangleSwift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

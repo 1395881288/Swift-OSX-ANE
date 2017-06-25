@@ -97,7 +97,7 @@ public struct FreDisplayList {
             }
 
 
-        } catch let e as FREError {
+        } catch let e as FreError {
             Swift.debugPrint(e)
         } catch {
         }

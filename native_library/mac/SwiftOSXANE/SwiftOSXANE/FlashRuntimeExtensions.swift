@@ -36,7 +36,7 @@ public class FreSwiftHelper {
         if FRE_OK == status {
             ret = (NSString(bytes: valuePtr!, length: Int(len), encoding: String.Encoding.utf8.rawValue) as String?)!
         } else {
-            throw FREError(stackTrace: "", message: "cannot get FREObject as String", type: getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot get FREObject as String", type: getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         return ret
@@ -51,7 +51,7 @@ public class FreSwiftHelper {
         let status: FREResult = FREGetObjectAsBool(rawValue, &val)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot get FREObject as Bool", type: getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot get FREObject as Bool", type: getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         ret = val == 1 ? true : false
@@ -67,7 +67,7 @@ public class FreSwiftHelper {
         let status: FREResult = FREGetObjectAsDouble(rawValue, &ret)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot get FREObject as Double", type: getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot get FREObject as Double", type: getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         return ret
@@ -81,7 +81,7 @@ public class FreSwiftHelper {
         let status: FREResult = FREGetObjectAsInt32(rawValue, &ret)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot get FREObject as Int", type: getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot get FREObject as Int", type: getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         return Int(ret)
@@ -95,7 +95,7 @@ public class FreSwiftHelper {
         let status: FREResult = FREGetObjectAsUint32(rawValue, &ret)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot get FREObject as UInt", type: getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot get FREObject as UInt", type: getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         return UInt(ret)
@@ -103,14 +103,14 @@ public class FreSwiftHelper {
 
 
     static func getAsId(_ rawValue: FREObject) throws -> Any? {
-        let objectType: FREObjectTypeSwift = getType(rawValue)
+        let objectType: FreObjectTypeSwift = getType(rawValue)
 
         //Swift.debugPrint("getAsId is of type ", objectType)
         switch objectType {
         case .int:
             return try getAsInt(rawValue)
         case .vector, .array:
-            return FREArraySwift.init(freObject: rawValue).value
+            return FreArraySwift.init(freObject: rawValue).value
         case .string:
             return try getAsString(rawValue)
         case .boolean:
@@ -123,7 +123,7 @@ public class FreSwiftHelper {
             break
           //return try self.getAsImage()
         case .bytearray:
-            let asByteArray = FREByteArraySwift.init(freByteArray: rawValue)
+            let asByteArray = FreByteArraySwift.init(freByteArray: rawValue)
             let byteData = asByteArray.value
             asByteArray.releaseBytes() //don't forget to release
             return byteData
@@ -153,22 +153,22 @@ public class FreSwiftHelper {
         return nil
     }
 
-    public static func getType(_ rawValue: FREObject) -> FREObjectTypeSwift {
+    public static func getType(_ rawValue: FREObject) -> FreObjectTypeSwift {
         var objectType: FREObjectType = FRE_TYPE_NULL
 #if os(iOS)
         _ = FRESwiftBridge.bridge.FREGetObjectType(object: rawValue, objectType: &objectType)
 #else
         FREGetObjectType(rawValue, &objectType)
 #endif
-        let type: FREObjectTypeSwift = FREObjectTypeSwift(rawValue: objectType.rawValue)!
+        let type: FreObjectTypeSwift = FreObjectTypeSwift(rawValue: objectType.rawValue)!
 
 
-        return FREObjectTypeSwift.number == type || FREObjectTypeSwift.object == type
+        return FreObjectTypeSwift.number == type || FreObjectTypeSwift.object == type
           ? getActionscriptType(rawValue)
           : type
     }
 
-    fileprivate static func getActionscriptType(_ rawValue: FREObject) -> FREObjectTypeSwift {
+    fileprivate static func getActionscriptType(_ rawValue: FREObject) -> FreObjectTypeSwift {
 
         //Swift.debugPrint("GET ACTIONSCRIPT TYPE----------------")
         if let aneUtils: FreObjectSwift = try? FreObjectSwift.init(className: "com.tuarua.fre.ANEUtils") {
@@ -177,20 +177,20 @@ public class FreSwiftHelper {
                 let type: String? = try! FreSwiftHelper.getAsString(classType.rawValue!).lowercased()
 
                 if type == "int" {
-                    return FREObjectTypeSwift.int
+                    return FreObjectTypeSwift.int
                 } else if type == "string" {
-                    return FREObjectTypeSwift.string
+                    return FreObjectTypeSwift.string
                 } else if type == "number" {
-                    return FREObjectTypeSwift.number
+                    return FreObjectTypeSwift.number
                 } else if type == "boolean" {
-                    return FREObjectTypeSwift.boolean
+                    return FreObjectTypeSwift.boolean
                 } else {
-                    return FREObjectTypeSwift.cls
+                    return FreObjectTypeSwift.cls
                 }
 
             }
         }
-        return FREObjectTypeSwift.null
+        return FreObjectTypeSwift.null
     }
 
     static func getAsDictionary(_ rawValue: FREObject) throws -> Dictionary<String, AnyObject> {
@@ -208,7 +208,7 @@ public class FreSwiftHelper {
             return Dictionary<String, AnyObject>()
         }
 
-        let array: FREArraySwift = FREArraySwift.init(freObject: rValue)
+        let array: FreArraySwift = FreArraySwift.init(freObject: rValue)
         let arrayLength = array.length
         for i in 0..<arrayLength {
             if let elem: FreObjectSwift = try array.getObjectAt(index: i) {
@@ -242,7 +242,7 @@ public class FreSwiftHelper {
 #endif
 
         guard FRE_OK == status else {
-            throw FREError(stackTrace: getActionscriptException(thrownException),
+            throw FreError(stackTrace: getActionscriptException(thrownException),
               message: "cannot get property \"\(name)\"", type: getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
@@ -261,7 +261,7 @@ public class FreSwiftHelper {
         let status: FREResult = FRESetObjectProperty(rawValue, name, prop, &thrownException)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: getActionscriptException(thrownException),
+            throw FreError(stackTrace: getActionscriptException(thrownException),
               message: "cannot set property \"\(name)\"", type: getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
@@ -273,7 +273,7 @@ public class FreSwiftHelper {
         }
         let thrownExceptionSwift: FreObjectSwift = FreObjectSwift.init(freObject: thrownException)
 
-        guard FREObjectTypeSwift.cls == thrownExceptionSwift.getType() else {
+        guard FreObjectTypeSwift.cls == thrownExceptionSwift.getType() else {
             return ""
         }
         do {
@@ -281,7 +281,7 @@ public class FreSwiftHelper {
                   let hasStackTrace = try? getAsBool(rv),
                   hasStackTrace,
                   let asStackTrace = try thrownExceptionSwift.callMethod(methodName: "getStackTrace"),
-                  FREObjectTypeSwift.string == asStackTrace.getType(),
+                  FreObjectTypeSwift.string == asStackTrace.getType(),
                   let ret: String = asStackTrace.value as? String
               else {
                 return ""
@@ -302,7 +302,7 @@ public class FreSwiftHelper {
         let status: FREResult = FRENewObjectFromUTF8(UInt32(string.utf8.count), string, &ret)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot create new  object ", type: getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot create new  object ", type: getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         return ret
@@ -317,7 +317,7 @@ public class FreSwiftHelper {
         let status: FREResult = FRENewObjectFromDouble(double, &ret)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot create new  object ", type: getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot create new  object ", type: getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         return ret
@@ -331,7 +331,7 @@ public class FreSwiftHelper {
         let status: FREResult = FRENewObjectFromInt32(Int32(int), &ret)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot create new  object ", type: getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot create new  object ", type: getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         return ret
@@ -345,7 +345,7 @@ public class FreSwiftHelper {
         let status: FREResult = FRENewObjectFromUint32(UInt32(uint), &ret)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot create new  object ", type: getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot create new  object ", type: getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         return ret
@@ -360,7 +360,7 @@ public class FreSwiftHelper {
         let status: FREResult = FRENewObjectFromBool(b, &ret)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot create new  object ", type: getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot create new  object ", type: getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         return ret
@@ -380,7 +380,7 @@ public class FreSwiftHelper {
         let status: FREResult = FRENewObject(className, numArgs, arrayToFREArray(args), &ret, &thrownException)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: getActionscriptException(thrownException),
+            throw FreError(stackTrace: getActionscriptException(thrownException),
               message: "cannot create new  object \(className)", type: FreSwiftHelper.getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
@@ -388,7 +388,7 @@ public class FreSwiftHelper {
     }
 
 
-    static func getErrorCode(_ result: FREResult) -> FREError.Code {
+    static func getErrorCode(_ result: FREResult) -> FreError.Code {
         switch result {
         case FRE_NO_SUCH_NAME:
             return .noSuchName
@@ -463,7 +463,7 @@ open class FreContextSwift: NSObject {
 
     public func dispatchStatusEventAsync(code: String, level: String) throws {
         guard let rv = rawValue else {
-            throw FREError(stackTrace: "", message: "FREObject is nil", type: FREError.Code.invalidObject,
+            throw FreError(stackTrace: "", message: "FREObject is nil", type: FreError.Code.invalidObject,
               line: #line, column: #column, file: #file)
         }
 #if os(iOS)
@@ -472,14 +472,14 @@ open class FreContextSwift: NSObject {
         let status: FREResult = FREDispatchStatusEventAsync(rv, code, level)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot dispatch event \(code):\(level)",
+            throw FreError(stackTrace: "", message: "cannot dispatch event \(code):\(level)",
               type: FreSwiftHelper.getErrorCode(status), line: #line, column: #column, file: #file)
         }
     }
 
     public func getActionScriptData() throws -> FREObject? {
         guard let rv = rawValue else {
-            throw FREError(stackTrace: "", message: "FREObject is nil", type: FREError.Code.invalidObject,
+            throw FreError(stackTrace: "", message: "FREObject is nil", type: FreError.Code.invalidObject,
               line: #line, column: #column, file: #file)
         }
         var ret: FREObject?
@@ -489,7 +489,7 @@ open class FreContextSwift: NSObject {
         let status: FREResult = FREGetContextActionScriptData(rv, &ret)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot get actionscript data", type: FreSwiftHelper.getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot get actionscript data", type: FreSwiftHelper.getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         return ret
@@ -498,7 +498,7 @@ open class FreContextSwift: NSObject {
 
     public func setActionScriptData(object: FREObject) throws {
         guard let rv = rawValue else {
-            throw FREError(stackTrace: "", message: "FREObject is nil", type: FREError.Code.invalidObject,
+            throw FreError(stackTrace: "", message: "FREObject is nil", type: FreError.Code.invalidObject,
               line: #line, column: #column, file: #file)
         }
 #if os(iOS)
@@ -507,7 +507,7 @@ open class FreContextSwift: NSObject {
         let status: FREResult = FRESetContextActionScriptData(rv, object)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot set actionscript data", type: FreSwiftHelper.getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot set actionscript data", type: FreSwiftHelper.getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
 
@@ -515,7 +515,7 @@ open class FreContextSwift: NSObject {
 
 }
 
-public struct FREError: Error {
+public struct FreError: Error {
 
     public enum Code {
         case ok
@@ -554,7 +554,7 @@ public struct FREError: Error {
     public let file: String
 }
 
-public enum FREObjectTypeSwift: UInt32 {
+public enum FreObjectTypeSwift: UInt32 {
     case object = 0
     case number = 1
     case string = 2
@@ -627,7 +627,7 @@ open class FreObjectSwift: NSObject {
 
     public func callMethod(methodName: String, args: Any...) throws -> FreObjectSwift? {
         guard let rv = rawValue else {
-            throw FREError(stackTrace: "", message: "FREObject is nil", type: FREError.Code.invalidObject,
+            throw FreError(stackTrace: "", message: "FREObject is nil", type: FreError.Code.invalidObject,
               line: #line, column: #column, file: #file)
         }
         let argsArray: NSPointerArray = NSPointerArray(options: .opaqueMemory)
@@ -649,7 +649,7 @@ open class FreObjectSwift: NSObject {
         let status: FREResult = FRECallObjectMethod(rv, methodName, numArgs, FreSwiftHelper.arrayToFREArray(argsArray), &ret, &thrownException)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: FreSwiftHelper.getActionscriptException(thrownException),
+            throw FreError(stackTrace: FreSwiftHelper.getActionscriptException(thrownException),
               message: "cannot call method \"\(methodName)\"", type: FreSwiftHelper.getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
@@ -663,7 +663,7 @@ open class FreObjectSwift: NSObject {
 
     public func getProperty(name: String) throws -> FreObjectSwift? {
         guard let rv = rawValue else {
-            throw FREError(stackTrace: "", message: "FREObject is nil", type: FREError.Code.invalidObject,
+            throw FreError(stackTrace: "", message: "FREObject is nil", type: FreError.Code.invalidObject,
               line: #line, column: #column, file: #file)
         }
         if let ret = try FreSwiftHelper.getProperty(rawValue: rv, name: name) {
@@ -674,7 +674,7 @@ open class FreObjectSwift: NSObject {
 
     public func setProperty(name: String, prop: FreObjectSwift?) throws {
         guard let rv = rawValue else {
-            throw FREError(stackTrace: "", message: "FREObject is nil", type: FREError.Code.invalidObject,
+            throw FreError(stackTrace: "", message: "FREObject is nil", type: FreError.Code.invalidObject,
               line: #line, column: #column, file: #file)
         }
 
@@ -685,9 +685,9 @@ open class FreObjectSwift: NSObject {
         }
     }
 
-    public func setProperty(name: String, array: FREArraySwift?) throws {
+    public func setProperty(name: String, array: FreArraySwift?) throws {
         guard let rv = rawValue else {
-            throw FREError(stackTrace: "", message: "FREObject is nil", type: FREError.Code.invalidObject,
+            throw FreError(stackTrace: "", message: "FREObject is nil", type: FreError.Code.invalidObject,
               line: #line, column: #column, file: #file)
         }
         if let p = array {
@@ -697,9 +697,9 @@ open class FreObjectSwift: NSObject {
         }
     }
 
-    public func getType() -> FREObjectTypeSwift {
+    public func getType() -> FreObjectTypeSwift {
         guard let rv = rawValue else {
-            return FREObjectTypeSwift.null
+            return FreObjectTypeSwift.null
         }
         return FreSwiftHelper.getType(rv)
     }
@@ -734,7 +734,7 @@ open class FreObjectSwift: NSObject {
 }
 
 
-public class FREArraySwift: NSObject {
+public class FreArraySwift: NSObject {
     public var rawValue: FREObject? = nil
 
     public init(freObject: FREObject) {
@@ -752,7 +752,7 @@ public class FREArraySwift: NSObject {
 
     public func getObjectAt(index: UInt) throws -> FreObjectSwift? {
         guard let rv = rawValue else {
-            throw FREError(stackTrace: "", message: "FREObject is nil", type: FREError.Code.invalidObject,
+            throw FreError(stackTrace: "", message: "FREObject is nil", type: FreError.Code.invalidObject,
               line: #line, column: #column, file: #file)
         }
         var object: FREObject?
@@ -763,7 +763,7 @@ public class FREArraySwift: NSObject {
         let status: FREResult = FREGetArrayElementAt(rv, UInt32(index), &object)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot get object at \(index) ", type: FreSwiftHelper.getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot get object at \(index) ", type: FreSwiftHelper.getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         if let object = object {
@@ -775,7 +775,7 @@ public class FREArraySwift: NSObject {
 
     public func setObjectAt(index: UInt, object: FreObjectSwift) throws {
         guard let rv = rawValue else {
-            throw FREError(stackTrace: "", message: "FREObject is nil", type: FREError.Code.invalidObject,
+            throw FreError(stackTrace: "", message: "FREObject is nil", type: FreError.Code.invalidObject,
               line: #line, column: #column, file: #file)
         }
 #if os(iOS)
@@ -785,7 +785,7 @@ public class FREArraySwift: NSObject {
         let status: FREResult = FRESetArrayElementAt(rv, UInt32(index), object.rawValue)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot set object at \(index) ", type: FreSwiftHelper.getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot set object at \(index) ", type: FreSwiftHelper.getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
     }
@@ -803,7 +803,7 @@ public class FREArraySwift: NSObject {
                 let status: FREResult = FREGetArrayLength(rv, &ret)
 #endif
                 guard FRE_OK == status else {
-                    throw FREError(stackTrace: "", message: "cannot get length of array", type: FreSwiftHelper.getErrorCode(status),
+                    throw FreError(stackTrace: "", message: "cannot get length of array", type: FreSwiftHelper.getErrorCode(status),
                       line: #line, column: #column, file: #file)
                 }
                 return UInt(ret)
@@ -831,7 +831,7 @@ public class FREArraySwift: NSObject {
 
 }
 
-public class FREByteArraySwift: NSObject {
+public class FreByteArraySwift: NSObject {
     public var rawValue: FREObject? = nil
     public var bytes: UnsafeMutablePointer<UInt8>!
     public var length: UInt = 0
@@ -879,7 +879,7 @@ public class FREByteArraySwift: NSObject {
 
 
                 guard FRE_OK == status else {
-                    throw FREError(stackTrace: "", message: "cannot acquire ByteArray", type: FreSwiftHelper.getErrorCode(status),
+                    throw FreError(stackTrace: "", message: "cannot acquire ByteArray", type: FreSwiftHelper.getErrorCode(status),
                       line: #line, column: #column, file: #file)
                 }
 
@@ -887,7 +887,7 @@ public class FREByteArraySwift: NSObject {
                 length = UInt(_byteArray.length)
                 bytes = _byteArray.bytes
             }
-        } catch let e as FREError {
+        } catch let e as FreError {
             Swift.debugPrint("something went wrong in creating bytearray")
             trace(e.message)
             trace(e.stackTrace)
@@ -899,7 +899,7 @@ public class FREByteArraySwift: NSObject {
     public func acquire() throws {
         guard let rv = rawValue else {
             Swift.debugPrint("acquire rawValue is nil")
-            throw FREError(stackTrace: "", message: "FREObject is nil", type: FREError.Code.invalidObject,
+            throw FreError(stackTrace: "", message: "FREObject is nil", type: FreError.Code.invalidObject,
               line: #line, column: #column, file: #file)
         }
 
@@ -909,7 +909,7 @@ public class FREByteArraySwift: NSObject {
         let status: FREResult = FREAcquireByteArray(rv, &_byteArray)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot acquire ByteArray", type: FreSwiftHelper.getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot acquire ByteArray", type: FreSwiftHelper.getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         length = UInt(_byteArray.length)
@@ -1001,7 +1001,7 @@ public class FreBitmapDataSwift: NSObject {
 
     public func acquire() throws {
         guard let rv = rawValue else {
-            throw FREError(stackTrace: "", message: "FREObject is nil", type: FREError.Code.invalidObject,
+            throw FreError(stackTrace: "", message: "FREObject is nil", type: FreError.Code.invalidObject,
               line: #line, column: #column, file: #file)
         }
 #if os(iOS)
@@ -1010,7 +1010,7 @@ public class FreBitmapDataSwift: NSObject {
         let status: FREResult = FREAcquireBitmapData2(rv, &_bitmapData)
 #endif
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot acquire BitmapData", type: FreSwiftHelper.getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot acquire BitmapData", type: FreSwiftHelper.getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
         width = Int(_bitmapData.width)
@@ -1089,7 +1089,7 @@ public class FreBitmapDataSwift: NSObject {
 
     public func invalidateRect(x: UInt, y: UInt, width: UInt, height: UInt) throws {
         guard let rv = rawValue else {
-            throw FREError(stackTrace: "", message: "FREObject is nil", type: FREError.Code.invalidObject,
+            throw FreError(stackTrace: "", message: "FREObject is nil", type: FreError.Code.invalidObject,
               line: #line, column: #column, file: #file)
         }
 #if os(iOS)
@@ -1100,7 +1100,7 @@ public class FreBitmapDataSwift: NSObject {
 #endif
 
         guard FRE_OK == status else {
-            throw FREError(stackTrace: "", message: "cannot invalidateRect", type: FreSwiftHelper.getErrorCode(status),
+            throw FreError(stackTrace: "", message: "cannot invalidateRect", type: FreSwiftHelper.getErrorCode(status),
               line: #line, column: #column, file: #file)
         }
     }
@@ -1118,6 +1118,14 @@ public func trace(_ value: Any...) {
     do {
         try context.dispatchStatusEventAsync(code: traceStr, level: "TRACE")
     } catch {
+    }
+}
+
+public func traceError(message: String, line: Int, column: Int, file: String, freError: FreError?) {
+    trace("ERROR:", "message:", message, "file:", "[\(file):\(line):\(column)]")
+    if let freError = freError {
+        trace(freError.type)
+        trace(freError.stackTrace)
     }
 }
 

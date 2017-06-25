@@ -36,7 +36,6 @@ import CoreImage
         functionsToSet["runArrayTests"] = runArrayTests
         functionsToSet["runObjectTests"] = runObjectTests
         functionsToSet["runBitmapTests"] = runBitmapTests
-        functionsToSet["runBitmapTests2"] = runBitmapTests2
         functionsToSet["runByteArrayTests"] = runByteArrayTests
         functionsToSet["runErrorTests"] = runErrorTests
         functionsToSet["runErrorTests2"] = runErrorTests2
@@ -47,6 +46,8 @@ import CoreImage
         functionsToSet["updateNativeStage"] = FreStageSwift.update
         functionsToSet["addNativeChild"] = FreDisplayList.addChild
         functionsToSet["updateNativeChild"] = FreDisplayList.updateChild
+        functionsToSet["fullscreenNativeStage"] = FreStageSwift.onFullScreen
+        functionsToSet["restoreNativeStage"] = FreStageSwift.restore
 
 
 
@@ -131,7 +132,7 @@ import CoreImage
             return nil
         }
 
-        let airArray: FREArraySwift = FREArraySwift.init(freObject: inFRE0)
+        let airArray: FreArraySwift = FreArraySwift.init(freObject: inFRE0)
         do {
             let airArrayLen = airArray.length
 
@@ -148,7 +149,7 @@ import CoreImage
                 }
             }
 
-        } catch let e as FREError {
+        } catch let e as FreError {
             _ = e.getError(#file, #line, #column)
         } catch {
         }
@@ -185,7 +186,7 @@ import CoreImage
                     }
 
                     if let dictionary: Dictionary<String, AnyObject> = person.value as? Dictionary<String, AnyObject> {
-                        trace("AIR Object converted to Dictionary using getAsDictionary:", dictionary.description) //this is what's failing
+                        trace("AIR Object converted to Dictionary using getAsDictionary:", dictionary.description)
                     }
 
                     return person.rawValue
@@ -193,7 +194,7 @@ import CoreImage
                 }
 
             }
-        } catch let e as FREError {
+        } catch let e as FreError {
             _ = e.getError(#file, #line, #column)
         } catch {
         }
@@ -237,49 +238,21 @@ import CoreImage
 
     }
 
-    func runBitmapTests2(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-        /*
-        let nativeStage = FreStageSwift(frame: NSRect.init(x: 50, y: 50, width: 600, height: 600))
-
-
-        if let windowView = NSApp.mainWindow?.contentView {
-
-            let btn:FreNativeButton = FreNativeButton.init(frame: NSRect.init(x: 0, y: 0, width: 100, height: 100))
-            //let btn:NSButton = NSButton(title: "Well hello mis lady", target: self, action: nil)
-
-
-            let imgView = NSImageView(frame: NSRect.init(x: 0, y: 0, width: 640, height: 536))
-            let img = NSImage(byReferencing: URL.init(string: "https://raw.githubusercontent.com/tuarua/FreSharp/master/example/example/src/adobeair.png")!)
-
-            imgView.alphaValue = 0.5
-            imgView.image = img
-
-            nativeStage.addSubview(imgView)
-            nativeStage.addSubview(btn)
-            nativeStage.needsDisplay = true
-            windowView.addSubview(nativeStage)
-            windowView.needsDisplay = true
-            windowView.needsLayout = true
-            windowView.layoutSubtreeIfNeeded() //this is the magic line
-        }
-        */
-        return nil
-    }
 
     func runByteArrayTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
         trace("***********Start ByteArray test***********")
 
         guard argc == 1, let inFRE0 = argv[0] else {
-            Swift.debugPrint("returning eraly BA")
+            Swift.debugPrint("returning early BA")
             return nil
         }
 
-        let asByteArray = FREByteArraySwift.init(freByteArray: inFRE0)
+        let asByteArray = FreByteArraySwift.init(freByteArray: inFRE0)
 
 
         guard let byteData = asByteArray.value else {
             asByteArray.releaseBytes()
-            Swift.debugPrint("returning eraly BA 2")
+            Swift.debugPrint("returning early BA 2")
             return nil
         }
 
@@ -289,7 +262,7 @@ import CoreImage
 
         let myString = "Here is a Swift string encoded to byte array"
         if let stringData: NSData = myString.data(using: .utf8) as NSData? {
-            let newBA = FREByteArraySwift.init(data: stringData)
+            let newBA = FreByteArraySwift.init(data: stringData)
             newBA.releaseBytes() //don't forget to release!!
             return newBA.rawValue
         }
@@ -324,14 +297,14 @@ import CoreImage
 
         do {
             _ = try person.callMethod(methodName: "add", args: 2) //not passing enough args
-        } catch let e as FREError {
+        } catch let e as FreError {
             trace(e.message) //just catch in Swift, do not bubble to actionscript
         } catch {
         }
 
         do {
             _ = try person.getProperty(name: "doNotExist") //calling a property that doesn't exist
-        } catch let e as FREError {
+        } catch let e as FreError {
             if let aneError = e.getError(#file, #line, #column) {
                 return aneError //return the error as an actionscript error
             }
@@ -348,13 +321,10 @@ import CoreImage
         }
 
         let expectInt = FreObjectSwift.init(freObject: inFRE0)
-        guard FREObjectTypeSwift.int == expectInt.getType() else {
+        guard FreObjectTypeSwift.int == expectInt.getType() else {
             trace("Oops, we expected the FREObject to be passed as an int but it's not")
             return nil
         }
-
-        let _: Int = expectInt.value as! Int;
-
 
         return nil
 
