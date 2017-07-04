@@ -9,7 +9,7 @@
 
 #include "FreSwift_oc.h"
 #import "FreSwift-Swift.h"
-#include "../../../../../../../sdks/AIR/AIRSDK_23/runtimes/air/mac/Adobe AIR.framework/Headers/Adobe AIR.h"
+#import <FRESwift/FlashRuntimeExtensions.h>
 
 FreSwift *swft;
 #define FRE_FUNCTION(fn) FREObject (fn)(FREContext context, void* functionData, uint32_t argc, FREObject argv[])
