@@ -11,6 +11,9 @@
             <entry library-name="greensock" library-level="project">
               <dependency linkage="Merged" />
             </entry>
+            <entry library-name="FreSwift" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
           </entries>
           <sdk name="AIRSDK_26" />
         </dependencies>
@@ -36,5 +39,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="SwiftOSXANE" level="project" />
     <orderEntry type="library" exported="" name="greensock" level="project" />
+    <orderEntry type="library" exported="" name="TaskbarProgressANE" level="project" />
+    <orderEntry type="library" exported="" name="FreSwift" level="project" />
   </component>
 </module>

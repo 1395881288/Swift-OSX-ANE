@@ -1,13 +1,16 @@
 package {
 
 import com.greensock.TweenLite;
+import com.tuarua.FreSwift;
 import com.tuarua.Person;
 import com.tuarua.SwiftOSXANE;
 import com.tuarua.fre.ANEError;
-import com.tuarua.fre.NativeStage;
+/*import com.tuarua.fre.NativeStage;
 import com.tuarua.fre.display.NativeButton;
 import com.tuarua.fre.display.NativeImage;
-import com.tuarua.fre.display.NativeSprite;
+import com.tuarua.fre.display.NativeSprite;*/
+
+import flash.desktop.NativeApplication;
 
 import flash.display.Bitmap;
 
@@ -18,8 +21,6 @@ import flash.display.StageAlign;
 import flash.display.StageDisplayState;
 import flash.display.StageScaleMode;
 import flash.events.Event;
-
-
 import flash.events.MouseEvent;
 import flash.geom.Rectangle;
 import flash.net.URLRequest;
@@ -30,6 +31,7 @@ import flash.utils.ByteArray;
 
 [SWF(width="640", height="640", frameRate="60", backgroundColor="#F1F1F1")]
 public class Main extends Sprite {
+    private var freSwift:FreSwift = new FreSwift(); //create this shared lib first. It contains all the Swift Shared Goodness
     private var ane:SwiftOSXANE;
     private var hasActivated:Boolean;
 
@@ -42,15 +44,16 @@ public class Main extends Sprite {
     [Embed(source="play-hover.png")]
     public static const TestButtonHover:Class;
 
-    private var nativeButton:NativeButton;
+    /*private var nativeButton:NativeButton;
     private var nativeImage:NativeImage;
-    private var nativeSprite:NativeSprite;
+    private var nativeSprite:NativeSprite;*/
 
     public function Main() {
         super();
         stage.align = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
         this.addEventListener(Event.ACTIVATE, onActivated);
+        NativeApplication.nativeApplication.addEventListener(Event.EXITING, onExiting);
     }
 
 
@@ -58,6 +61,9 @@ public class Main extends Sprite {
 
     private function onActivated(event:Event):void {
         if (!hasActivated) {
+            // notes - the ane with shared context must come first
+            // don't need the swift libs in secondary anes
+
             ane = new SwiftOSXANE();
             var textField:TextField = new TextField();
             var tf:TextFormat = new TextFormat();
@@ -110,7 +116,7 @@ public class Main extends Sprite {
             }
 
 
-            NativeStage.init(stage, new Rectangle(0, 0, 400, 400), true, true/*, 0x505050*/);
+           /* NativeStage.init(stage, new Rectangle(0, 0, 400, 400), true, true, 0x505050);
             NativeStage.add();
 
             nativeSprite = new NativeSprite();
@@ -131,7 +137,7 @@ public class Main extends Sprite {
             //NativeStage.viewPort = new Rectangle(0,0,400,600);
 
             nativeButton.addEventListener(MouseEvent.MOUSE_OVER, onNativeOver);
-            nativeButton.addEventListener(MouseEvent.CLICK, onNativeClick);
+            nativeButton.addEventListener(MouseEvent.CLICK, onNativeClick);*/
 
             var myByteArray:ByteArray = new ByteArray();
 
@@ -139,7 +145,7 @@ public class Main extends Sprite {
             var resultBA:ByteArray = ane.runByteArrayTests(myByteArray);
             trace("resultBA.toString()", resultBA.toString());
 
-            try {
+           /* try {
                 ane.runErrorTests(person);
             } catch (e:ANEError) {
                 trace("Error captured in AS");
@@ -150,7 +156,7 @@ public class Main extends Sprite {
                 trace("e.getStackTrace():", e.getStackTrace());
             }
 
-            ane.runErrorTests2("Test String");
+            ane.runErrorTests2("Test String");*/
 
 
             var inData:String = "Saved and returned";
@@ -159,9 +165,15 @@ public class Main extends Sprite {
 
 
             addChild(textField);
+
+
+
+
         }
         hasActivated = true;
     }
+
+
 
     private function onNativeOver(event:MouseEvent):void {
         //nativeButton.alpha = 0.5;
@@ -171,7 +183,7 @@ public class Main extends Sprite {
         //goFullscreen();
 
         //nativeImage.x = 100;
-        TweenLite.to(nativeImage, 0.35, {x: 100});
+        //TweenLite.to(nativeImage, 0.35, {x: 100});
         // NativeStage.viewPort = new Rectangle(0, 0, 500, 600);
 
     }
@@ -180,6 +192,10 @@ public class Main extends Sprite {
         stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
     }
 
+    private function onExiting(event:Event):void {
+        freSwift.dispose();
+        ane.dispose();
+    }
 
 }
 }
