@@ -7,7 +7,7 @@ Example Xcode project showing how to programme Air Native Extensions for OSX usi
 
 You will need
  
- - Xcode 8.1
+ - Xcode 8.3
  - IntelliJ IDEA
- - AIR 23 SDK
+ - AIR 19 SDK
 

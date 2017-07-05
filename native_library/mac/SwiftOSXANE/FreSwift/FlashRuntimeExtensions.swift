@@ -428,7 +428,10 @@ public class FreSwiftHelper {
         if let alphaD = aFre.value as? Double {
             a = CGFloat.init(alphaD)
         }
-        return UIColor.init(red: CGFloat(r / 255), green: CGFloat(g / 255), blue: CGFloat(b / 255), alpha: a)
+        let rFl: CGFloat = CGFloat.init(r) / 255
+        let gFl: CGFloat = CGFloat.init(g) / 255
+        let bFl: CGFloat = CGFloat.init(b) / 255
+        return UIColor.init(red: rFl, green: gFl, blue: bFl, alpha: a)
     }
 
 #else
@@ -446,7 +449,10 @@ public class FreSwiftHelper {
         if let alphaD = aFre.value as? Double {
             a = CGFloat.init(alphaD)
         }
-        return CGColor.init(red: CGFloat(r / 255), green: CGFloat(g / 255), blue: CGFloat(b / 255), alpha: a)
+        let rFl: CGFloat = CGFloat.init(r) / 255
+        let gFl: CGFloat = CGFloat.init(g) / 255
+        let bFl: CGFloat = CGFloat.init(b) / 255
+        return CGColor.init(red: rFl, green: gFl, blue: bFl, alpha: a)
     }
 
 #endif

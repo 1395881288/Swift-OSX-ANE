@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension xmlns="http://ns.adobe.com/air/extension/19.0">
+	<id>com.tuarua.FreSwift</id>
+	<name>FreSwift</name>
+	<copyright>This work is licensed under Mozilla Public License Version 1.1, Copyright 2015</copyright>
+	<versionNumber>0.0.1</versionNumber>
+	<platforms>
+	<platform name="MacOS-x86-64">
+		<applicationDeployment>
+			<nativeLibrary>FreSwift.framework</nativeLibrary>
+			<initializer>TRFRESExtInizer</initializer>
+			<finalizer>TRFRESExtFinizer</finalizer>
+		</applicationDeployment>
+	</platform>
+	</platforms>
+</extension>
