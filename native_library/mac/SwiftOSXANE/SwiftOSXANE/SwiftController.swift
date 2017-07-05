@@ -27,8 +27,7 @@ import FreSwift
 
 @objc class SwiftController: FreSwiftController {
 
-    // must have this function !!
-    // Must set const numFunctions in SwiftOSXANE.m to the length of this Array
+    // Must have this function. It exposes the methods to our entry ObjC.
     func getFunctions() -> Array<String> {
 
         functionsToSet["runStringTests"] = runStringTests
@@ -49,12 +48,6 @@ import FreSwift
         }
         return arr
     }
-
-
-    func FreDisplayListUpdateChild(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
-        return nil
-    }
-
 
     func runStringTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
         trace("***********Start String test***********")
@@ -169,7 +162,7 @@ import FreSwift
                     trace("current person age is", oldAge)
 
                     if let addition: FreObjectSwift = try person.callMethod(
-                      methodName: "add", args: 100, 31) {
+                      name: "add", args: 100, 31) {
 
                         if let sum: Int = addition.value as? Int {
                             trace("addition result:", sum)
@@ -288,7 +281,7 @@ import FreSwift
         let person = FreObjectSwift.init(freObject: inFRE0)
 
         do {
-            _ = try person.callMethod(methodName: "add", args: 2) //not passing enough args
+            _ = try person.callMethod(name: "add", args: 2) //not passing enough args
         } catch let e as FreError {
             trace(e.message) //just catch in Swift, do not bubble to actionscript
         } catch {
