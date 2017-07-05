@@ -4,11 +4,12 @@ import com.greensock.TweenLite;
 import com.tuarua.FreSwift;
 import com.tuarua.Person;
 import com.tuarua.SwiftOSXANE;
+import com.tuarua.fre.ANStage;
+import com.tuarua.fre.display.ANSprite;
+import com.tuarua.fre.display.ANButton;
+import com.tuarua.fre.display.ANImage;
+
 import com.tuarua.fre.ANEError;
-/*import com.tuarua.fre.NativeStage;
-import com.tuarua.fre.display.NativeButton;
-import com.tuarua.fre.display.NativeImage;
-import com.tuarua.fre.display.NativeSprite;*/
 
 import flash.desktop.NativeApplication;
 
@@ -44,9 +45,9 @@ public class Main extends Sprite {
     [Embed(source="play-hover.png")]
     public static const TestButtonHover:Class;
 
-    /*private var nativeButton:NativeButton;
-    private var nativeImage:NativeImage;
-    private var nativeSprite:NativeSprite;*/
+    private var nativeButton:ANButton;
+    private var nativeImage:ANImage;
+    private var nativeSprite:ANSprite;
 
     public function Main() {
         super();
@@ -55,9 +56,6 @@ public class Main extends Sprite {
         this.addEventListener(Event.ACTIVATE, onActivated);
         NativeApplication.nativeApplication.addEventListener(Event.EXITING, onExiting);
     }
-
-
-
 
     private function onActivated(event:Event):void {
         if (!hasActivated) {
@@ -116,28 +114,7 @@ public class Main extends Sprite {
             }
 
 
-           /* NativeStage.init(stage, new Rectangle(0, 0, 400, 400), true, true, 0x505050);
-            NativeStage.add();
 
-            nativeSprite = new NativeSprite();
-            nativeSprite.x = 10;
-
-            nativeImage = new NativeImage(new TestImage());
-            nativeImage.x = 10;
-            nativeImage.y = 99;
-            nativeImage.visible = true;
-
-            nativeButton = new NativeButton(new TestButton(), new TestButtonHover());
-            NativeStage.addChild(nativeButton);
-
-
-            NativeStage.addChild(nativeSprite);
-            nativeSprite.addChild(nativeImage);
-
-            //NativeStage.viewPort = new Rectangle(0,0,400,600);
-
-            nativeButton.addEventListener(MouseEvent.MOUSE_OVER, onNativeOver);
-            nativeButton.addEventListener(MouseEvent.CLICK, onNativeClick);*/
 
             var myByteArray:ByteArray = new ByteArray();
 
@@ -145,7 +122,7 @@ public class Main extends Sprite {
             var resultBA:ByteArray = ane.runByteArrayTests(myByteArray);
             trace("resultBA.toString()", resultBA.toString());
 
-           /* try {
+            try {
                 ane.runErrorTests(person);
             } catch (e:ANEError) {
                 trace("Error captured in AS");
@@ -156,7 +133,7 @@ public class Main extends Sprite {
                 trace("e.getStackTrace():", e.getStackTrace());
             }
 
-            ane.runErrorTests2("Test String");*/
+            ane.runErrorTests2("Test String");
 
 
             var inData:String = "Saved and returned";
@@ -167,10 +144,33 @@ public class Main extends Sprite {
             addChild(textField);
 
 
+            ANStage.init(stage, new Rectangle(0, 0, 400, 400), true, true, 0x505050);
+            ANStage.add();
 
+            nativeSprite = new ANSprite();
+            nativeSprite.x = 10;
+
+            nativeImage = new ANImage(new TestImage());
+            nativeImage.x = 10;
+            nativeImage.y = 99;
+            nativeImage.visible = true;
+
+            nativeButton = new ANButton(new TestButton(), new TestButtonHover());
+            ANStage.addChild(nativeButton);
+
+
+            ANStage.addChild(nativeSprite);
+            nativeSprite.addChild(nativeImage);
+
+            //NativeStage.viewPort = new Rectangle(0,0,400,600);
+
+            nativeButton.addEventListener(MouseEvent.MOUSE_OVER, onNativeOver);
+            nativeButton.addEventListener(MouseEvent.CLICK, onNativeClick);
 
         }
         hasActivated = true;
+
+
     }
 
 
@@ -183,7 +183,7 @@ public class Main extends Sprite {
         //goFullscreen();
 
         //nativeImage.x = 100;
-        //TweenLite.to(nativeImage, 0.35, {x: 100});
+        TweenLite.to(nativeImage, 0.35, {x: 100});
         // NativeStage.viewPort = new Rectangle(0, 0, 500, 600);
 
     }

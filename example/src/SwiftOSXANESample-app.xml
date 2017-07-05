@@ -280,5 +280,6 @@
 <extensions>
 		<extensionID>com.tuarua.FreSwift</extensionID>
         <extensionID>com.tuarua.SwiftOSXANE</extensionID>
+	<extensionID>com.tuarua.AIRNativeANE</extensionID>
     </extensions>
 </application>

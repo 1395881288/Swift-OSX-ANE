@@ -42,16 +42,6 @@ import FreSwift
         functionsToSet["runErrorTests2"] = runErrorTests2
         functionsToSet["runDataTests"] = runDataTests
 
-        /*
-        functionsToSet["initNativeStage"] = FreStageSwift.initView
-        functionsToSet["addNativeStage"] = FreStageSwift.addRoot
-        functionsToSet["updateNativeStage"] = FreStageSwift.update
-        functionsToSet["addNativeChild"] = FreDisplayList.addChild
-        functionsToSet["updateNativeChild"] = FreDisplayList.updateChild
-        functionsToSet["fullscreenNativeStage"] = FreStageSwift.onFullScreen
-        functionsToSet["restoreNativeStage"] = FreStageSwift.restore
-*/
-
 
         var arr: Array<String> = []
         for key in functionsToSet.keys {

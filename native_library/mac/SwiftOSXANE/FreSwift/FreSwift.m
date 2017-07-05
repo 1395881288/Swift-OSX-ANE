@@ -25,13 +25,12 @@ void contextFinalizer(FREContext ctx) {
 void contextInitializer(void *extData, const uint8_t *ctxType, FREContext ctx, uint32_t *numFunctionsToSet,
                         const FRENamedFunction **functionsToSet) {
     
+    swft = [[FreSwift alloc] init];
     static FRENamedFunction extensionFunctions[] =
     {
         { (const uint8_t*) "initFreSwift", NULL,&initFreSwift }
     };
-    
     *numFunctionsToSet = sizeof( extensionFunctions ) / sizeof( FRENamedFunction );
-    
     *functionsToSet = extensionFunctions;
     
 }

@@ -124,7 +124,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
 
-SWIFT_CLASS("_TtC8FreSwift15SwiftController")
+SWIFT_CLASS("_TtC8FreSwift8FreSwift")
 @interface FreSwift : NSObject
 - (FREObject _Nullable)initFreSwiftWithCtx:(FREContext _Nonnull)ctx
                                             argc:(uint32_t)argc

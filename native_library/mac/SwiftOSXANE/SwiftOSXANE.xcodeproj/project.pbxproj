@@ -30,6 +30,16 @@
 		CEE7AB181DF4EE620047E083 /* SwiftOSXANE-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE7AB131DF4D63D0047E083 /* SwiftOSXANE-Bridging-Header.h */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CEE66DDF1F0C6A0000590C93 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE36AF371DF47B7B003C224B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE01CF011F0B01180021E29A;
+			remoteInfo = FreSwift;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		285FE037784B271C6D59DD34 /* FreSwift_oc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreSwift_oc.h; sourceTree = "<group>"; };
 		285FE07BD8F0489B98F1DBB0 /* FreSwift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreSwift.m; sourceTree = "<group>"; };
@@ -221,6 +231,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CEE66DE01F0C6A0000590C93 /* PBXTargetDependency */,
 			);
 			name = SwiftOSXANE;
 			productName = SwiftOSXANE;
@@ -330,6 +341,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CEE66DE01F0C6A0000590C93 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE01CF011F0B01180021E29A /* FreSwift */;
+			targetProxy = CEE66DDF1F0C6A0000590C93 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CE01CF131F0B01180021E29A /* Debug */ = {
