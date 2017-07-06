@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		285FE3D28753650C2F1F637A /* FrePointSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FE9058FCD2EE45DD719CC /* FrePointSwift.swift */; };
-		285FE44CEE09FD97929CEF99 /* FreSwift_oc.h in Headers */ = {isa = PBXBuildFile; fileRef = 285FE037784B271C6D59DD34 /* FreSwift_oc.h */; };
 		285FE53DB9D50C815BCD0DFF /* SwiftOSXANE_oc.h in Headers */ = {isa = PBXBuildFile; fileRef = 285FEAB02EF710CE1ED2BC9A /* SwiftOSXANE_oc.h */; };
 		285FE5D4FE3BD57FC9C6A8EC /* SwiftOSXANE-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 285FE632F089B25BE590B688 /* SwiftOSXANE-Swift.h */; };
 		285FE75533B63F65E4FB39BB /* FlashRuntimeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FE9E9CB2D43D43E9190CB /* FlashRuntimeExtensions.swift */; };
-		285FE818C3CA5EAD96CB7264 /* FreSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FE12217DA6F3DEA84EA81 /* FreSwift.swift */; };
 		285FEA50717E82432DA4B557 /* FreSwift-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 285FE3E21784010D5C3039D5 /* FreSwift-Swift.h */; };
 		285FEAB0481294474F21BE5D /* SwiftOSXANE.m in Sources */ = {isa = PBXBuildFile; fileRef = 285FEA208428C0509C440EE0 /* SwiftOSXANE.m */; };
 		285FECCD1E06D9B2AD54D2F2 /* FreRectangleSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FE8DF1F318721D284E1FD /* FreRectangleSwift.swift */; };
-		285FECF0C80E122D2BD7E2A4 /* FreSwift.m in Sources */ = {isa = PBXBuildFile; fileRef = 285FE07BD8F0489B98F1DBB0 /* FreSwift.m */; };
 		CE01CF091F0B01180021E29A /* Adobe AIR in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4C1DF47DBD003C224B /* Adobe AIR */; };
 		CE01CF0A1F0B01180021E29A /* Adobe AIR_64 in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4B1DF47DBD003C224B /* Adobe AIR_64 */; };
 		CE01CF0B1F0B01180021E29A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4F1DF47E4E003C224B /* Cocoa.framework */; };
 		CE36AF4D1DF47DBD003C224B /* Adobe AIR_64 in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4B1DF47DBD003C224B /* Adobe AIR_64 */; };
 		CE36AF4E1DF47DBD003C224B /* Adobe AIR in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4C1DF47DBD003C224B /* Adobe AIR */; };
 		CE36AF501DF47E4E003C224B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4F1DF47E4E003C224B /* Cocoa.framework */; };
+		CEE375DE1F0EC38D007069B0 /* FreSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE375DD1F0EC38D007069B0 /* FreSwift.swift */; };
+		CEE375E01F0EC398007069B0 /* FreSwift_oc.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE375DF1F0EC398007069B0 /* FreSwift_oc.h */; };
+		CEE375E21F0EC3A5007069B0 /* FreSwift.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE375E11F0EC3A5007069B0 /* FreSwift.m */; };
 		CEE66DA31F0C1CE500590C93 /* FreSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE01CF151F0B01180021E29A /* FreSwift.framework */; };
 		CEE66DB21F0C275700590C93 /* FreSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE66DB11F0C275700590C93 /* FreSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CEE66DB41F0C293600590C93 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE66DB31F0C293600590C93 /* FlashRuntimeExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -41,9 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		285FE037784B271C6D59DD34 /* FreSwift_oc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreSwift_oc.h; sourceTree = "<group>"; };
-		285FE07BD8F0489B98F1DBB0 /* FreSwift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreSwift.m; sourceTree = "<group>"; };
-		285FE12217DA6F3DEA84EA81 /* FreSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreSwift.swift; sourceTree = "<group>"; };
 		285FE3E21784010D5C3039D5 /* FreSwift-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FreSwift-Swift.h"; sourceTree = "<group>"; };
 		285FE632F089B25BE590B688 /* SwiftOSXANE-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SwiftOSXANE-Swift.h"; sourceTree = "<group>"; };
 		285FE8DF1F318721D284E1FD /* FreRectangleSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreRectangleSwift.swift; sourceTree = "<group>"; };
@@ -58,6 +55,9 @@
 		CE36AF4B1DF47DBD003C224B /* Adobe AIR_64 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR_64"; path = "/Users/User/sdks/AIR/AIRSDK_23/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR_64"; sourceTree = "<absolute>"; };
 		CE36AF4C1DF47DBD003C224B /* Adobe AIR */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR"; path = "/Users/User/sdks/AIR/AIRSDK_23/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR"; sourceTree = "<absolute>"; };
 		CE36AF4F1DF47E4E003C224B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		CEE375DD1F0EC38D007069B0 /* FreSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreSwift.swift; sourceTree = "<group>"; };
+		CEE375DF1F0EC398007069B0 /* FreSwift_oc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreSwift_oc.h; sourceTree = "<group>"; };
+		CEE375E11F0EC3A5007069B0 /* FreSwift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreSwift.m; sourceTree = "<group>"; };
 		CEE66DB11F0C275700590C93 /* FreSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreSwift.h; sourceTree = "<group>"; };
 		CEE66DB31F0C293600590C93 /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = "<group>"; };
 		CEE7AB111DF4D45D0047E083 /* SwiftController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftController.swift; sourceTree = "<group>"; };
@@ -101,12 +101,12 @@
 		285FEAA74CBA556F5EE73EE3 /* FreSwift */ = {
 			isa = PBXGroup;
 			children = (
+				CEE375E11F0EC3A5007069B0 /* FreSwift.m */,
+				CEE375DF1F0EC398007069B0 /* FreSwift_oc.h */,
+				CEE375DD1F0EC38D007069B0 /* FreSwift.swift */,
 				CEE66DB31F0C293600590C93 /* FlashRuntimeExtensions.h */,
 				285FE9E9CB2D43D43E9190CB /* FlashRuntimeExtensions.swift */,
-				285FE12217DA6F3DEA84EA81 /* FreSwift.swift */,
 				285FE26263612EC4E094C3A9 /* Geom */,
-				285FE037784B271C6D59DD34 /* FreSwift_oc.h */,
-				285FE07BD8F0489B98F1DBB0 /* FreSwift.m */,
 				285FE3E21784010D5C3039D5 /* FreSwift-Swift.h */,
 				285FEBC4252C401F05448399 /* Info.plist */,
 				CEE66DB11F0C275700590C93 /* FreSwift.h */,
@@ -181,7 +181,7 @@
 			files = (
 				CEE66DB41F0C293600590C93 /* FlashRuntimeExtensions.h in Headers */,
 				CEE66DB21F0C275700590C93 /* FreSwift.h in Headers */,
-				285FE44CEE09FD97929CEF99 /* FreSwift_oc.h in Headers */,
+				CEE375E01F0EC398007069B0 /* FreSwift_oc.h in Headers */,
 				285FEA50717E82432DA4B557 /* FreSwift-Swift.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,6 +247,9 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Tua Rua Ltd";
 				TargetAttributes = {
+					CE01CF011F0B01180021E29A = {
+						LastSwiftMigration = 0830;
+					};
 					CE36AF3F1DF47B7B003C224B = {
 						CreatedOnToolsVersion = 8.1;
 						LastSwiftMigration = 0810;
@@ -324,10 +327,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				285FE75533B63F65E4FB39BB /* FlashRuntimeExtensions.swift in Sources */,
-				285FE818C3CA5EAD96CB7264 /* FreSwift.swift in Sources */,
 				285FE3D28753650C2F1F637A /* FrePointSwift.swift in Sources */,
 				285FECCD1E06D9B2AD54D2F2 /* FreRectangleSwift.swift in Sources */,
-				285FECF0C80E122D2BD7E2A4 /* FreSwift.m in Sources */,
+				CEE375DE1F0EC38D007069B0 /* FreSwift.swift in Sources */,
+				CEE375E21F0EC3A5007069B0 /* FreSwift.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

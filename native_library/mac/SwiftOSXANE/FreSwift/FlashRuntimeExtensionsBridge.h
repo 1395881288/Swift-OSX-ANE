@@ -12,24 +12,12 @@
  See the License for the specific language governing permissions and
  limitations under the License.*/
 
-#if __APPLE__
-#include "TargetConditionals.h"
-#if (TARGET_IPHONE_SIMULATOR) || (TARGET_OS_IPHONE)
-#import <UIKit/UIKit.h>
-#elif TARGET_OS_MAC
-#import <Cocoa/Cocoa.h>
-#else
-#   error "Unknown Apple platform"
-#endif
 
-#endif
-
-//! Project version number for FRESwift.
-FOUNDATION_EXPORT double FreSwiftVersionNumber;
-
-//! Project version string for FRESwift.
-FOUNDATION_EXPORT const unsigned char FreSwiftVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <FRESwift/PublicHeader.h>
-
+/*
+ * This is your Swift header, interop methods are defined in here
+ */
+#import <Foundation/Foundation.h>
 #import <FreSwift/FlashRuntimeExtensions.h>
+#import "FreSwift-Swift.h"
+@interface FlashRuntimeExtensionsBridge : NSObject<FreSwiftBridgeProtocol>
+@end

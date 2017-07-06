@@ -24,18 +24,23 @@ mkdir "$pathtome/platforms/mac/release"
 mkdir "$pathtome/platforms/mac/debug"
 fi
 
+if [ ! -d "$pathtome/platforms/default" ]; then
+mkdir "$pathtome/platforms/default"
+fi
+
 #Copy SWC into place.
 echo "Copying SWC into place."
-cp "$pathtome/../bin/$FRESWIFT_NAME.swc" "$pathtome/"
+cp "$pathtome/../bin/CommonDependencies.swc" "$pathtome/"
 
 #Extract contents of SWC.
 echo "Extracting files form SWC."
-unzip "$pathtome/$FRESWIFT_NAME.swc" "library.swf" -d "$pathtome"
+unzip "$pathtome/CommonDependencies.swc" "library.swf" -d "$pathtome"
 
 #Copy library.swf to folders.
 echo "Copying library.swf into place."
 cp "$pathtome/library.swf" "$pathtome/platforms/mac/release"
 cp "$pathtome/library.swf" "$pathtome/platforms/mac/debug"
+cp "$pathtome/library.swf" "$pathtome/platforms/default"
 
 #Copy native libraries into place.
 echo "Copying native libraries into place."
@@ -56,16 +61,18 @@ rm -r "$pathtome/platforms/mac/release/$FRESWIFT_NAME.framework/Versions"
 #Run the build command.
 echo "Building Release."
 "$AIR_SDK"/bin/adt -package \
--target ane "$pathtome/$FRESWIFT_NAME.ane" "$pathtome/extension_osx.xml" \
--swc "$pathtome/$FRESWIFT_NAME.swc" \
--platform MacOS-x86-64 -C "$pathtome/platforms/mac/release" "$FRESWIFT_NAME.framework" "library.swf"
+-target ane "$pathtome/CommonDependencies.ane" "$pathtome/extension_osx.xml" \
+-swc "$pathtome/CommonDependencies.swc" \
+-platform MacOS-x86-64 -C "$pathtome/platforms/mac/release" "$FRESWIFT_NAME.framework" "library.swf" \
+-platform default -C "$pathtome/platforms/default" "library.swf"
 
 
 echo "Building Debug."
 "$AIR_SDK"/bin/adt -package \
--target ane "$pathtome/$FRESWIFT_NAME-debug.ane" "$pathtome/extension_osx.xml" \
--swc "$pathtome/$FRESWIFT_NAME.swc" \
--platform MacOS-x86-64 -C "$pathtome/platforms/mac/debug" "$FRESWIFT_NAME.framework" "library.swf"
+-target ane "$pathtome/CommonDependencies-debug.ane" "$pathtome/extension_osx.xml" \
+-swc "$pathtome/CommonDependencies.swc" \
+-platform MacOS-x86-64 -C "$pathtome/platforms/mac/debug" "$FRESWIFT_NAME.framework" "library.swf" \
+-platform default -C "$pathtome/platforms/default" "library.swf"
 
 if [[ -d "$pathtome/debug" ]]
 then
@@ -73,11 +80,12 @@ rm -r "$pathtome/debug"
 fi
 
 mkdir "$pathtome/debug"
-unzip "$pathtome/$FRESWIFT_NAME-debug.ane" -d  "$pathtome/debug/$FRESWIFT_NAME.ane/"
+unzip "$pathtome/CommonDependencies-debug.ane" -d  "$pathtome/debug/CommonDependencies.ane/"
 
 
 rm -r "$pathtome/platforms/mac"
-rm "$pathtome/$FRESWIFT_NAME.swc"
+rm -r "$pathtome/platforms/default"
+rm "$pathtome/CommonDependencies.swc"
 rm "$pathtome/library.swf"
-rm "$pathtome/$FRESWIFT_NAME-debug.ane"
+rm "$pathtome/CommonDependencies-debug.ane"
 

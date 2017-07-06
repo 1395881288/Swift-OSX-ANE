@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="Flex" version="4">
-  <component name="FlexBuildConfigurationManager" active="FreSwift">
+  <component name="FlexBuildConfigurationManager" active="CommonDependencies">
     <configurations>
-      <configuration name="FreSwift" target-platform="Desktop" pure-as="true" output-type="Library" output-file="FreSwift.swc" output-folder="$MODULE_DIR$/bin">
+      <configuration name="CommonDependencies" target-platform="Desktop" pure-as="true" output-type="Library" output-file="CommonDependencies.swc" output-folder="$MODULE_DIR$/bin">
         <dependencies target-player="26.0">
           <sdk name="AIRSDK_26" />
         </dependencies>
         <compiler-options>
+          <map>
+            <entry key="compiler.debug.swc" value="false" />
+          </map>
           <option name="additionalOptions" value="-swf-version=30" />
         </compiler-options>
         <packaging-air-desktop />

@@ -1,7 +1,7 @@
 package {
 
 import com.greensock.TweenLite;
-import com.tuarua.FreSwift;
+import com.tuarua.CommonDependencies;
 import com.tuarua.Person;
 import com.tuarua.SwiftOSXANE;
 import com.tuarua.fre.ANStage;
@@ -32,7 +32,7 @@ import flash.utils.ByteArray;
 
 [SWF(width="640", height="640", frameRate="60", backgroundColor="#F1F1F1")]
 public class Main extends Sprite {
-    private var freSwift:FreSwift = new FreSwift(); //create this shared lib first. It contains all the Swift Shared Goodness
+    private var commonDependenciesANE:CommonDependencies = new CommonDependencies();
     private var ane:SwiftOSXANE;
     private var hasActivated:Boolean;
 
@@ -114,8 +114,6 @@ public class Main extends Sprite {
             }
 
 
-
-
             var myByteArray:ByteArray = new ByteArray();
 
             myByteArray.writeUTFBytes("Swift in an ANE. Say whaaaat!");
@@ -174,7 +172,6 @@ public class Main extends Sprite {
     }
 
 
-
     private function onNativeOver(event:MouseEvent):void {
         //nativeButton.alpha = 0.5;
     }
@@ -193,7 +190,7 @@ public class Main extends Sprite {
     }
 
     private function onExiting(event:Event):void {
-        freSwift.dispose();
+        commonDependenciesANE.dispose();
         ane.dispose();
     }
 

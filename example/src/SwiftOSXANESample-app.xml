@@ -278,7 +278,7 @@
 	<!-- End of the schema for adding the android specific tags in AndroidManifest.xml file -->
 
 <extensions>
-		<extensionID>com.tuarua.FreSwift</extensionID>
+		<extensionID>com.tuarua.CommonDependencies</extensionID>
         <extensionID>com.tuarua.SwiftOSXANE</extensionID>
 	<extensionID>com.tuarua.AIRNativeANE</extensionID>
     </extensions>

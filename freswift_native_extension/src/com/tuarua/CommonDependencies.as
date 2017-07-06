@@ -5,14 +5,16 @@ package com.tuarua {
 import flash.events.EventDispatcher;
 import flash.events.StatusEvent;
 import flash.external.ExtensionContext;
+import flash.system.Capabilities;
 
-public class FreSwift extends EventDispatcher {
-    private static const NAME:String = "FreSwift";
+public class CommonDependencies extends EventDispatcher {
+    private static const NAME:String = "CommonDependencies";
     private var ctx:ExtensionContext;
-    public function FreSwift() {
+    public function CommonDependencies() {
         initiate();
     }
     private function initiate():void {
+        if (Capabilities.os.indexOf("Mac OS") == -1) return;
         trace("[" + NAME + "] Initalizing ANE...");
         try {
             ctx = ExtensionContext.createExtensionContext("com.tuarua."+NAME, null);
@@ -31,6 +33,7 @@ public class FreSwift extends EventDispatcher {
         }
     }
     public function dispose():void {
+        if (Capabilities.os.indexOf("Mac OS") == -1) return;
         if (!ctx) {
             trace("[" + NAME + "] Error. ANE Already in a disposed or failed state...");
             return;
