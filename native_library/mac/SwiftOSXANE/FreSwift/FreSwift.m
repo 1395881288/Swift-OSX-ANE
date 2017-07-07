@@ -6,10 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #include "FreSwift_oc.h"
 #import "FreSwift-Swift.h"
-#import <FRESwift/FlashRuntimeExtensions.h>
+#import <FreSwift/FlashRuntimeExtensions.h>
 
 FreSwift *swft;
 #define FRE_FUNCTION(fn) FREObject (fn)(FREContext context, void* functionData, uint32_t argc, FREObject argv[])
