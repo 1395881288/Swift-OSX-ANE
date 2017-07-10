@@ -1,6 +1,6 @@
 //
 // Created by User on 04/12/2016.
-// Copyright (c) 2016 Tua Rua Ltd. All rights reserved.
+// Copyright (c) 2017 Tua Rua Ltd. All rights reserved.
 //
 #import <Foundation/Foundation.h>
 
@@ -12,13 +12,13 @@
 SwiftController *swft;
 NSArray *funcArray;
 #define FRE_FUNCTION(fn) FREObject (fn)(FREContext context, void* functionData, uint32_t argc, FREObject argv[])
-
 FRE_FUNCTION(callSwiftFunction) {
     NSString *fName = (__bridge NSString *) (functionData);
     return [swft callSwiftFunctionWithName:fName ctx:context argc:argc argv:argv];
 }
 
-void contextInitializer(void *extData, const uint8_t *ctxType, FREContext ctx, uint32_t *numFunctionsToSet,
+//Prefix these functions to avoid conflicts
+void TRSOA_contextInitializer(void *extData, const uint8_t *ctxType, FREContext ctx, uint32_t *numFunctionsToSet,
                         const FRENamedFunction **functionsToSet) {
     
     swft = [[SwiftController alloc] init];
@@ -26,9 +26,6 @@ void contextInitializer(void *extData, const uint8_t *ctxType, FREContext ctx, u
     funcArray = [swft getFunctions];
     
     /**************************************************************************/
-    /********************* DO NO MODIFY ABOVE THIS LINE ***********************/
-    /**************************************************************************/
-    
     /******* MAKE SURE TO ADD FUNCTIONS HERE THE SAME AS SWIFT CONTROLLER *****/
     /**************************************************************************/
     static FRENamedFunction extensionFunctions[] =
@@ -53,19 +50,19 @@ void contextInitializer(void *extData, const uint8_t *ctxType, FREContext ctx, u
     
     
 }
-
-void contextFinalizer(FREContext ctx) {
+//Prefix these functions to avoid conflicts
+void TRSOA_contextFinalizer(FREContext ctx) {
     return;
 }
-
+//Prefix these functions to avoid conflicts
 void TRSOAExtInizer(void **extData, FREContextInitializer *ctxInitializer, FREContextFinalizer *ctxFinalizer) {
-    *ctxInitializer = &contextInitializer;
-    *ctxFinalizer = &contextFinalizer;
+    *ctxInitializer = &TRSOA_contextInitializer;
+    *ctxFinalizer = &TRSOA_contextFinalizer;
 }
-
+//Prefix these functions to avoid conflicts
 void TRSOAExtFinizer(void *extData) {
     FREContext nullCTX;
     nullCTX = 0;
-    contextFinalizer(nullCTX);
+    TRSOA_contextFinalizer(nullCTX);
     return;
 }

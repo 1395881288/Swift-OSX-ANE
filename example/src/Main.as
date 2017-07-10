@@ -12,9 +12,7 @@ import com.tuarua.fre.display.ANImage;
 import com.tuarua.fre.ANEError;
 
 import flash.desktop.NativeApplication;
-
 import flash.display.Bitmap;
-
 import flash.display.Loader;
 
 import flash.display.Sprite;

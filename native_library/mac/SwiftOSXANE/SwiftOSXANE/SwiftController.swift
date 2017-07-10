@@ -27,6 +27,11 @@ import FreSwift
 
 @objc class SwiftController: FreSwiftController {
 
+    private var context: FreContextSwift!
+    private func trace(_ value: Any...){
+        freTrace(ctx: context, value: value)
+    }
+    
     // Must have this function. It exposes the methods to our entry ObjC.
     func getFunctions() -> Array<String> {
 
@@ -228,7 +233,6 @@ import FreSwift
         trace("***********Start ByteArray test***********")
 
         guard argc == 1, let inFRE0 = argv[0] else {
-            Swift.debugPrint("returning early BA")
             return nil
         }
 
@@ -237,7 +241,6 @@ import FreSwift
 
         guard let byteData = asByteArray.value else {
             asByteArray.releaseBytes()
-            Swift.debugPrint("returning early BA 2")
             return nil
         }
 
