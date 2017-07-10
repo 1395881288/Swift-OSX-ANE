@@ -1106,8 +1106,8 @@ public class FreBitmapDataSwift: NSObject {
 
 public func freTrace(ctx:FreContextSwift, value: [Any]) {
     var traceStr: String = ""
-    for i in value {
-        traceStr = traceStr + "\(i)" + " "
+    for i in 0..<value.count {
+        traceStr = traceStr + "\(value[i])" + " "
     }
     do {
         try ctx.dispatchStatusEventAsync(code: traceStr, level: "TRACE")
