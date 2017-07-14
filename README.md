@@ -17,8 +17,8 @@ Add the methods to expose to AIR here
 ````objectivec
 static FRENamedFunction extensionFunctions[] =
 {
- MAP_FUNCTION(TRSOA, load)
-,MAP_FUNCTION(TRSOA, goBack)
+    MAP_FUNCTION(TRSOA, load)
+   ,MAP_FUNCTION(TRSOA, goBack)
 };
 `````
 
