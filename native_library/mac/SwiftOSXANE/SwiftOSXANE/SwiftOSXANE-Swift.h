@@ -128,7 +128,7 @@ SWIFT_CLASS("_TtC11SwiftOSXANE15SwiftController")
 @interface SwiftController : NSObject
 //Must have these 3 functions
 - (void)setFREContextWithCtx:(FREContext _Nonnull)ctx;
-- (NSArray *_Nonnull) getFunctions;
+- (NSArray *_Nonnull) getFunctionsWithPrefix:(NSString * _Nonnull)prefix;
 - (FREObject _Nullable)callSwiftFunctionWithName:(NSString * _Nonnull)name
                                              ctx:(FREContext _Nonnull)ctx
                                             argc:(uint32_t)argc

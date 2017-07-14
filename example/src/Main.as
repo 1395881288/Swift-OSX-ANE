@@ -188,8 +188,8 @@ public class Main extends Sprite {
     }
 
     private function onExiting(event:Event):void {
-        commonDependenciesANE.dispose();
         ane.dispose();
+        commonDependenciesANE.dispose();
     }
 
 }

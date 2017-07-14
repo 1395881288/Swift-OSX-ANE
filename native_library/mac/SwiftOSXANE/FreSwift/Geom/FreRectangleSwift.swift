@@ -13,19 +13,15 @@
  limitations under the License.*/
 
 import Foundation
-
-#if os(iOS)
-#else
-
-import Cocoa
-
+#if os(OSX)
+    import Cocoa
 #endif
 
 public class FreRectangleSwift: FreObjectSwift {
     override public init(freObject: FREObject?) {
         super.init(freObject: freObject)
     }
-
+    
     public init(value: CGRect) {
         var freObject: FREObject? = nil
         do {
@@ -41,10 +37,10 @@ public class FreRectangleSwift: FreObjectSwift {
             freObject = try FreSwiftHelper.newObject("flash.geom.Rectangle", argsArray)
         } catch {
         }
-
+        
         super.init(freObject: freObject)
     }
-
+    
     override public var value: Any? {
         get {
             do {
@@ -57,22 +53,22 @@ public class FreRectangleSwift: FreObjectSwift {
             return nil
         }
     }
-
+    
     private func getAsCGRect(_ rawValue: FREObject) throws -> CGRect {
         var ret: CGRect = CGRect.init(x: 0, y: 0, width: 0, height: 0)
         guard let x: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "x")).value as? Int,
-              let y: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "y")).value as? Int,
-              let width: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "width")).value as? Int,
-              let height: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "height")).value as? Int
-          else {
-            return ret
+            let y: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "y")).value as? Int,
+            let width: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "width")).value as? Int,
+            let height: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "height")).value as? Int
+            else {
+                return ret
         }
         ret.origin.x = CGFloat.init(x)
         ret.origin.y = CGFloat.init(y)
         ret.size.width = CGFloat.init(width)
         ret.size.height = CGFloat.init(height)
-
+        
         return ret
     }
-
+    
 }

@@ -13,19 +13,15 @@
  limitations under the License.*/
 
 import Foundation
-
-#if os(iOS)
-#else
-
-import Cocoa
-
+#if os(OSX)
+    import Cocoa
 #endif
 
 public class FrePointSwift: FreObjectSwift {
     override public init(freObject: FREObject?) {
         super.init(freObject: freObject)
     }
-
+    
     public init(value: CGPoint) {
         var freObject: FREObject? = nil
         do {
@@ -37,10 +33,10 @@ public class FrePointSwift: FreObjectSwift {
             freObject = try FreSwiftHelper.newObject("flash.geom.Point", argsArray)
         } catch {
         }
-
+        
         super.init(freObject: freObject)
     }
-
+    
     override public var value: Any? {
         get {
             do {
@@ -53,18 +49,18 @@ public class FrePointSwift: FreObjectSwift {
             return nil
         }
     }
-
+    
     private func getAsCGPoint(_ rawValue: FREObject) throws -> CGPoint {
         var ret: CGPoint = CGPoint.init(x: 0, y: 0)
         guard let x: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "x")).value as? Int,
-              let y: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "y")).value as? Int
-          else {
-            return ret
+            let y: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "y")).value as? Int
+            else {
+                return ret
         }
         ret.x = CGFloat.init(x)
         ret.y = CGFloat.init(y)
-
+        
         return ret
     }
-
+    
 }

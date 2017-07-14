@@ -6,17 +6,16 @@
 #ifndef SWIFTOSXANE_SWIFTOSXANE_H
 #define SWIFTOSXANE_SWIFTOSXANE_H
 
-
 #import <Cocoa/Cocoa.h>
 
 #include <Adobe AIR/Adobe AIR.h>
 
 #define EXPORT __attribute__((visibility("default")))
-EXPORT
-void TRSOAExtInizer(void** extData, FREContextInitializer* ctxInitializer, FREContextFinalizer* ctxFinalizer);
 
 EXPORT
-void TRSOAExtFinizer(void* extData);
+EXTENSION_FIN_DECL(TRSOA);
 
+EXPORT
+EXTENSION_INIT_DECL(TRSOA);
 
 #endif //SWIFTOSXANE_SWIFTOSXANE_H

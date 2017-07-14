@@ -45,8 +45,8 @@ cp "$pathtome/library.swf" "$pathtome/platforms/default"
 #Copy native libraries into place.
 echo "Copying native libraries into place."
 
-cp -R -L "$pathtome/../../native_library/mac/$PROJECT_NAME/$FRESWIFT_NAME/$FRESWIFT_NAME-Swift.h" "$pathtome/../../native_library/mac/$PROJECT_NAME/Build/Products/Release/$FRESWIFT_NAME.framework/Versions/A/Headers/$FRESWIFT_NAME-Swift.h"
-cp -R -L "$pathtome/../../native_library/mac/$PROJECT_NAME/$FRESWIFT_NAME/$FRESWIFT_NAME-Swift.h" "$pathtome/../../native_library/mac/$PROJECT_NAME/Build/Products/Debug/$FRESWIFT_NAME.framework/Versions/A/Headers/$FRESWIFT_NAME-Swift.h"
+cp -R -L "$pathtome/../../native_library/mac/$PROJECT_NAME/$FRESWIFT_NAME/$FRESWIFT_NAME-OSX-Swift.h" "$pathtome/../../native_library/mac/$PROJECT_NAME/Build/Products/Release/$FRESWIFT_NAME.framework/Versions/A/Headers/$FRESWIFT_NAME-OSX-Swift.h"
+cp -R -L "$pathtome/../../native_library/mac/$PROJECT_NAME/$FRESWIFT_NAME/$FRESWIFT_NAME-OSX-Swift.h" "$pathtome/../../native_library/mac/$PROJECT_NAME/Build/Products/Debug/$FRESWIFT_NAME.framework/Versions/A/Headers/$FRESWIFT_NAME-OSX-Swift.h"
 
 cp -R -L "$pathtome/../../native_library/mac/$PROJECT_NAME/Build/Products/Release/$FRESWIFT_NAME.framework" "$pathtome/platforms/mac/release"
 cp -R -L "$pathtome/../../native_library/mac/$PROJECT_NAME/Build/Products/Debug/$FRESWIFT_NAME.framework" "$pathtome/platforms/mac/debug"

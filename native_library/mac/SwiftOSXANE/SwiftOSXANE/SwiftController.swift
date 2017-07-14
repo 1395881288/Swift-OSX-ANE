@@ -33,19 +33,18 @@ import FreSwift
     }
     
     // Must have this function. It exposes the methods to our entry ObjC.
-    func getFunctions() -> Array<String> {
-
-        functionsToSet["runStringTests"] = runStringTests
-        functionsToSet["runNumberTests"] = runNumberTests
-        functionsToSet["runIntTests"] = runIntTests
-        functionsToSet["runArrayTests"] = runArrayTests
-        functionsToSet["runObjectTests"] = runObjectTests
-        functionsToSet["runBitmapTests"] = runBitmapTests
-        functionsToSet["runByteArrayTests"] = runByteArrayTests
-        functionsToSet["runErrorTests"] = runErrorTests
-        functionsToSet["runErrorTests2"] = runErrorTests2
-        functionsToSet["runDataTests"] = runDataTests
-
+    func getFunctions(prefix: String) -> Array<String> {
+        
+        functionsToSet["\(prefix)runStringTests"] = runStringTests
+        functionsToSet["\(prefix)runNumberTests"] = runNumberTests
+        functionsToSet["\(prefix)runIntTests"] = runIntTests
+        functionsToSet["\(prefix)runArrayTests"] = runArrayTests
+        functionsToSet["\(prefix)runObjectTests"] = runObjectTests
+        functionsToSet["\(prefix)runBitmapTests"] = runBitmapTests
+        functionsToSet["\(prefix)runByteArrayTests"] = runByteArrayTests
+        functionsToSet["\(prefix)runErrorTests"] = runErrorTests
+        functionsToSet["\(prefix)runErrorTests2"] = runErrorTests2
+        functionsToSet["\(prefix)runDataTests"] = runDataTests
 
         var arr: Array<String> = []
         for key in functionsToSet.keys {

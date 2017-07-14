@@ -30,6 +30,8 @@ public class SwiftOSXANE extends EventDispatcher {
     }
 
     private function gotEvent(event:StatusEvent):void {
+        //trace("event.level:",event.level);
+        //trace("event.code:",event.code);
         switch (event.level) {
             case "TRACE":
                 trace("[" + name + "]" ,event.code);

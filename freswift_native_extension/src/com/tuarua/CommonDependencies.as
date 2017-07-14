@@ -21,6 +21,10 @@ public class CommonDependencies extends EventDispatcher {
             ctx.addEventListener(StatusEvent.STATUS, gotEvent);
             ctx.call("initFreSwift");
         } catch (e:Error) {
+            trace(e.message);
+            trace(e.getStackTrace());
+            trace(e.errorID);
+            trace(e.name);
             trace("[" + NAME + "] ANE Not loaded properly.  Future calls will fail.");
         }
     }
