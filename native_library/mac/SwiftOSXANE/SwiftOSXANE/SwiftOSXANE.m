@@ -34,8 +34,7 @@ CONTEXT_INIT(TRSOA) {
     /**************************************************************************/
     /**************************************************************************/
     
-    *numFunctionsToSet = sizeof( extensionFunctions ) / sizeof( FRENamedFunction );
-    *functionsToSet = extensionFunctions;
+    SET_FUNCTIONS
     
 }
 

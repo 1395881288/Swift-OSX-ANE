@@ -26,21 +26,20 @@ FRE_FUNCTION(initFreSwift) {
     return [swft initFreSwiftWithCtx:context argc:argc argv:argv];
 }
 
-void TRFRES_contextInitializer(void *extData, const uint8_t *ctxType, FREContext ctx, uint32_t *numFunctionsToSet,
-                              const FRENamedFunction **functionsToSet) {
+CONTEXT_INIT(TRFRES) {
     
     swft = [[FreSwift alloc] init];
     static FRENamedFunction extensionFunctions[] =
     {
         { (const uint8_t*) "initFreSwift", NULL,&initFreSwift }
     };
-    *numFunctionsToSet = sizeof( extensionFunctions ) / sizeof( FRENamedFunction );
-    *functionsToSet = extensionFunctions;
+    
+    SET_FUNCTIONS
     
 }
 
 CONTEXT_FIN(TRFRES){
-    
+    //any clean up code here
 }
 
 EXTENSION_INIT(TRFRES)
