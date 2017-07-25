@@ -21,6 +21,7 @@ import flash.display.StageDisplayState;
 import flash.display.StageScaleMode;
 import flash.events.Event;
 import flash.events.MouseEvent;
+import flash.geom.Point;
 import flash.geom.Rectangle;
 import flash.net.URLRequest;
 import flash.text.TextField;
@@ -73,6 +74,10 @@ public class Main extends Sprite {
             textField.wordWrap = true;
             textField.width = 500;
             textField.height = 300;
+
+
+            var result:Point = ane.runRectTests(new Point(-10.5, 50.1), new Rectangle(-11, 20.3, 40.7, 60.8));
+            trace(result);
 
             var person:Person = new Person();
             person.age = 21;

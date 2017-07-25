@@ -52,13 +52,18 @@ public class FrePointSwift: FreObjectSwift {
     
     private func getAsCGPoint(_ rawValue: FREObject) throws -> CGPoint {
         var ret: CGPoint = CGPoint.init(x: 0, y: 0)
-        guard let x: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "x")).value as? Int,
-            let y: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "y")).value as? Int
-            else {
-                return ret
+
+        if let xInt = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "x")).value as? Int {
+            ret.x = CGFloat.init(xInt)
+        } else if let xDbl = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "x")).value as? Double {
+            ret.x = CGFloat.init(xDbl)
         }
-        ret.x = CGFloat.init(x)
-        ret.y = CGFloat.init(y)
+        
+        if let yInt = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "y")).value as? Int {
+            ret.y = CGFloat.init(yInt)
+        } else if let yDbl = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "y")).value as? Double {
+            ret.y = CGFloat.init(yDbl)
+        }
         
         return ret
     }

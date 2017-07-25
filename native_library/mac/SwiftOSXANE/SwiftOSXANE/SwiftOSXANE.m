@@ -30,6 +30,7 @@ CONTEXT_INIT(TRSOA) {
         ,MAP_FUNCTION(TRSOA, runErrorTests)
         ,MAP_FUNCTION(TRSOA, runErrorTests2)
         ,MAP_FUNCTION(TRSOA, runDataTests)
+        ,MAP_FUNCTION(TRSOA, runRectTests)
     };
     /**************************************************************************/
     /**************************************************************************/

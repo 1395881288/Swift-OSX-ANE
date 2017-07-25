@@ -45,12 +45,33 @@ import FreSwift
         functionsToSet["\(prefix)runErrorTests"] = runErrorTests
         functionsToSet["\(prefix)runErrorTests2"] = runErrorTests2
         functionsToSet["\(prefix)runDataTests"] = runDataTests
+        functionsToSet["\(prefix)runRectTests"] = runRectTests
 
         var arr: Array<String> = []
         for key in functionsToSet.keys {
             arr.append(key)
         }
         return arr
+    }
+    
+    func runRectTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        trace("***********Start Rectangle Point test***********")
+        guard argc == 2,
+            let inFRE0 = argv[0], //point, rectangle
+            let inFRE1 = argv[1] else {
+                trace("runRectTests returning early")
+                return nil
+        }
+        
+        if let frePoint = FrePointSwift.init(freObject: inFRE0).value as? CGPoint {
+            trace(frePoint.debugDescription)
+        }
+        
+        if let freRect = FreRectangleSwift.init(freObject: inFRE1).value as? CGRect {
+            trace(freRect.debugDescription)
+        }
+        
+        return FrePointSwift.init(value: CGPoint.init(x: 10.2, y: 99.9)).rawValue
     }
 
     func runStringTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {

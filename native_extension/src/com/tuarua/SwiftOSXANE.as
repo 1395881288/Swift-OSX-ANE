@@ -8,6 +8,8 @@ import flash.display.BitmapData;
 import flash.events.EventDispatcher;
 import flash.external.ExtensionContext;
 import flash.events.StatusEvent;
+import flash.geom.Point;
+import flash.geom.Rectangle;
 import flash.utils.ByteArray;
 
 public class SwiftOSXANE extends EventDispatcher {
@@ -34,9 +36,13 @@ public class SwiftOSXANE extends EventDispatcher {
         //trace("event.code:",event.code);
         switch (event.level) {
             case "TRACE":
-                trace("[" + name + "]" ,event.code);
+                trace("[" + name + "]", event.code);
                 break;
         }
+    }
+
+    public function runRectTests(value:Point, value2:Rectangle):Point {
+        return ctx.call("runRectTests", value, value2) as Point;
     }
 
     public function runStringTests(value:String):String {

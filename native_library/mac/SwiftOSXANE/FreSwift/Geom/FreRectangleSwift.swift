@@ -56,17 +56,30 @@ public class FreRectangleSwift: FreObjectSwift {
     
     private func getAsCGRect(_ rawValue: FREObject) throws -> CGRect {
         var ret: CGRect = CGRect.init(x: 0, y: 0, width: 0, height: 0)
-        guard let x: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "x")).value as? Int,
-            let y: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "y")).value as? Int,
-            let width: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "width")).value as? Int,
-            let height: Int = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "height")).value as? Int
-            else {
-                return ret
+
+        if let xInt = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "x")).value as? Int {
+            ret.origin.x = CGFloat.init(xInt)
+        } else if let xDbl = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "x")).value as? Double {
+            ret.origin.x = CGFloat.init(xDbl)
         }
-        ret.origin.x = CGFloat.init(x)
-        ret.origin.y = CGFloat.init(y)
-        ret.size.width = CGFloat.init(width)
-        ret.size.height = CGFloat.init(height)
+        
+        if let yInt = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "y")).value as? Int {
+            ret.origin.y = CGFloat.init(yInt)
+        } else if let yDbl = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "y")).value as? Double {
+            ret.origin.y = CGFloat.init(yDbl)
+        }
+        
+        if let wInt = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "width")).value as? Int {
+            ret.size.width = CGFloat.init(wInt)
+        } else if let wDbl = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "width")).value as? Double {
+            ret.size.width = CGFloat.init(wDbl)
+        }
+        
+        if let hInt = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "height")).value as? Int {
+            ret.size.height = CGFloat.init(hInt)
+        } else if let hDbl = try FreObjectSwift.init(freObject: FreSwiftHelper.getProperty(rawValue: rawValue, name: "height")).value as? Double {
+            ret.size.height = CGFloat.init(hDbl)
+        }
         
         return ret
     }
