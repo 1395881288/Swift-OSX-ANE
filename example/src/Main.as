@@ -79,6 +79,8 @@ public class Main extends Sprite {
             var result:Point = ane.runRectTests(new Point(-10.5, 50.1), new Rectangle(-11, 20.3, 40.7, 60.8));
             trace(result);
 
+
+
             var person:Person = new Person();
             person.age = 21;
             person.name = "Tom";

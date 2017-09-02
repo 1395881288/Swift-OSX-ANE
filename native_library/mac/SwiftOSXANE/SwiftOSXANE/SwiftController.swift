@@ -25,16 +25,13 @@ import Cocoa
 import CoreImage
 import FreSwift
 
-@objc class SwiftController: FreSwiftController {
+@objc class SwiftController: NSObject, FreSwiftMainController {
+    var context: FreContextSwift!
+    var functionsToSet: FREFunctionMap = [:]
 
-    private var context: FreContextSwift!
-    private func trace(_ value: Any...){
-        freTrace(ctx: context, value: value)
-    }
-    
     // Must have this function. It exposes the methods to our entry ObjC.
     func getFunctions(prefix: String) -> Array<String> {
-        
+
         functionsToSet["\(prefix)runStringTests"] = runStringTests
         functionsToSet["\(prefix)runNumberTests"] = runNumberTests
         functionsToSet["\(prefix)runIntTests"] = runIntTests
@@ -51,26 +48,28 @@ import FreSwift
         for key in functionsToSet.keys {
             arr.append(key)
         }
+
         return arr
     }
-    
+
+
     func runRectTests(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
         trace("***********Start Rectangle Point test***********")
         guard argc == 2,
-            let inFRE0 = argv[0], //point, rectangle
-            let inFRE1 = argv[1] else {
-                trace("runRectTests returning early")
-                return nil
+              let inFRE0 = argv[0], //point, rectangle
+              let inFRE1 = argv[1] else {
+            trace("runRectTests returning early")
+            return nil
         }
-        
+
         if let frePoint = FrePointSwift.init(freObject: inFRE0).value as? CGPoint {
             trace(frePoint.debugDescription)
         }
-        
+
         if let freRect = FreRectangleSwift.init(freObject: inFRE1).value as? CGRect {
             trace(freRect.debugDescription)
         }
-        
+
         return FrePointSwift.init(value: CGPoint.init(x: 10.2, y: 99.9)).rawValue
     }
 
@@ -300,7 +299,6 @@ import FreSwift
         }
 
 
-
         let person = FreObjectSwift.init(freObject: inFRE0)
 
         do {
@@ -338,8 +336,16 @@ import FreSwift
 
     }
 
+    // Must have this function. It exposes the methods to our entry ObjC.
+    func callSwiftFunction(name: String, ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
+        if let fm = functionsToSet[name] {
+            return fm(ctx, argc, argv)
+        }
+        return nil
+    }
+
     func setFREContext(ctx: FREContext) {
-        context = FreContextSwift.init(freContext: ctx)
+        self.context = FreContextSwift.init(freContext: ctx)
     }
 
 

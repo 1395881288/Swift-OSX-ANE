@@ -53,8 +53,8 @@
 		CE01CF151F0B01180021E29A /* FreSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FreSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE36AF401DF47B7B003C224B /* SwiftOSXANE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftOSXANE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE36AF441DF47B7C003C224B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE36AF4B1DF47DBD003C224B /* Adobe AIR_64 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR_64"; path = "/Users/User/sdks/AIR/AIRSDK_23/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR_64"; sourceTree = "<absolute>"; };
-		CE36AF4C1DF47DBD003C224B /* Adobe AIR */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR"; path = "/Users/User/sdks/AIR/AIRSDK_23/runtimes/air/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR"; sourceTree = "<absolute>"; };
+		CE36AF4B1DF47DBD003C224B /* Adobe AIR_64 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR_64"; path = "/Users/User/sdks/AIR/AIRSDK_26/runtimes/air-captive/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR_64"; sourceTree = "<absolute>"; };
+		CE36AF4C1DF47DBD003C224B /* Adobe AIR */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "Adobe AIR"; path = "/Users/User/sdks/AIR/AIRSDK_26/runtimes/air-captive/mac/Adobe AIR.framework/Versions/1.0/Adobe AIR"; sourceTree = "<absolute>"; };
 		CE36AF4F1DF47E4E003C224B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CE7D29D31F183F3C007A510C /* FreMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreMacros.h; sourceTree = "<group>"; };
 		CEE375DD1F0EC38D007069B0 /* FreSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreSwift.swift; sourceTree = "<group>"; };
@@ -299,7 +299,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		CE7A71DE1F19797C00FAFB77 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (

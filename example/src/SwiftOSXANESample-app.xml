@@ -280,6 +280,6 @@
 <extensions>
 		<extensionID>com.tuarua.CommonDependencies</extensionID>
         <extensionID>com.tuarua.SwiftOSXANE</extensionID>
-	<extensionID>com.tuarua.AIRNativeANE</extensionID>
+		<extensionID>com.tuarua.AIRNativeANE</extensionID>
     </extensions>
 </application>

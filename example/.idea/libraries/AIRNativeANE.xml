@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="AIRNativeANE" type="flex">
     <CLASSES>
-      <root url="jar://$DOCUMENTS$/SwiftOSXANE/native_extension/ane/AIRNativeANE.ane!/" />
+      <root url="jar://$DOCUMENTS$/AIRNativeANE/native_extension/ane/AIRNativeANE.ane!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
