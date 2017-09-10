@@ -50,19 +50,40 @@ func goBack(ctx: FREContext, argc: FREArgc, argv: FREArgv) -> FREObject? {
 
 ----------
 
-### How to use
 ######  The methods exposed by FlashRuntimeExtensions.swift are identical in most parts to the [iOS version](https://github.com/tuarua/Swift-IOS-ANE). 
 
-Example - Convert a FREObject into a String, and String into FREObject
+----------
 
+### How to use
+###### Converting from FREObject args into Swift types, returning FREObjects
+
+
+The following table shows the primitive as3 types which can easily be converted to/from Swift types
+
+
+| AS3 type | Swift type | AS3 param->Swift | return Swift->AS3 |
+|:--------:|:--------:|:--------------|:-----------|
+| String | String | let str = String(argv[0]) | return str.toFREObject()|
+| int | Int | let i = Int(argv[0]) | return i.toFREObject()|
+| Boolean | Bool | let b = Bool(argv[0]) | return b.toFREObject()|
+| Number | Double | let dbl = Double(argv[0]) | return dbl.toFREObject()|
+| Number | CGFloat | let cfl = CGFloat(argv[0]) | return cfl.toFREObject()|
+| Date | Date | let date = Date(argv[0]) | return date.toFREObject()|
+| Rectangle | CGRect | let rect = CGRect(argv[0]) | return rect.toFREObject()|
+| Point | CGPoint | let pnt = CGPoint(argv[0]) | return pnt.toFREObject()|
+
+
+Example
 ````swift
-let airString: String = FreObjectSwift(freObject: inFRE0).value as? String
+let airString = String(argv[0])
 trace("String passed from AIR:", airString)
 let swiftString: String = "I am a string from Swift"
-do {
-    return try FreObjectSwift(string: swiftString).rawValue
-} catch {}
+return swiftString.toFREObject()
 `````
+
+FreSwift is fully extensible. New conversion types can be added in your own project. For example, Rectangle and Point are built as Extensions.
+
+----------
 
 
 Example - Call a method on an FREObject
