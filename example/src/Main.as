@@ -75,10 +75,11 @@ public class Main extends Sprite {
             textField.width = 500;
             textField.height = 300;
 
+            var testDate:Date = ane.runDateTests(new Date());
+            trace(testDate);
 
             var result:Point = ane.runRectTests(new Point(-10.5, 50.1), new Rectangle(-11, 20.3, 40.7, 60.8));
             trace(result);
-
 
 
             var person:Person = new Person();
@@ -94,6 +95,9 @@ public class Main extends Sprite {
 
             var resultNumber:Number = ane.runNumberTests(31.99);
             textField.text += "Number: " + resultNumber + "\n";
+
+            ane.runNumberTests(1.0);
+
 
             var resultInt:int = ane.runIntTests(-54, 66);
             textField.text += "Int: " + resultInt + "\n";
@@ -145,7 +149,6 @@ public class Main extends Sprite {
 
 
             addChild(textField);
-
 
             ANStage.init(stage, new Rectangle(0, 0, 400, 400), true, true, 0x505050);
             ANStage.add();

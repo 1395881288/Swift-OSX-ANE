@@ -88,6 +88,10 @@ public class SwiftOSXANE extends EventDispatcher {
         ctx.call("runErrorTests2", string);
     }
 
+    public function runDateTests(value:Date):Date {
+        return ctx.call("runDateTests", value) as Date;
+    }
+
     public function dispose():void {
         if (!ctx) {
             trace("[" + name + "] Error. ANE Already in a disposed or failed state...");
