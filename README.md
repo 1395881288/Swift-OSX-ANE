@@ -89,24 +89,22 @@ FreSwift is fully extensible. New conversion types can be added in your own proj
 Example - Call a method on an FREObject
 
 ````swift
-if let addition: FreObjectSwift = try person.callMethod(name: "add", args: 100, 31) {
-    if let sum: Int = addition.value as? Int {
-        trace("addition result:", sum)
+let person = argv[0]
+    if let addition = try person.call(method: "add", args: 100, 31) {
+        if let result = Int(addition) {
+            trace("addition result:", result)
+        }
     }
-}
 `````
 
 Example - Reading items in array
 ````swift
-let airArray: FreArraySwift = FreArraySwift.init(freObject: inFRE0)
+let airArray: FREArray = FREArray.init(argv[0])
 do {
-    if let itemZero: FreObjectSwift = try airArray.getObjectAt(index: 0) {
-        if let itemZeroVal: Int = itemZero.value as? Int {
-            trace("AIR Array elem at 0 type:", "value:", itemZeroVal)
-            let newVal = try FreObjectSwift.init(int: 56)
-            try airArray.setObjectAt(index: 0, object: newVal)
-            return airArray.rawValue
-         }
+    if let itemZero = try Int(airArray.at(index: 0)) {
+        trace("AIR Array elem at 0 type:", "value:", itemZero)
+        try airArray.set(index: 0, value: 56)
+        return airArray.rawValue
     }
 } catch {}
 `````
@@ -127,7 +125,7 @@ do {
 Example - Error handling
 ````swift
 do {
-    _ = try person.getProperty(name: "doNotExist") //calling a property that doesn't exist
+    _ = try person.getProp(name: "doNotExist") //calling a property that doesn't exist
 } catch let e as FREError {
     if let aneError = e.getError(#file, #line, #column) {
         return aneError //return the error as an actionscript error
