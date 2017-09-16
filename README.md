@@ -89,11 +89,11 @@ Example - Call a method on an FREObject
 
 ````swift
 let person = argv[0]
-    if let addition = try person.call(method: "add", args: 100, 31) {
-        if let result = Int(addition) {
-            trace("addition result:", result)
-        }
+if let addition = try person.call(method: "add", args: 100, 31) {
+    if let result = Int(addition) {
+        trace("addition result:", result)
     }
+}
 `````
 
 Example - Reading items in array
