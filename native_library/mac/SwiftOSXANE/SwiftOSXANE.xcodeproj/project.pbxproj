@@ -7,13 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		285FE10894FCDD0FE9D42FAC /* FreByteArraySwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FE4E4296393FC0190981C /* FreByteArraySwift.swift */; };
+		285FE1E58EF75BD2D70752D8 /* FreSwiftHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FEFD2815EEA85CCAB9C58 /* FreSwiftHelper.swift */; };
+		285FE24501DFC0989063408D /* FreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FE3A302C094F707FB8A34 /* FreError.swift */; };
 		285FE3D28753650C2F1F637A /* FrePointSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FE9058FCD2EE45DD719CC /* FrePointSwift.swift */; };
 		285FE53DB9D50C815BCD0DFF /* SwiftOSXANE_oc.h in Headers */ = {isa = PBXBuildFile; fileRef = 285FEAB02EF710CE1ED2BC9A /* SwiftOSXANE_oc.h */; };
+		285FE5B1205BD7AF5C3AB6C6 /* FreContextSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FEF2903B665CC4BF7C03B /* FreContextSwift.swift */; };
 		285FE5D4FE3BD57FC9C6A8EC /* SwiftOSXANE-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 285FE632F089B25BE590B688 /* SwiftOSXANE-Swift.h */; };
+		285FE6CF1E622A33DB862EE1 /* FreObjectSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FED2A63CAA7E7071FBED4 /* FreObjectSwift.swift */; };
 		285FE75533B63F65E4FB39BB /* FlashRuntimeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FE9E9CB2D43D43E9190CB /* FlashRuntimeExtensions.swift */; };
 		285FEA50717E82432DA4B557 /* FreSwift-OSX-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 285FE3E21784010D5C3039D5 /* FreSwift-OSX-Swift.h */; };
 		285FEAB0481294474F21BE5D /* SwiftOSXANE.m in Sources */ = {isa = PBXBuildFile; fileRef = 285FEA208428C0509C440EE0 /* SwiftOSXANE.m */; };
 		285FECCD1E06D9B2AD54D2F2 /* FreRectangleSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FE8DF1F318721D284E1FD /* FreRectangleSwift.swift */; };
+		285FEF20466765C65F976570 /* FreObjectTypeSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FED3F710EC3CFD7576C1F /* FreObjectTypeSwift.swift */; };
+		285FEF8166D29EE437F08AFD /* FreBitmapDataSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FECEF4DC4728773544209 /* FreBitmapDataSwift.swift */; };
+		285FEF979A13F274D8F3B7DE /* ArgCountError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FEEE06E781FFE88CAC1E8 /* ArgCountError.swift */; };
 		CE01CF091F0B01180021E29A /* Adobe AIR in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4C1DF47DBD003C224B /* Adobe AIR */; };
 		CE01CF0A1F0B01180021E29A /* Adobe AIR_64 in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4B1DF47DBD003C224B /* Adobe AIR_64 */; };
 		CE01CF0B1F0B01180021E29A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE36AF4F1DF47E4E003C224B /* Cocoa.framework */; };
@@ -42,7 +50,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		285FE3A302C094F707FB8A34 /* FreError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreError.swift; sourceTree = "<group>"; };
 		285FE3E21784010D5C3039D5 /* FreSwift-OSX-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FreSwift-OSX-Swift.h"; sourceTree = "<group>"; };
+		285FE4E4296393FC0190981C /* FreByteArraySwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreByteArraySwift.swift; sourceTree = "<group>"; };
 		285FE632F089B25BE590B688 /* SwiftOSXANE-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SwiftOSXANE-Swift.h"; sourceTree = "<group>"; };
 		285FE8DF1F318721D284E1FD /* FreRectangleSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreRectangleSwift.swift; sourceTree = "<group>"; };
 		285FE9058FCD2EE45DD719CC /* FrePointSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrePointSwift.swift; sourceTree = "<group>"; };
@@ -50,6 +60,12 @@
 		285FEA208428C0509C440EE0 /* SwiftOSXANE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwiftOSXANE.m; sourceTree = "<group>"; };
 		285FEAB02EF710CE1ED2BC9A /* SwiftOSXANE_oc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftOSXANE_oc.h; sourceTree = "<group>"; };
 		285FEBC4252C401F05448399 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		285FECEF4DC4728773544209 /* FreBitmapDataSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreBitmapDataSwift.swift; sourceTree = "<group>"; };
+		285FED2A63CAA7E7071FBED4 /* FreObjectSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreObjectSwift.swift; sourceTree = "<group>"; };
+		285FED3F710EC3CFD7576C1F /* FreObjectTypeSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreObjectTypeSwift.swift; sourceTree = "<group>"; };
+		285FEEE06E781FFE88CAC1E8 /* ArgCountError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgCountError.swift; sourceTree = "<group>"; };
+		285FEF2903B665CC4BF7C03B /* FreContextSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreContextSwift.swift; sourceTree = "<group>"; };
+		285FEFD2815EEA85CCAB9C58 /* FreSwiftHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreSwiftHelper.swift; sourceTree = "<group>"; };
 		CE01CF151F0B01180021E29A /* FreSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FreSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE36AF401DF47B7B003C224B /* SwiftOSXANE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftOSXANE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE36AF441DF47B7C003C224B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -113,6 +129,14 @@
 				285FE3E21784010D5C3039D5 /* FreSwift-OSX-Swift.h */,
 				285FEBC4252C401F05448399 /* Info.plist */,
 				CEE66DB11F0C275700590C93 /* FreSwift.h */,
+				285FEFD2815EEA85CCAB9C58 /* FreSwiftHelper.swift */,
+				285FE3A302C094F707FB8A34 /* FreError.swift */,
+				285FEEE06E781FFE88CAC1E8 /* ArgCountError.swift */,
+				285FED3F710EC3CFD7576C1F /* FreObjectTypeSwift.swift */,
+				285FED2A63CAA7E7071FBED4 /* FreObjectSwift.swift */,
+				285FEF2903B665CC4BF7C03B /* FreContextSwift.swift */,
+				285FE4E4296393FC0190981C /* FreByteArraySwift.swift */,
+				285FECEF4DC4728773544209 /* FreBitmapDataSwift.swift */,
 			);
 			path = FreSwift;
 			sourceTree = "<group>";
@@ -335,6 +359,14 @@
 				285FECCD1E06D9B2AD54D2F2 /* FreRectangleSwift.swift in Sources */,
 				CEE375DE1F0EC38D007069B0 /* FreSwift.swift in Sources */,
 				CEE375E21F0EC3A5007069B0 /* FreSwift.m in Sources */,
+				285FE1E58EF75BD2D70752D8 /* FreSwiftHelper.swift in Sources */,
+				285FE24501DFC0989063408D /* FreError.swift in Sources */,
+				285FEF979A13F274D8F3B7DE /* ArgCountError.swift in Sources */,
+				285FEF20466765C65F976570 /* FreObjectTypeSwift.swift in Sources */,
+				285FE6CF1E622A33DB862EE1 /* FreObjectSwift.swift in Sources */,
+				285FE5B1205BD7AF5C3AB6C6 /* FreContextSwift.swift in Sources */,
+				285FE10894FCDD0FE9D42FAC /* FreByteArraySwift.swift in Sources */,
+				285FEF8166D29EE437F08AFD /* FreBitmapDataSwift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
