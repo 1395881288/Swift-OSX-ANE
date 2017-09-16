@@ -32,7 +32,6 @@ Add Swift method(s) to the functionsToSet Dictionary in getFunctions()
     functionsToSet["\(prefix)goBack"] = goBack    
 }
 `````
-`````
 
 Add Swift method(s)
 
