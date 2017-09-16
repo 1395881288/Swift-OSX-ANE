@@ -75,11 +75,11 @@ public class Main extends Sprite {
             textField.width = 500;
             textField.height = 300;
 
-            var testDate:Date = ane.runDateTests(new Date());
+            /* var testDate:Date = ane.runDateTests(new Date());
             trace(testDate);
 
             var result:Point = ane.runRectTests(new Point(-10.5, 50.1), new Rectangle(-11, 20.3, 40.7, 60.8));
-            trace(result);
+            trace(result);*/
 
 
             var person:Person = new Person();
@@ -103,10 +103,12 @@ public class Main extends Sprite {
             textField.text += "Int: " + resultInt + "\n";
 
             var resultArray:Array = ane.runArrayTests(myArray);
+            trace("resultArray", resultArray);
             textField.text += "Array: " + resultArray.toString() + "\n";
 
 
             var resultObject:Person = ane.runObjectTests(person) as Person;
+            trace("resultObject", resultObject);
             textField.text += "Person.age: " + resultObject.age.toString() + "\n";
 
             const IMAGE_URL:String = "https://scontent.cdninstagram.com/t/s320x320/17126819_1827746530776184_5999931637335326720_n.jpg";
